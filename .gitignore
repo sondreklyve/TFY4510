@@ -1,0 +1,23 @@
+# LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+thesis/main.pdf
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS/Editors
+.DS_Store
+.idea/
+.vscode/
