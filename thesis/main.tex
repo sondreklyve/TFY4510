@@ -2,6 +2,15 @@
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{amsmath,amssymb,physics,siunitx}
 \usepackage{hyperref}
+\usepackage[backend=biber,style=phys,biblabel=brackets]{biblatex}
+\addbibresource{bib/refs.bib}
+
+% Resolve \qty issue between si and physics package
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 
 \title{Hybrid Stars — Master Thesis}
 \author{Sondre Klyve}
@@ -9,7 +18,9 @@
 \begin{document}
 \maketitle
 
-\section{Introduction}
-Hello Hybrid Stars!
+\tableofcontents
+\input{chapters/tov}
+
+\printbibliography
 
 \end{document}
