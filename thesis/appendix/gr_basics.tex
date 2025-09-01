@@ -1,0 +1,73 @@
+\chapter{General Relativity: Setup and Conventions}
+\label{app:GR_basics}
+
+This appendix fixes notation and defines the geometric objects used in the thesis. No derivations are given.
+
+\section{Units, signature, indices}
+We use natural units with $c=G=1$. The metric signature is $(+,-,-,-)$, so timelike vectors obey $u^\mu u_\mu=1$. Greek indices $\mu,\nu,\ldots$ run over spacetime coordinates $0,1,2,3$; Latin indices $i,j,\ldots$ denote spatial components $1,2,3$. Symmetrization and antisymmetrization use $A_{(\mu\nu)}=\tfrac12(A_{\mu\nu}+A_{\nu\mu})$ and $A_{[\mu\nu]}=\tfrac12(A_{\mu\nu}-A_{\nu\mu})$.
+
+\section{Metric and volume element}
+The metric tensor $g_{\mu\nu}$ defines the line element
+\begin{equation}
+ds^2 = g_{\mu\nu}\,dx^\mu dx^\nu,
+\end{equation}
+and raises/lowers indices with $g^{\mu\nu}$ and $g_{\mu\nu}$, where $g^{\mu\alpha}g_{\alpha\nu}=\delta^\mu{}_\nu$. The determinant is $g\equiv\det(g_{\mu\nu})<0$ for signature $(+,-,-,-)$. The invariant spacetime volume element is $\sqrt{-g}\,d^4x$.
+
+\section{Covariant derivative and Christoffel symbols}
+We use the Levi–Civita connection (metric compatible and torsion free). The covariant derivative of a vector is
+\begin{equation}
+\nabla_\mu V^\nu = \partial_\mu V^\nu + \Gamma^\nu{}_{\mu\lambda} V^\lambda,\qquad
+\nabla_\mu V_\nu = \partial_\mu V_\nu - \Gamma^\lambda{}_{\mu\nu} V_\lambda,
+\end{equation}
+with Christoffel symbols
+\begin{equation}
+\Gamma^{\rho}{}_{\mu\nu}=\tfrac12 g^{\rho\sigma}(\partial_\mu g_{\nu\sigma}+\partial_\nu g_{\mu\sigma}-\partial_\sigma g_{\mu\nu}).
+\label{eq:christoffel_def}
+\end{equation}
+
+\section{Curvature tensors}
+The Riemann tensor acts on vectors transported around an infinitesimal loop and is defined by
+\begin{equation}
+R^{\rho}{}_{\sigma\mu\nu}
+= \partial_{\mu}\Gamma^{\rho}{}_{\nu\sigma}
+- \partial_{\nu}\Gamma^{\rho}{}_{\mu\sigma}
++ \Gamma^{\rho}{}_{\mu\lambda}\Gamma^{\lambda}{}_{\nu\sigma}
+- \Gamma^{\rho}{}_{\nu\lambda}\Gamma^{\lambda}{}_{\mu\sigma}.
+\label{eq:riemann_def}
+\end{equation}
+Its contractions give the Ricci tensor and Ricci scalar,
+\begin{equation}
+R_{\mu\nu}=R^{\rho}{}_{\mu\rho\nu},\qquad R=g^{\mu\nu}R_{\mu\nu}.
+\label{eq:ricci_def}
+\end{equation}
+
+\section{Einstein tensor and Bianchi identity}
+The Einstein tensor is
+\begin{equation}
+G_{\mu\nu}=R_{\mu\nu}-\tfrac12 R\,g_{\mu\nu}.
+\label{eq:einstein_tensor_def}
+\end{equation}
+The twice–contracted Bianchi identity holds for the Levi–Civita connection:
+\begin{equation}
+\nabla^\mu G_{\mu\nu}=0.
+\end{equation}
+
+\section{Energy–momentum tensor}
+For matter and fields the energy–momentum tensor $T_{\mu\nu}$ encodes energy density, momentum density, and stresses. Local conservation follows from diffeomorphism invariance and the Bianchi identity:
+\begin{equation}
+\nabla^\mu T_{\mu\nu}=0.
+\end{equation}
+For a perfect fluid,
+\begin{equation}
+T_{\mu\nu}=(\epsilon+p)u_\mu u_\nu - p\,g_{\mu\nu},
+\label{eq:perfect_fluid_Tmn}
+\end{equation}
+with energy density $\epsilon$, pressure $p$, and four–velocity $u^\mu$ normalized by $u^\mu u_\mu=1$ (signature $(+,-,-,-)$).
+
+\section{Einstein field equations}
+Geometry and matter are related by
+\begin{equation}
+R_{\mu\nu}-\tfrac12 R\,g_{\mu\nu}=8\pi T_{\mu\nu}.
+\label{eq:einstein_equation}
+\end{equation}
+With $c=G=1$, the coupling is $8\pi$. The sign conventions here are consistent with signature $(+,-,-,-)$. If comparing to sources using the mostly–plus signature $(-,+,+,+)$ (e.g.\ Carroll), note that several signs in intermediate formulas change accordingly, though invariant statements and final physics agree.

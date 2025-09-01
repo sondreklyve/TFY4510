@@ -2,18 +2,21 @@
 
 \section{Introduction}
 
-The structure of relativistic stars cannot be captured within the framework of Newtonian gravity. 
-In neutron stars, the densities reach values comparable to those of nuclear matter, and the 
-gravitational field is so strong that a fully relativistic treatment becomes indispensable. 
-General relativity provides the natural framework to describe how matter curves spacetime and, 
+The structure of highly compact stars cannot always be captured within the framework of Newtonian gravity. 
+For white dwarfs, where electrons are relativistic but the gravitational field is relatively weak, 
+Newtonian gravity combined with special relativity provides an adequate description. 
+In contrast, neutron stars and hypothetical hybrid stars reach densities comparable to nuclear matter, 
+and the curvature of spacetime becomes so strong that general relativity is indispensable. 
+It provides the natural framework to describe how matter curves spacetime and, 
 conversely, how this curved geometry governs the equilibrium of stellar matter.
 
 In this chapter we derive the equations governing static, spherically symmetric configurations of 
-perfect fluids in general relativity, known as the Tolman-Oppenheimer-Volkoff (TOV)
-equations. They generalize the Newtonian hydrostatic equilibrium equation to curved spacetime. 
-Hence, the TOV equations form the central tool for studying compact stars such as white dwarfs, neutron stars, and hypothetical 
-hybrid stars with exotic cores. They link microscopic physics, encoded in the 
-equation of state of dense matter, to macroscopic observables such as stellar masses and radii.
+perfect fluids in general relativity, known as the Tolman–Oppenheimer–Volkoff (TOV) equations. 
+They generalize the Newtonian hydrostatic equilibrium equation to curved spacetime. 
+Hence, the TOV equations form the central tool for studying compact stars such as neutron stars 
+and hybrid stars with exotic cores, while also providing a relativistic extension of the classical treatment 
+that suffices for white dwarfs. They link microscopic physics, encoded in the equation of state of dense matter, 
+to macroscopic observables such as stellar masses and radii.
 
 Our starting point will be Einstein's field equations, together with the assumption of spherical 
 symmetry and a perfect-fluid energy–momentum tensor. From these ingredients we obtain a set of 
@@ -35,36 +38,8 @@ The derivation presented here follows the standard approach used in the literatu
 The organization and several intermediate steps are adapted from Carroll’s 
 \emph{Spacetime and Geometry} \cite{carroll}, rewritten for the mostly minus signature.
 
-\section{Setup and Conventions}
-
-Before deriving the Tolman–Oppenheimer–Volkoff (TOV) equations we state the conventions used 
-throughout this chapter. We employ natural units such that $c=G=1$. With this choice, the coupling 
-in Einstein’s equations appears as $8\pi$. The metric signature is taken as $(+,-,-,-)$, so that 
-timelike vectors satisfy $u^\mu u_\mu=1$. Greek indices $\mu,\nu,\dots$ run over spacetime 
-coordinates $(0,1,2,3)$, while Latin indices $i,j,\dots$ are reserved for spatial components. 
-
-\subsection*{Curvature and field equations}
-We adopt the following definition of the Riemann tensor,
-\begin{equation}
-R^{\rho}{}_{\sigma\mu\nu}
- = \partial_{\mu}\Gamma^{\rho}{}_{\nu\sigma}
- - \partial_{\nu}\Gamma^{\rho}{}_{\mu\sigma}
- + \Gamma^{\rho}{}_{\mu\lambda}\Gamma^{\lambda}{}_{\nu\sigma}
- - \Gamma^{\rho}{}_{\nu\lambda}\Gamma^{\lambda}{}_{\mu\sigma},
-\end{equation}
-from which the Ricci tensor is $R_{\mu\nu}=R^{\rho}{}_{\mu\rho\nu}$ 
-and the Ricci scalar $R=g^{\mu\nu}R_{\mu\nu}$. Other sign conventions exist in the literature, 
-so it is important to note that all results here are consistent with this choice. 
-
-The Einstein tensor is defined as $G_{\mu\nu}=R_{\mu\nu}-\tfrac{1}{2}R g_{\mu\nu}$, 
-and Einstein’s field equations then take the form
-\begin{equation}
-R_{\mu\nu} - \tfrac{1}{2} R g_{\mu\nu} = 8\pi T_{\mu\nu}.
-\label{eq:einstein_equation}
-\end{equation}
-
-\subsection*{Metric ansatz and coordinates}
-We now restrict attention to static, spherically symmetric stellar configurations. 
+\section{Metric ansatz and coordinates}
+We now restrict outselves to static, spherically symmetric stellar configurations. 
 By Birkhoff’s theorem, the most general spherically symmetric vacuum solution of 
 Einstein’s equations is the Schwarzschild metric. Inside the star, where matter is present, 
 the metric must reduce continuously to the Schwarzschild form at the stellar surface. 
@@ -81,7 +56,7 @@ $r^{2} d\Omega^{2}$ form.
 
 \section{Explicit computation of Einstein tensor components}
 
-It is convenient to reparameterize the metric functions by
+It is convenient to rewrite the metric functions by
 \begin{equation}
 A(r)=e^{2\alpha(r)},\qquad B(r)=e^{2\beta(r)},
 \end{equation}
@@ -90,7 +65,9 @@ so that the line element becomes
 ds^{2}=e^{2\alpha(r)}\,dt^{2}-e^{2\beta(r)}\,dr^{2}-r^{2}\,\bigl(d\theta^{2}+\sin^{2}\theta\,d\phi^{2}\bigr).
 \label{eq:sss_alpha_beta}
 \end{equation}
-Nonvanishing Christoffel symbols needed for the curvature are
+Primes denote derivatives with respect to $r$.
+
+Using the definition of the Christoffel symbols from Eq.~\eqref{eq:christoffel_def}, one finds the nonvanishing components
 \begin{align}
 \Gamma^{t}{}_{tr} &= \alpha', &
 \Gamma^{r}{}_{tt} &= \alpha' e^{2(\alpha-\beta)}, &
@@ -102,12 +79,8 @@ Nonvanishing Christoffel symbols needed for the curvature are
 \Gamma^{\phi}{}_{\theta\phi} &= \cot\theta,
 \label{eq:Gamma_subset}
 \end{align}
-where primes denote $d/dr$.
 
-The Ricci tensor is $R_{\mu\nu}=\partial_{\lambda}\Gamma^{\lambda}{}_{\mu\nu}
--\partial_{\nu}\Gamma^{\lambda}{}_{\mu\lambda}
-+\Gamma^{\lambda}{}_{\mu\nu}\Gamma^{\sigma}{}_{\lambda\sigma}
--\Gamma^{\sigma}{}_{\mu\lambda}\Gamma^{\lambda}{}_{\nu\sigma}$. Stationarity ($\partial_{t}=0$) and spherical symmetry simplify the components. For $R_{tt}$ one finds
+From the definition of the Ricci tensor in Eq.~\eqref{eq:ricci_def}, stationarity ($\partial_{t}=0$) and spherical symmetry simplify the components. For $R_{tt}$ one finds
 \begin{align}
 R_{tt}
 &=\partial_{r}\Gamma^{r}{}_{tt}
@@ -116,7 +89,7 @@ R_{tt}
 &=e^{2(\alpha-\beta)}\!\left[\alpha''+(\alpha')^{2}-\alpha'\beta'+\frac{2\alpha'}{r}\right].
 \label{eq:Rtt_result}
 \end{align}
-The Ricci scalar for \eqref{eq:sss_alpha_beta} is
+Contracting gives the Ricci scalar,
 \begin{equation}
 R
 =2e^{-2\beta}\!\left[\alpha''+(\alpha')^{2}-\alpha'\beta'+\frac{2}{r}\,(\alpha'-\beta')\right]
@@ -124,15 +97,16 @@ R
 \label{eq:R_scalar}
 \end{equation}
 
-Hence the Einstein tensor $G_{\mu\nu}=R_{\mu\nu}-\tfrac12 g_{\mu\nu}R$ gives
+Finally, using the definition of the Einstein tensor in
+Eq.~\eqref{eq:einstein_tensor_def}, the $tt$--component becomes
 \begin{equation}
-\boxed{\,G_{tt}=\frac{e^{2(\alpha-\beta)}}{r^{2}}\Big(2r\,\beta'-1+e^{2\beta}\Big)\,}.
+\boxed{\,G_{tt}=\frac{e^{2(\alpha-\beta)}}{r^{2}}\Big(2r\,\beta'-1+e^{2\beta}\Big)\,.}
 \label{eq:Gtt_final}
 \end{equation}
-For completeness, the other nonzero covariant components are
+The other nonzero components are
 \begin{equation}
-\boxed{\,G_{rr}=\frac{1}{r^{2}}\Big(2r\,\alpha'+1-e^{2\beta}\Big)\,},\qquad
-\boxed{\,G_{\theta\theta}=e^{-2\beta}\!\left[\alpha''+(\alpha')^{2}-\alpha'\beta'+\frac{\alpha'-\beta'}{r}\right]r^{2}\,},
+\boxed{\,G_{rr}=\frac{1}{r^{2}}\Big(2r\,\alpha'+1-e^{2\beta}\Big)\,,}\qquad
+\boxed{\,G_{\theta\theta}=e^{-2\beta}\!\left[\alpha''+(\alpha')^{2}-\alpha'\beta'+\frac{\alpha'-\beta'}{r}\right]r^{2}\,,}
 \label{eq:GrGth_cov}
 \end{equation}
 and by spherical symmetry
@@ -141,7 +115,8 @@ G_{\phi\phi}=\sin^{2}\theta\,G_{\theta\theta}.
 \end{equation}
 
 \paragraph{Mixed components.}
-It is often convenient to work with $G^{\mu}{}_{\nu}=g^{\mu\lambda}G_{\lambda\nu}$. Using $g^{tt}=e^{-2\alpha}$, $g^{rr}=-e^{-2\beta}$, and $g^{\theta\theta}=-1/r^{2}$, one finds
+It is often convenient to work with $G^{\mu}{}_{\nu}=g^{\mu\lambda}G_{\lambda\nu}$. 
+For the metric \eqref{eq:sss_alpha_beta} these read
 \begin{align}
 G^{t}{}_{t} &= \frac{e^{-2\beta}}{r^{2}}\Bigl(2r\,\beta'-1+e^{2\beta}\Bigr),\label{eq:Gtt_mixed}\\
 G^{r}{}_{r} &= \frac{e^{-2\beta}}{r^{2}}\Bigl(-2r\,\alpha'-1+e^{2\beta}\Bigr),\label{eq:Grr_mixed}\\
@@ -152,12 +127,20 @@ G^{\theta}{}_{\theta} &= G^{\phi}{}_{\phi}
 
 \section{Einstein equations with a perfect fluid source}
 
-For stellar matter we assume a perfect fluid energy--momentum tensor,
-\begin{equation}
-T_{\mu\nu}=(\epsilon+p)u_\mu u_\nu - p\,g_{\mu\nu},
-\end{equation}
-with energy density $\epsilon(r)$, pressure $p(r)$, and four--velocity 
-$u^\mu=(e^{-\alpha},0,0,0)$ in the fluid rest frame. 
+In relativistic astrophysics, stellar matter is commonly modeled as a 
+perfect fluid. A perfect fluid is an idealized medium that has 
+no viscosity, no heat conduction, and is completely characterized by 
+its local rest--frame energy density $\epsilon$ and isotropic pressure $p$. 
+This means that, in the rest frame of the fluid, the stress is the same 
+in all spatial directions and there are no dissipative processes such 
+as friction or heat flow. While real nuclear matter may exhibit more 
+complicated transport properties, the perfect fluid approximation 
+captures the essential macroscopic features of dense stellar matter 
+and provides a tractable starting point for deriving equilibrium equations.
+
+Accordingly, we assume the perfect-fluid form \eqref{eq:perfect_fluid_Tmn}
+with energy density $\epsilon(r)$, pressure $p(r)$, and four–velocity
+$u^\mu=(e^{-\alpha},0,0,0)$ in the fluid rest frame.
 Normalization $u^\mu u_\mu=1$ then implies $u_\mu=(e^{\alpha},0,0,0)$ 
 for the metric \eqref{eq:sss_alpha_beta}.  
 In mixed form the components take the simple diagonal structure
@@ -168,7 +151,7 @@ T^{\mu}{}_{\nu}=\mathrm{diag}\!\big(\epsilon,\,-p,\,-p,\,-p\big).
 \subsection*{Independent Einstein equations}
 
 Equating \eqref{eq:Gtt_mixed}--\eqref{eq:Gang_mixed} to $8\pi T^{\mu}{}_{\nu}$ 
-via \eqref{eq:einstein_equation} yields three independent equations:
+via \eqref{eq:einstein_equation} yields three independent equations,
 \begin{align}
 \frac{e^{-2\beta}}{r^{2}}\Bigl(2r\,\beta'-1+e^{2\beta}\Bigr) &= 8\pi\,\epsilon, 
 \label{eq:Ein_tt}\\[6pt]
@@ -180,23 +163,36 @@ e^{-2\beta}\!\left[\alpha''+(\alpha')^{2}-\alpha'\beta'
 \end{align}
 By spherical symmetry $G^{\phi}{}_{\phi}=G^{\theta}{}_{\theta}$, 
 so the $\phi\phi$ component provides no new equation beyond \eqref{eq:Ein_thth}.  
-Equation \eqref{eq:Ein_tt} relates geometry to the energy density, 
-\eqref{eq:Ein_rr} encodes the radial pressure balance, 
-and \eqref{eq:Ein_thth} enforces equality of radial and tangential pressures.
+
+Each of these equations has a clear physical interpretation.  
+Equation \eqref{eq:Ein_tt} links the $tt$ component of spacetime curvature 
+to the local energy density $\epsilon(r)$: it plays the role of a relativistic 
+generalization of Poisson’s equation in Newtonian gravity.  
+Equation \eqref{eq:Ein_rr} involves the $rr$ component and connects the radial 
+metric function $\alpha(r)$ to the local pressure $p(r)$. 
+This equation expresses how the pressure gradient balances the inward pull of gravity 
+to maintain hydrostatic equilibrium.  
+Finally, Eq.~\eqref{eq:Ein_thth} comes from the angular components of the Einstein tensor. 
+It ensures that the pressure is isotropic, i.e.\ that the stress measured in the radial direction 
+is the same as in the tangential directions, consistent with the perfect fluid assumption.  
+
+Taken together, these equations encode the interplay between energy density, pressure, 
+and spacetime curvature that governs the internal structure of relativistic stars.
 
 \section{Mass function}
 
-It is convenient to define the mass function as the areal--radius invariant
+It is convenient to introduce the Misner--Sharp mass function, defined as
 \begin{equation}
-m(r)\equiv \frac{r}{2}\Bigl(1-e^{-2\beta(r)}\Bigr),
+m(r)\equiv \frac{r}{2}\Bigl(1-e^{-2\beta(r)}\Bigr).
+\label{eq:ms_mass}
 \end{equation}
-which directly measures the deviation of $g_{rr}$ from flat space and reduces to the 
-Schwarzschild mass in the exterior vacuum region. Physically, $m(r)$ represents the total mass--energy 
-contained within radius $r$. Inverting the definition gives
+This quantity measures the deviation of $g_{rr}$ from flat space and reduces to the 
+Schwarzschild mass in the exterior vacuum region. Physically, $m(r)$ represents the total 
+mass--energy contained within a sphere of areal radius $r$. Inverting the definition gives
 \begin{equation}
 e^{2\beta(r)}=\Bigl(1-\frac{2m(r)}{r}\Bigr)^{-1}.
+\label{eq:ms_mass_inv}
 \end{equation}
-
 Differentiating $m(r)$ with respect to $r$ yields
 \begin{equation}
 \frac{dm}{dr}=\frac{1}{2}\Bigl(1+e^{-2\beta}\,[\,2r\beta'-1\,]\Bigr).
@@ -211,6 +207,22 @@ with the regularity condition $m(0)=0$ at the center.
 For $r>R$, outside the stellar surface, $m(r)$ is constant and equal to the total gravitational 
 mass of the star.
 
+It is worth emphasizing the meaning of Eq.~\eqref{eq:mass_equation} in general relativity. 
+In Newtonian gravity the enclosed mass is obtained by integrating the rest--mass density 
+over the Euclidean volume element, $m(r)=\int_0^r 4\pi r'^2\rho(r')\,dr'$. 
+In curved spacetime, the proper volume element carries an extra factor from the metric, 
+$dV = 4\pi r'^2 e^{\beta(r')}dr'$, so one might expect an additional Jacobian factor 
+to appear in the integral of the energy density. However, the function $m(r)$ here is not 
+defined as a naive proper--volume integral. It is the Misner--Sharp mass, introduced in 
+Eq.~\eqref{eq:ms_mass}, a quasi--local quantity defined geometrically from the metric itself. 
+Because of this definition, the differential relation 
+\eqref{eq:mass_equation} follows directly from the Einstein equations, and the factor 
+$e^{\beta}$ is already encoded in the geometry. Thus the equation should be interpreted as: 
+the rate of change of the enclosed gravitational mass with respect to radius is proportional 
+to the local energy density times the coordinate--space volume element $4\pi r^2dr$. 
+This highlights a subtle but important distinction between Newtonian mass integrals and the 
+general relativistic notion of quasi--local mass.
+
 \section{Hydrostatic equilibrium: the TOV pressure equation}
 
 In this section we derive the differential equation governing the pressure profile $p(r)$ 
@@ -218,33 +230,28 @@ in a static, spherically symmetric star. The result expresses local force balanc
 inward pull of gravity and the outward pressure gradient. The derivation rests on two ingredients:
 \begin{enumerate}
 \item An expression for the radial metric potential $\alpha'(r)$ obtained from the 
-$rr$ component of Einstein’s equations [Eq.~\eqref{eq:Ein_rr}]. 
+$rr$ component of Einstein’s equations Eq.~\eqref{eq:Ein_rr}. 
 This connects the gradient of the redshift factor $e^{\alpha}$ to local matter variables.
 \item Local energy--momentum conservation, $\nabla_{\mu}T^{\mu}{}_{\nu}=0$, applied to 
 the perfect fluid energy--momentum tensor. 
 This provides a relation between the pressure gradient and the metric function $\alpha'(r)$.
 \end{enumerate}
-
 Combining these two relations yields the hydrostatic equilibrium equation, usually referred 
 to as the Tolman--Oppenheimer--Volkoff (TOV) equation. We will keep all intermediate steps 
 explicit in order to make clear how general relativity modifies the familiar Newtonian result.
 
 \subsection*{Solving the rr equation for the metric potential derivative}
 
-From Eq.~\eqref{eq:Ein_rr}, the mixed $rr$ component of Einstein’s equations reads
+From Eq.~\eqref{eq:Ein_rr}, the $rr$ component of Einstein’s equations reads
 \begin{equation}
 \frac{e^{-2\beta}}{r^{2}}\Bigl(-2r\,\alpha'-1+e^{2\beta}\Bigr)=-\,8\pi\,p(r).
 \label{eq:Ein_rr_repeat}
 \end{equation}
-Multiplying by $r^{2}e^{2\beta}$ eliminates the prefactor and gives
-\begin{align}
--2r\,\alpha' - 1 + e^{2\beta} &= -8\pi p\, r^{2} e^{2\beta},\nonumber\\
-2r\,\alpha' &= e^{2\beta}\!\left(1+8\pi p\,r^{2}\right) - 1.
-\end{align}
-
-Introducing the Misner--Sharp mass function 
-$m(r)=\tfrac{r}{2}\bigl(1-e^{-2\beta}\bigr)$, one has
-$e^{2\beta}=(1-2m/r)^{-1}$. Substitution yields
+Multiplying by $r^{2}e^{2\beta}$ eliminates the prefactor and, rearranging, we get 
+\begin{equation}
+2r\,\alpha' = e^{2\beta}\!\left(1+8\pi p\,r^{2}\right) - 1.
+\end{equation}
+Inserting the inverted definition of the Misner--Sharp mass, given in Eq.~\eqref{eq:ms_mass_inv}, we obtain
 \begin{align}
 2r\,\alpha' &= \frac{1+8\pi p\,r^{2}}{1-2m/r}-1 \nonumber\\
             &= \frac{1+8\pi p\,r^{2}-(1-2m/r)}{1-2m/r}\nonumber\\
@@ -309,26 +316,33 @@ Substituting \eqref{eq:alpha_prime} into \eqref{eq:preTOV} gives the Tolman--Opp
 \;}
 \label{eq:TOV_pressure}
 \end{equation}
-Together with the mass equation
-\begin{equation}
-\frac{dm}{dr}=4\pi r^{2}\epsilon(r),\qquad m(0)=0,
-\label{eq:TOV_mass_repeat}
-\end{equation}
-and an equation of state $p=p(\epsilon)$, Eqs.~\eqref{eq:TOV_pressure}--\eqref{eq:TOV_mass_repeat} form a closed system of ODEs
+Together with the mass equation \eqref{eq:mass_equation} 
+and an equation of state $p=p(\epsilon)$, these equations form a closed system of ODEs
 for $(p(r),m(r))$.
 
 \paragraph{Physical interpretation.}
-The factor $(\epsilon+p)$ reflects relativistic inertia: pressure adds to the effective weight of the fluid.
-The term $m(r)$ is the enclosed gravitational mass, while $4\pi r^{3}p$ encodes the additional self--gravity of pressure.
-The geometric denominator $r(r-2m)$ accounts for spatial curvature and redshift effects. In the weak--field, low--pressure limit
-($2m/r\ll 1$ and $p\ll\epsilon$), \eqref{eq:TOV_pressure} reduces to Newtonian hydrostatic balance,
+The factor $(\epsilon+p)$ reflects the relativistic notion of inertia: not only the energy density $\epsilon$ 
+but also the pressure $p$ contributes to the source of gravity. In Newtonian physics pressure merely 
+transmits forces; in general relativity it also gravitates. The term $m(r)$ is the total gravitational mass 
+enclosed within radius $r$, while the additional contribution $4\pi r^{3}p$ encodes the self--gravity of 
+pressure. The denominator $r(r-2m)$ carries the geometric effects of spatial curvature and gravitational 
+redshift. In the weak--field, low--pressure limit ($2m/r\ll 1$ and $p\ll\epsilon$), the Tolman–Oppenheimer–Volkoff 
+equation reduces to the familiar Newtonian hydrostatic balance,
 \begin{equation}
 \frac{dp}{dr}\approx -\,\rho(r)\,\frac{G\,m(r)}{r^{2}},
-\qquad \text{with } \epsilon\approx \rho c^{2}\ \text{(restore $G,c$ as needed; here $G=c=1$).}
 \end{equation}
+where $\rho$ is the rest--mass density. In relativistic notation one has $\epsilon\simeq \rho c^{2}$, so that 
+$\epsilon$ and $\rho$ differ by factors of $c^{2}$. Thus in this limit the term $(\epsilon+p)$ effectively reduces 
+to $\epsilon$, recovering the Newtonian form. This shows how the TOV equation generalizes the classical 
+hydrostatic equilibrium equation to strongly curved spacetime.  
 
-\paragraph{Boundary data and matching.}
-At the center, regularity imposes finite $\epsilon(0)$ and $p(0)$ and $\alpha'(0)=0$; moreover
-$m(r)\sim \tfrac{4\pi}{3}\epsilon(0)\,r^{3}$ as $r\to 0$, so $p'(0)=0$ follows from \eqref{eq:TOV_pressure}.
-The stellar radius $R$ is defined by $p(R)=0$. Matching to the exterior Schwarzschild solution sets
-$m(R)=M$ and $e^{2\alpha(R)}=1-2M/R$, with the overall normalization of $t$ fixed by asymptotic flatness.
+\paragraph{Boundary conditions and matching.}
+At the center of the star, regularity requires that $\epsilon(0)$ and $p(0)$ are finite, and that $\alpha'(0)=0$. 
+From the definition of the mass function one finds $m(r)\sim \tfrac{4\pi}{3}\,\epsilon(0)\,r^{3}$ as $r\to 0$, 
+so that $p'(0)=0$ follows from \eqref{eq:TOV_pressure}. The stellar surface $R$ is defined by the condition 
+$p(R)=0$. Beyond this radius, the solution must match smoothly to the vacuum Schwarzschild exterior. 
+This implies $m(R)=M$, the total gravitational mass of the star, and fixes the metric function via 
+$e^{2\alpha(R)}=1-2M/R$. The integration constant for $\alpha$ is determined by requiring asymptotic flatness, 
+so that $e^{2\alpha}\to 1$ as $r\to\infty$. The factor $(1-2M/R)$ is precisely the Schwarzschild redshift factor, 
+and the critical radius $R=2M$ corresponds to the Schwarzschild radius of a black hole. For stable stars, 
+one must have $R>2M$.
