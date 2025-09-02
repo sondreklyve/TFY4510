@@ -16,6 +16,8 @@ thesis/main.pdf
 __pycache__/
 *.pyc
 .pytest_cache/
+.venv
+numerics/data
 
 # OS/Editors
 .DS_Store
