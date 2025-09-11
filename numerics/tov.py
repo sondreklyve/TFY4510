@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.integrate
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.colors
 import utils
@@ -7,7 +8,10 @@ from stability import eigenmode
 
 from constants import *
 
-def soltov(ϵ, P0, maxdr=1e-3, Psurf=0, progress=True, newtonian=False):
+matplotlib.use("TkAgg")
+
+
+def soltov(ϵ, P0, maxdr=1e-3, Psurf=0, progress=False, newtonian=False):
     def printprogress(r, m, P, E, message="", end=""):
         print(f"\r", end="") # reset line
         print(f"Solving TOV: ", end="")
@@ -129,7 +133,9 @@ def massradiusplot(
 
     if visual:
         plt.ioff() # leave original state
-        plt.show() # leave final plot open
+        # Show non-blocking so execution continues while keeping the window open
+        plt.show(block=False)
+        plt.pause(0.001)
 
     if outfile != "":
         heads = ["P", "M", "R"] + [f"omega2{mode}" for mode in range(0, nmodes)] + ["nu"]

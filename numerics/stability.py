@@ -84,7 +84,9 @@ def search(r, Π, Q, W, N, p1, p2, plot=False, progress=False, outfile=""):
                 plt.plot(r, us[i], color=(i/len(us), 0, 0))
             ymax = np.max(np.abs(cut_divergence(u, r)))
             plt.ylim(-2*ymax, +2*ymax)
-            plt.show()
+            # Show non-blocking so execution continues while keeping the window open
+            plt.show(block=False)
+            plt.pause(0.001)
         if outfile:
             cols = [ω2s, r] + us
             headers = ["omega2", "r"] + [f"U{i}" for i in range(0, len(us))]
