@@ -1,0 +1,166 @@
+\chapter{Ideal Neutron Stars}
+\label{chap:ideal_neutron_stars}
+
+\section{Introduction}
+
+The concept of an \emph{ideal neutron star} provides a minimal
+theoretical model for a relativistic compact star.
+In this picture the stellar interior is assumed to consist solely
+of neutrons, treated as a cold, non--interacting Fermi gas.
+This construction parallels the classic white dwarf model,
+where support against gravity is provided by electron degeneracy
+pressure. The key distinction is that neutron stars reach densities
+so high that the gravitational field itself is extremely strong,
+requiring a treatment within general relativity.
+The appropriate framework is therefore given by the TOV equations
+introduced in Chapter~\ref{chap:tov}.
+
+To close the TOV system, an EOS relating pressure $P$ and energy density
+$\epsilon$ must be specified.
+Here we adopt the ideal Fermi gas EOS developed in
+Chapter~\ref{chap:fermi}, specialized to neutrons of mass $m_{n}$.
+Substituting this EOS into the TOV equations yields a complete system
+that can be solved numerically.
+
+The aim of this chapter is therefore to construct and analyze such ideal neutron
+star models, with the focus on the numerical implementation and results.
+
+\section{Numerical Setup}
+
+The TOV equations derived in Chapter~\ref{chap:tov} describe the
+radial dependence of pressure $P(r)$ and enclosed mass $m(r)$ in a
+static, spherically symmetric star. To integrate these equations we
+must specify boundary conditions,
+\[
+m(0)=0, \qquad P(0)=P_c, \qquad P(R)=0,
+\]
+where $P_c$ is the central pressure and $R$ is the stellar radius at
+which the pressure vanishes. The corresponding gravitational mass is
+then $M=m(R)$.
+
+The missing input required to close the system is an EOS $P(\epsilon)$.
+In Chapter~\ref{chap:fermi} we obtained this relation for a degenerate,
+zero--temperature Fermi gas. Specializing to neutrons of mass $m_n$,
+the EOS can be expressed in parametric form
+\[
+P = P(x_F), \qquad \epsilon = \epsilon(x_F),
+\]
+with $x_F=p_F/m_n$ the dimensionless Fermi momentum.
+Although this parametric representation is convenient analytically,
+the numerical solver expects $\epsilon(P)$. We therefore invert
+$P(x_F)$ numerically to obtain $x_F(P)$, and then evaluate
+$\epsilon(x_F)$ accordingly. This guarantees a consistent mapping
+between $P$ and $\epsilon$ across all density regimes.
+
+For numerical stability it is advantageous to work with dimensionless
+variables. We introduce reference scales for radius, mass, and energy
+density,
+\[
+r_0 = \frac{1}{\sqrt{G \epsilon_0}}, \qquad
+m_0 = \frac{1}{\sqrt{G^3 \epsilon_0}}, \qquad
+\epsilon_0 = m_n^4,
+\]
+where $G$ is Newton's constant and $m_n$ the neutron mass. All
+quantities are then expressed in units of $(r_0, m_0, \epsilon_0)$,
+so that
+\[
+\hat r = r/r_0, \qquad
+\hat m = m/m_0, \qquad
+\hat P = P/\epsilon_0, \qquad
+\hat \epsilon = \epsilon/\epsilon_0.
+\]
+In terms of these variables the TOV system takes a dimensionless form
+suitable for numerical integration. This rescaling avoids very large
+or small floating--point numbers and improves the stability of the
+Runge--Kutta solver.
+
+In summary, the numerical setup consists of:
+\begin{enumerate}
+  \item The TOV equations with boundary conditions at the center and
+  surface.
+  \item The ideal neutron gas EOS $\epsilon(P)$, obtained from the
+  parametric Fermi gas expressions of Chapter~\ref{chap:fermi}.
+  \item Dimensionless variables to reduce numerical instabilities.
+\end{enumerate}
+Together these ingredients define a well--posed system suitable for
+numerical solution.
+
+\section{Numerical Method}
+
+The numerical integration of the TOV equations with the ideal neutron
+gas EOS is carried out using a Python program originally developed by
+Herman Sletmoen as part of his Master's thesis~\cite{sletmoen2022}.
+In this work the code is used without modification to generate stellar
+models for the case of ideal neutron matter.
+
+The implementation proceeds as follows:
+\begin{itemize}
+  \item The coupled ODEs for $P(r)$ and $m(r)$ are integrated outward
+  from $r=0$ with initial values $P(0)=P_c$ and $m(0)=0$.
+  \item A Runge--Kutta algorithm with adaptive step size is used to
+  advance the solution.
+  \item The integration terminates once $P(r)$ vanishes, which defines
+  the stellar radius $R$. The corresponding $m(R)$ gives the
+  gravitational mass $M$.
+\end{itemize}
+Repeating the calculation for a range of central pressures $P_c$
+generates a sequence of stellar configurations. From these solutions
+one can extract the global properties of the star, namely its mass $M$
+and radius $R$, and thereby construct the mass--radius relation.
+In addition, the program provides access to internal structure such as
+the radial pressure profile $P(r)$ and energy density $\epsilon(r)$,
+which offer further insight into how equilibrium is maintained inside
+the star. In the following section we present both global and internal
+results for ideal neutron stars.
+
+
+\section{Results}
+
+The numerical solutions of the TOV equations with the ideal neutron gas
+EOS allow us to construct the mass--radius relation of ideal neutron
+stars and to examine the internal pressure profiles.
+
+\subsection*{Mass--radius relation}
+
+Figure~\ref{fig:mr_neutron} shows the mass--radius curves obtained under
+different levels of approximation. For comparison, both Newtonian
+hydrostatic equilibrium and the fully relativistic TOV equations are
+solved, each with two variants of the EOS: the non--relativistic limit
+and the general relativistic dispersion relation. This yields four
+distinct curves. The Newtonian models predict unrealistically large
+masses and radii, while the relativistic treatment produces the expected
+turnover in the $M$--$R$ diagram, signaling the existence of a maximum
+stable mass. The difference between using the approximate
+non--relativistic EOS and the full relativistic form is modest at low
+central pressures but becomes significant as $P_c$ increases.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/mass_radius_ideal_neutron_star.pdf}
+  \caption[Mass--radius relation for ideal neutron stars]{
+  Mass--radius relation for ideal neutron stars. Four models are
+  compared: Newtonian hydrostatic equilibrium with non--relativistic and
+  general EOS, and relativistic TOV equations with the same two EOS
+  inputs. Color indicates the central pressure $P_c$.}
+  \label{fig:mr_neutron}
+\end{figure}
+
+\subsection*{Pressure profiles}
+
+Figure~\ref{fig:profiles_neutron} displays radial profiles of the
+normalized pressure $P(r)/P_c$ for a sequence of central pressures
+spanning several orders of magnitude. The overall behavior is smooth,
+with $P(r)$ decreasing monotonically from the center to the surface.
+For higher $P_c$ the profiles become more centrally peaked, reflecting
+the stronger gravitational compression. These results are consistent
+with the qualitative expectation that more massive stars are also more
+compact.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/pressure_profile_ideal_neutron_star.pdf}
+  \caption[Pressure profiles of ideal neutron stars]{
+  Radial pressure profiles $P(r)/P_c$ for ideal neutron stars with
+  different central pressures $P_c$, shown on a logarithmic color scale.}
+  \label{fig:profiles_neutron}
+\end{figure}
