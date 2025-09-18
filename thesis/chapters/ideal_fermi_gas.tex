@@ -16,74 +16,80 @@ The simplest theoretical description of such systems is the \emph{ideal, zero--t
 gas}. In this model, fermions are treated as non--interacting particles that occupy all quantum
 states inside a sphere of radius $p_F$ in momentum space, known as the \emph{Fermi surface}.
 Despite its simplicity, the ideal Fermi gas captures the essential qualitative physics of compact
-stars~\cite{pathria2011}. For instance, the equilibrium of white dwarfs can be understood by modeling the electrons
-as an \emph{ultrarelativistic} Fermi gas, meaning that the typical electron momentum greatly
-exceeds the rest mass ($p \gg m$). In this regime, the pressure scales linearly with energy density,
-leading to the Chandrasekhar mass limit~\cite{chandrasekhar1931,chandrasekhar1935,shapiro1983}.
-Likewise, an \emph{ideal neutron gas} provided the basis of the pioneering Oppenheimer--Volkoff
-study of neutron stars~\cite{oppenheimer1939}.
+stars~\cite{pathria2011}. For instance, the equilibrium of white dwarfs can be described by the
+degeneracy pressure of electrons. For lighter white dwarfs the electrons are mostly
+non--relativistic, while in more massive white dwarfs the electrons at the Fermi surface become
+relativistic. In this high--density regime the model predicts the existence of a maximum stable
+mass, the Chandrasekhar limit~\cite{chandrasekhar1931,chandrasekhar1935,shapiro1983}. Likewise,
+an \emph{ideal neutron gas} provided the basis of the pioneering Oppenheimer--Volkoff study of
+neutron stars~\cite{oppenheimer1939}.
 
 From the perspective of general relativity, the ideal Fermi gas plays a crucial role as it provides
 an explicit equation of state, $p = p(\epsilon)$, which closes the Tolman--Oppenheimer--Volkoff
 equations derived in the previous chapter. While real neutron star matter is far more complicated,
-involving strong nuclear interactions, finite temperatures, and possibly exotic components such as
-hyperons or deconfined quarks, the ideal Fermi gas remains a natural starting point. It offers both
+involving strong nuclear interactions, finite temperatures, and possibly exotic components, the ideal Fermi gas remains a natural starting point. It offers both
 analytic insight in certain limits and a benchmark against which more sophisticated models can be
 compared.
 
 The purpose of this chapter is therefore twofold: first, to review the theoretical foundations of
-the ideal Fermi gas at zero temperature, deriving expressions for number density, energy density,
+an ideal Fermi gas at zero temperature, deriving expressions for number density, energy density,
 pressure, and chemical potential; and second, to connect these results to the astrophysical
 context of compact stars. We emphasize the non--relativistic and ultra--relativistic limits, where
 the expressions simplify considerably and provide physical intuition. Finally, we will discuss how
 the ideal Fermi gas equation of state can be coupled to the TOV equations to describe equilibrium
 configurations of idealized neutron stars.
 
+\section{Quantum statistics at zero temperature}
 
-\section{Quantum Statistics at Zero Temperature}
-
-Fermions are particles with half--integer spin that obey the Pauli exclusion principle: no two
-fermions can occupy the same quantum state simultaneously. As a consequence, when a macroscopic
-system of fermions is cooled to zero temperature, the available single--particle states are filled
-sequentially from the lowest energy upward. This filling behavior is described by the
-Fermi--Dirac distribution,
+Fermions are particles with half--integer spin that obey the Pauli exclusion principle: 
+no two fermions can occupy the same quantum state simultaneously. 
+The statistical distribution that incorporates this principle is the Fermi--Dirac distribution,
 \begin{equation}
 f(E) = \frac{1}{e^{(E-\mu)/T}+1},
 \label{eq:fermi_dirac_distribution}
 \end{equation}
-where $E$ is the single--particle energy, $\mu$ the chemical potential, and $T$ the temperature
-(in natural units $k_B=1$). 
+where $E$ is the single--particle energy, $\mu$ the chemical potential, 
+and $T$ the temperature (in natural units $k_B=1$).  
 
-\subsection*{Zero--temperature limit}
-In the limit $T \to 0$, the distribution becomes a sharp step function,
+In the zero--temperature limit $T\to 0$, the distribution becomes a sharp step function,
 \begin{equation}
-f(E) =
-\begin{cases}
-1, & E \leq \mu, \\
-0, & E > \mu,
-\end{cases}
+f(E) = \Theta(\mu - E),
 \label{eq:zeroT_distribution}
 \end{equation}
-so that every state with energy below the chemical potential is fully occupied, while all higher--energy
-states are empty. At zero temperature, the chemical potential takes on a special role: it equals the
-\emph{Fermi energy},
+so that all states with $E<\mu$ are occupied and all states with $E>\mu$ are empty.  
+At $T=0$, the chemical potential takes the value
 \begin{equation}
 E_F = \mu(T=0),
 \end{equation}
-the energy of the highest occupied single--particle state in the system. From the
-special--relativistic dispersion relation,
+which is called the \emph{Fermi energy}. It is the energy of the highest occupied 
+single--particle state in the system.  
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.65\textwidth]{figures/fermi_dirac_distribution.pdf}
+\caption[Fermi--Dirac distribution at different temperatures]{
+The Fermi--Dirac distribution $f(E)$ for several finite temperatures $T$ 
+with chemical potential $\mu=1$. 
+At $T=0$ the distribution reduces to a step function (dashed line), 
+so that all states with $E<\mu$ are occupied and all higher states are empty. 
+Increasing temperature smooths the step around the Fermi energy.}
+\label{fig:fermi_dirac_distribution}
+\end{figure}
+
+From the special--relativistic dispersion relation
 \begin{equation}
 E(p) = \sqrt{p^2+m^2},
 \label{eq:SR_dispersion}
 \end{equation}
-with $m$ the particle rest mass and $p = |\vec{p}|$ the momentum magnitude. One can then define
-the corresponding \emph{Fermi momentum},
+with $m$ the particle rest mass and $p=|\vec{p}|$ the momentum magnitude, one obtains at $T=0$ 
 \begin{equation}
-p_F = \sqrt{E_F^2 - m^2},
+p_F = \sqrt{\mu^2 - m^2},
 \end{equation}
-which sets the radius of the \emph{Fermi surface} in momentum space. These two quantities,
-$E_F$ and $p_F$, are the natural scales of a degenerate Fermi system: once specified, they
-determine the characteristic energies, momenta, and thermodynamic properties of the gas.
+since $\mu = E_F$ in this limit.  
+
+Thus a degenerate Fermi gas is fully specified once the particle mass $m$ and the chemical potential $\mu$ are given. 
+Equivalently, one can use the pair $(m, p_F)$, since $p_F$ and $\mu$ are related by the dispersion relation above. 
+These quantities set the natural scales of the system and will serve as the basis for the thermodynamic description in the following sections.
 
 \subsection*{Physical meaning of $E_F$ and $p_F$}
 The Fermi energy $E_F$ measures the energy cost of adding one more particle to the system at zero
@@ -92,14 +98,14 @@ therefore the largest momentum carried by any fermion in the ground state. Toget
 the ``surface'' of occupied states in momentum space --- the Fermi surface --- which plays a central
 role in both condensed matter and astrophysical systems. Even at $T=0$, fermions cannot all sit in
 the lowest momentum state; instead, the exclusion principle forces them to occupy an entire sphere
-of states up to $p_F$. This crowding of states gives rise to degeneracy pressure, independent of
+of states up to $p_F$. This filling of states gives rise to degeneracy pressure, independent of
 temperature.
 
 
-\section{Thermodynamics of the Ideal Fermi Gas}
+\section{Thermodynamics of an ideal Fermi gas}
 \label{sec:thermo_ideal_fermi}
 
-Having established the statistical foundations and the concepts of Fermi energy and Fermi
+Having reviewed the statistical foundations and the concepts of Fermi energy and Fermi
 momentum, we now derive the thermodynamic quantities of a degenerate Fermi gas at zero
 temperature by integrating over occupied momentum states up to $p_F$. The momentum--space
 volume element is $d^3p=4\pi p^2\,dp$, and the density of states per unit volume is
@@ -121,7 +127,7 @@ such as electrons, neutrons, or protons one has $g=2$.
 
 Counting the total number of occupied states inside the Fermi sphere then gives
 \begin{equation}
-n \;=\; g \int_{|\vec p|\le p_F}\frac{d^3p}{(2\pi)^3}
+n \;=\; g \int \frac{d^3p}{(2\pi)^3}\,\Theta(p_F-|\vec p|)
 \;=\; \frac{g}{2\pi^2}\int_0^{p_F}p^2\,dp
 \;=\; \frac{g}{6\pi^2}\,p_F^{3}.
 \label{eq:fermi_number_density}
@@ -137,11 +143,8 @@ and connects the microscopic filling of momentum states to the macroscopic parti
 The total energy density follows from summing the single--particle energies $E(p)=\sqrt{p^2+m^2}$ 
 over all occupied momentum states. In terms of the general phase--space integral,
 \begin{equation}
-\epsilon \;=\; g \int_{|\vec p|\le p_F}\frac{d^3p}{(2\pi)^3}\,E(p),
-\end{equation}
-this gives
-\begin{equation}
-\epsilon \;=\; \frac{g}{2\pi^2}\int_0^{p_F}\sqrt{p^2+m^2}\,p^2\,dp.
+\epsilon \;=\; g \int \frac{d^3p}{(2\pi)^3}\,E(p)\,\Theta(p_F-|\vec p|)
+\;=\; \frac{g}{2\pi^2}\int_0^{p_F}\sqrt{p^2+m^2}\,p^2\,dp.
 \label{eq:energy_density_integral}
 \end{equation}
 To simplify the evaluation it is convenient to introduce the dimensionless variable $x=p/m$, 
@@ -158,35 +161,6 @@ Carrying out the integral yields the compact analytic form
 This expression makes explicit the crossover between the non--relativistic regime 
 ($x_F\ll 1$, where $\epsilon \approx m n$ with small kinetic corrections) 
 and the ultra--relativistic regime ($x_F\gg 1$, where $\epsilon \propto p_F^4$).
-
-\subsection*{Pressure}
-Microscopically, pressure can be defined as the flux of momentum carried by the particles across a unit area. 
-In relativistic kinetic theory this notion is captured by the spatial diagonal components of the energy--momentum tensor,
-\begin{equation}
-T^{\mu\nu} \;=\; g \int \frac{d^3p}{(2\pi)^3}\,\frac{p^\mu p^\nu}{E(p)}\,f(p),
-\end{equation}
-with $E(p)=\sqrt{p^2+m^2}$ and $f(p)$ the occupation number. 
-At zero temperature, the distribution is simply a step function $f(p)=\Theta(p_F-p)$, filling all states up to the Fermi momentum. 
-The pressure is then given by the diagonal spatial component, for instance $T^{xx}$,
-\begin{equation}
-p \;=\; T^{xx} \;=\; g \int \frac{d^3p}{(2\pi)^3}\,\frac{p_x^2}{E(p)}\,f(p).
-\end{equation}
-Because the Fermi sphere is isotropic, the average over directions yields $\langle p_x^2 \rangle = p^2/3$, so that
-\begin{equation}
-p \;=\; \frac{g}{3}\int \frac{d^3p}{(2\pi)^3}\,\frac{p^2}{E(p)}\,f(p).
-\end{equation}
-Switching to spherical momentum coordinates, $d^3p=4\pi p^2 dp$, gives the momentum--flux integral
-\begin{equation}
-p \;=\; \frac{g}{6\pi^2}\int_0^{p_F}\frac{p^4}{\sqrt{p^2+m^2}}\,dp
-\;=\; \frac{g\,m^4}{6\pi^2}\int_0^{x_F}\frac{x^4}{\sqrt{1+x^2}}\,dx,
-\label{eq:pressure_integral}
-\end{equation}
-which evaluates to
-\begin{equation}
-p \;=\; \frac{g\,m^4}{48\pi^2}
-\Big[\,x_F\sqrt{1+x_F^2}\,(2x_F^2-3)\;+\;3\,\sinh^{-1}x_F\,\Big].
-\label{eq:pressure}
-\end{equation}
 
 \subsection*{Chemical potential}
 The chemical potential measures the change in energy when adding one particle to the system, 
@@ -207,33 +181,70 @@ Two useful thermodynamic identities hold in the degenerate limit $T=0$:
 \begin{equation}
 d\epsilon \;=\; \mu\,dn,
 \qquad
-\epsilon + p \;=\; \mu\,n.
+\epsilon + P \;=\; \mu\,n.
 \label{eq:zeroT_identities}
 \end{equation}
 The first expresses that the chemical potential is the derivative of the energy density 
-with respect to particle number, while the second is the Gibbs--Duhem relation (or enthalpy identity) 
+with respect to particle number, while the second is the Gibbs--Duhem relation
 with the entropy term $Ts$ vanishing at zero temperature. 
 These relations are easily checked by differentiating the explicit integral expressions 
 for $\epsilon$ and $n$: from \eqref{eq:energy_density_integral} and \eqref{eq:fermi_number_density} one finds
 \[
-\mu \;=\; \frac{d\epsilon/dp_F}{dn/dp_F} \;=\; \sqrt{p_F^2+m^2},
+\mu \;=\; \frac{d\epsilon}{dn} \;=\; \sqrt{p_F^2+m^2},
 \]
 which confirms Eq.~\eqref{eq:mu_zeroT}.
 
+\subsection*{Pressure}
+Microscopically, pressure can be defined as the flux of momentum carried by the particles across a unit area. 
+In relativistic kinetic theory this notion is captured by the spatial diagonal components of the energy--momentum tensor,
+\begin{equation}
+T^{\mu\nu} \;=\; g \int \frac{d^3p}{(2\pi)^3}\,\frac{p^\mu p^\nu}{E(p)}\,f(p),
+\end{equation}
+with $E(p)=\sqrt{p^2+m^2}$ and $f(p)$ the occupation number. 
+At zero temperature, the distribution is simply a step function $f(p)=\Theta(p_F-p)$, filling all states up to the Fermi momentum. 
+The pressure is then given by the diagonal spatial component, for instance $T^{xx}$,
+\begin{equation}
+P \;=\; T^{xx} \;=\; g \int \frac{d^3p}{(2\pi)^3}\,\frac{p_x^2}{E(p)}\,f(p).
+\end{equation}
+Because the Fermi sphere is isotropic, the average over directions yields $\langle p_x^2 \rangle = \frac{1}{3}p^2$, so that
+\begin{equation}
+P \;=\; \frac{g}{3}\int \frac{d^3p}{(2\pi)^3}\,\frac{p^2}{E(p)}\,f(p).
+\end{equation}
+Switching to spherical momentum coordinates, $d^3p=4\pi p^2 dp$, gives the momentum--flux integral
+\begin{equation}
+P \;=\; \frac{g}{6\pi^2}\int_0^{p_F}\frac{p^4}{\sqrt{p^2+m^2}}\,dp
+\;=\; \frac{g\,m^4}{6\pi^2}\int_0^{x_F}\frac{x^4}{\sqrt{1+x^2}}\,dx,
+\label{eq:pressure_integral}
+\end{equation}
+which evaluates to
+\begin{equation}
+P \;=\; \frac{g\,m^4}{48\pi^2}
+\Big[\,x_F\sqrt{1+x_F^2}\,(2x_F^2-3)\;+\;3\,\sinh^{-1}x_F\,\Big].
+\label{eq:pressure}
+\end{equation}
+
+\noindent
+Alternatively, the pressure can also be obtained from the thermodynamic relation
+\begin{equation}
+P \;=\; -\,\epsilon \;+\; \mu n,
+\end{equation}
+which follows from the Gibbs--Duhem relation introduced in the previous section. 
+This provides a useful check on the explicit momentum--flux calculation above.
+
 \section{Equation of State and Limiting Cases}
 
-The expressions derived above provide $n$, $\epsilon$ and $p$ as explicit functions of the
+The expressions derived above provide $n$, $\epsilon$ and $P$ as explicit functions of the
 Fermi momentum $p_F$ (or equivalently the dimensionless ratio $x_F=p_F/m$). In practice,
 this means that the ideal Fermi gas equation of state is most conveniently written in
 \emph{parametric form}:
 \begin{align}
 \epsilon &= \epsilon(x_F), \\
-p &= p(x_F),
+P &= P(x_F),
 \end{align}
-with $\epsilon(x_F)$ and $p(x_F)$ given by
+with $\epsilon(x_F)$ and $P(x_F)$ given by
 Eqs.~\eqref{eq:energy_density} and \eqref{eq:pressure}. The chemical potential
 is simultaneously determined by Eq.~\eqref{eq:mu_zeroT}. Eliminating $x_F$ gives a
-closed functional relation $p(\epsilon)$, but the analytic form is not especially
+closed functional relation $P(\epsilon)$, but the analytic form is not especially
 transparent; in astrophysical applications one typically evaluates the parametric
 expressions numerically.
 
@@ -245,7 +256,7 @@ physically illuminating.
 In the non--relativistic regime $x_F=p_F/m\ll 1$, single--particle energies are
 $E(p)\simeq m+\frac{p^2}{2m}$. The pressure and number density at $T=0$ are
 \begin{equation}
-p \;\simeq\; \frac{g}{30\pi^2\,m}\,p_F^5,
+P \;\simeq\; \frac{g}{30\pi^2\,m}\,p_F^5,
 \qquad
 n \;=\; \frac{g}{6\pi^2}\,p_F^3.
 \label{eq:NR_p_and_n}
@@ -256,42 +267,46 @@ In this limit the \emph{total} energy density is dominated by rest mass,
 \label{eq:NR_eps_total}
 \end{equation}
 with a subleading kinetic piece (of order $p_F^5/m$) that we neglect when relating
-$\epsilon$ to $p$.
-
-Eliminating $p_F$ between \eqref{eq:NR_p_and_n} gives
+$\epsilon$ to $P$. Eliminating $p_F$ between \eqref{eq:NR_p_and_n} gives
 \[
-p_F^5 \;=\; \frac{30\pi^2\,m}{g}\,p,
+p_F^5 \;=\; \frac{30\pi^2\,m}{g}\,P,
 \qquad
-p_F^3 \;=\; \biggl(\frac{30\pi^2\,m}{g}\,p\biggr)^{\!3/5}.
+p_F^3 \;=\; \biggl(\frac{30\pi^2\,m}{g}\,P\biggr)^{\!3/5}.
 \]
 Hence
 \begin{align}
 n \;&=\; \frac{g}{6\pi^2}\,p_F^3
-\;=\; \frac{g}{6\pi^2}\,\biggl(\frac{30\pi^2\,m}{g}\,p\biggr)^{\!3/5},
+\;=\; \frac{g}{6\pi^2}\,\biggl(\frac{30\pi^2\,m}{g}\,P\biggr)^{\!3/5},
 \\[2pt]
-\epsilon(p) \;&=\; m\,n
+\epsilon(P) \;&=\; m\,n
 \;=\; \Bigl(\tfrac{30^{3/5}}{6}\,\pi^{-4/5}\Bigr)\,
-g^{2/5}\,m^{8/5}\,p^{3/5}.
+g^{2/5}\,m^{8/5}\,P^{3/5}.
 \end{align}
 Thus, in the non--relativistic limit the equation of state exhibits the polytropic scaling
 \begin{equation}
-\epsilon \;\propto\; p^{3/5}.
+\epsilon \;\propto\; P^{3/5}.
 \end{equation}
+The term ``polytropic'' refers to an equation of state of the form 
+$P = K \rho^\gamma$, where $\rho$ is the mass density. 
+At zero temperature in the non--relativistic regime the energy density is dominated 
+by rest mass, $\epsilon \simeq m n \simeq \rho$, so that the relation above is 
+equivalent to $P \propto \rho^{5/3}$. The effective polytropic index is therefore 
+$\gamma = 5/3$ for a non--relativistic degenerate Fermi gas.
 
 \subsection*{Ultra--relativistic limit}
 For large Fermi momenta, $x_F \gg 1$, the rest mass becomes negligible and
 $E(p) \approx p$. The integrals then yield
 \begin{align}
 \epsilon &\;\approx\; \frac{g}{8\pi^2}\,p_F^4, \\
-p &\;\approx\; \frac{g}{24\pi^2}\,p_F^4,
+P &\;\approx\; \frac{g}{24\pi^2}\,p_F^4,
 \end{align}
 so that the equation of state approaches
 \begin{equation}
-\epsilon \;=\; 3\, p.
+\epsilon \;=\; 3\, P.
 \label{eq:ultrarel_eos}
 \end{equation}
 This is identical to the relation for a gas of massless particles such as
-photons or neutrinos, consistent with the fact that for $p \gg m$ the particle
+photons or neutrinos, consistent with the fact that for $P \gg m$ the particle
 dispersion relation becomes effectively massless.
 
 \subsection*{Physical interpretation}
@@ -300,14 +315,14 @@ equation of state, i.e.\ how strongly the pressure responds to increasing energy
 In the non--relativistic regime, the pressure scales as $n^{5/3}$, which rises faster 
 than linearly with density but remains subdominant to the rest--mass energy in $\epsilon$. 
 In contrast, in the ultra--relativistic regime the pressure is a fixed fraction ($1/3$) 
-of the energy density, producing a much softer relation between $p$ and $\epsilon$. 
+of the energy density, producing a much softer relation between $P$ and $\epsilon$. 
 The transition between these two regimes occurs when $p_F \sim m$, i.e.\ when
-the typical fermion momentum becomes comparable to the rest mass. In compact
-stars, the electron component typically lies in the ultra--relativistic regime,
-whereas neutrons can remain non--relativistic in less massive stars but
-become increasingly relativistic toward higher central densities.
-In all cases, the degeneracy pressure encapsulated by the Fermi gas equation
-of state provides the fundamental microscopic mechanism preventing
+the typical fermion momentum becomes comparable to the rest mass. 
+In compact stars, electrons often approach or enter the relativistic regime at 
+sufficiently high densities, while baryons such as neutrons may remain largely 
+non--relativistic in lighter stars but become increasingly relativistic as central 
+densities grow. In all cases, the degeneracy pressure encapsulated by the Fermi gas 
+equation of state provides the fundamental microscopic mechanism preventing 
 gravitational collapse.
 
 \begin{figure}[ht]
@@ -317,9 +332,9 @@ gravitational collapse.
 Ratio of pressure to energy density $p/\epsilon$ as a function of the
 dimensionless Fermi momentum $x_F = p_F/m$. 
 In the non--relativistic regime $x_F \ll 1$, rest--mass energy dominates
-and $p/\epsilon \to 0$. 
+and $P/\epsilon \to 0$. 
 In the ultra--relativistic regime $x_F \gg 1$, the relation approaches
-$p = \epsilon/3$, indicated by the dashed line.
+$P = \epsilon/3$, indicated by the dashed line.
 }
 \label{fig:fermi_eos}
 \end{figure}
@@ -333,28 +348,31 @@ canonical astrophysical contexts.
 
 \paragraph{White dwarfs.}
 In white dwarfs, the pressure support is provided almost entirely by
-degenerate electrons. Typical central densities are so high that the
-electron Fermi momentum satisfies $p_F \gg m_e$, placing the system in
-the ultra--relativistic regime. As a consequence, the equation of state
-approaches $p = \epsilon/3$, and the stellar mass becomes essentially
-independent of radius. Balancing this relativistic degeneracy pressure
-against gravity yields the famous Chandrasekhar mass limit,
-$M_{\rm Ch} \simeq 1.4\,M_\odot$, beyond which no stable white dwarf
-configurations exist. This provides the theoretical foundation for our
-understanding of type~Ia supernova progenitors.
+degenerate electrons. As the central density increases, the electron
+Fermi momentum can approach or exceed the rest mass, $p_F \gtrsim m_e$,
+driving the system toward the relativistic regime. In this limit the
+equation of state approaches $P = \epsilon/3$, and the stellar mass
+becomes essentially independent of radius. Balancing this relativistic
+degeneracy pressure against gravity yields the Chandrasekhar mass limit,
+$M_{\rm Ch} \simeq 1.4\,M_\odot$. This result follows under the
+idealized assumptions of a cold, non--interacting electron gas providing
+all of the pressure support, with ions contributing only to the rest--mass
+density, and with the electrons treated in the ultra--relativistic
+limit. Despite these simplifications, the Chandrasekhar limit gives a
+value close to the maximum masses of observed white dwarfs, making the
+ideal Fermi gas a useful model for this calculation.
 
 \paragraph{Neutron stars.}
-In neutron stars, the relevant fermions are neutrons, whose rest mass is
-comparable to their Fermi momentum at typical nuclear densities. As a
-result, the system lies in the intermediate regime between the
-non--relativistic and ultra--relativistic limits. The pioneering work of
-Oppenheimer and Volkoff modeled neutron stars as ideal neutron gases and
-found a maximum mass of order $0.7\,M_\odot$. While this value is far
-below the $\sim 2\,M_\odot$ neutron stars observed today~\cite{haensel2007}, the calculation
-was historically crucial: it demonstrated that relativistic gravity,
-together with a microscopic equation of state, predicts an upper mass
-limit for neutron stars analogous to Chandrasekhar’s result for white
-dwarfs.
+In their pioneering work, Oppenheimer and Volkoff modeled neutron stars
+as a cold, ideal Fermi gas of neutrons with no nuclear interactions,
+described by the full relativistic dispersion relation
+$E(p)=\sqrt{p^2+m_n^2}$. Solving the TOV equations with this equation of
+state, they found a maximum stable mass of order $0.7\,M_\odot$. Although
+this value is far below the $\sim 2\,M_\odot$ neutron stars observed
+today~\cite{haensel2007}, the calculation was historically crucial: it
+demonstrated that combining general relativity with a microscopic
+equation of state leads to an upper mass limit for neutron stars,
+analogous to Chandrasekhar’s result for white dwarfs.
 
 \paragraph{Limitations.}
 The ideal Fermi gas neglects several important physical ingredients. Real
@@ -362,17 +380,19 @@ neutron star matter is strongly interacting, with short--range nuclear
 forces significantly modifying the pressure at supranuclear densities.
 Charge neutrality and beta equilibrium imply a mixture of neutrons,
 protons, electrons, and muons, rather than a pure single--species Fermi
-gas. At sufficiently high densities, more exotic components such as
-hyperons, meson condensates, or deconfined quark matter may appear.
+gas. At sufficiently high densities, more exotic components may appear.
 Moreover, finite temperature effects can be relevant in newly born
 protoneutron stars. All of these factors alter the equation of state,
 and hence the predicted stellar structure.
 
 \paragraph{Summary.}
-Despite these limitations, the ideal Fermi gas remains an indispensable
-baseline model. It provides analytic control in limiting regimes,
-a clear physical picture of degeneracy pressure, and a convenient
-parametric equation of state that can be directly coupled to the
-Tolman--Oppenheimer--Volkoff equations. As such, it serves both as a
-pedagogical introduction to compact star physics and as a benchmark
-against which more realistic models of dense matter can be tested.
+Despite its limitations, the ideal Fermi gas remains a valuable baseline
+model. It provides analytic control in limiting regimes, a clear physical
+picture of degeneracy pressure, and a simple parametric equation of state
+that can be directly coupled to the Tolman--Oppenheimer--Volkoff equations.
+As such, it serves as a pedagogical introduction to compact star physics,
+and its predictions---such as the Chandrasekhar mass for white dwarfs and
+the Oppenheimer--Volkoff mass limit for neutron stars---show that even this
+simplified treatment can reproduce the correct order of magnitude for the
+maximum masses of compact stars.
+

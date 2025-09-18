@@ -17,7 +17,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv
-numerics/data
+numerics/data*
 
 # OS/Editors
 .DS_Store
