@@ -8,7 +8,7 @@ theoretical model for a relativistic compact star.
 In this picture the stellar interior is assumed to consist solely
 of neutrons, treated as a cold, non--interacting Fermi gas.
 This construction parallels the classic white dwarf model,
-where support against gravity is provided by electron degeneracy
+where support against gravity is provided by the electron degeneracy
 pressure. The key distinction is that neutron stars reach densities
 so high that the gravitational field itself is extremely strong,
 requiring a treatment within general relativity.
@@ -28,9 +28,9 @@ star models, with the focus on the numerical implementation and results.
 \section{Numerical Setup}
 
 The TOV equations derived in Chapter~\ref{chap:tov} describe the
-radial dependence of pressure $P(r)$ and enclosed mass $m(r)$ in a
+radial dependence of the pressure $P(r)$ and enclosed mass $m(r)$ in a
 static, spherically symmetric star. To integrate these equations we
-must specify boundary conditions,
+must specify the boundary conditions. They are
 \[
 m(0)=0, \qquad P(0)=P_c, \qquad P(R)=0,
 \]
@@ -38,14 +38,13 @@ where $P_c$ is the central pressure and $R$ is the stellar radius at
 which the pressure vanishes. The corresponding gravitational mass is
 then $M=m(R)$.
 
-The missing input required to close the system is an EOS $P(\epsilon)$.
 In Chapter~\ref{chap:fermi} we obtained this relation for a degenerate,
-zero--temperature Fermi gas. Specializing to neutrons of mass $m_n$,
+zero--temperature Fermi gas. Specializing to neutrons of mass $m_N$,
 the EOS can be expressed in parametric form
 \[
 P = P(x_F), \qquad \epsilon = \epsilon(x_F),
 \]
-with $x_F=p_F/m_n$ the dimensionless Fermi momentum.
+with $x_F=p_F/m_N$ the dimensionless Fermi momentum.
 Although this parametric representation is convenient analytically,
 the numerical solver expects $\epsilon(P)$. We therefore invert
 $P(x_F)$ numerically to obtain $x_F(P)$, and then evaluate
@@ -58,10 +57,9 @@ density,
 \[
 r_0 = \frac{1}{\sqrt{G \epsilon_0}}, \qquad
 m_0 = \frac{1}{\sqrt{G^3 \epsilon_0}}, \qquad
-\epsilon_0 = m_n^4,
+\epsilon_0 = m_N^4.
 \]
-where $G$ is Newton's constant and $m_n$ the neutron mass. All
-quantities are then expressed in units of $(r_0, m_0, \epsilon_0)$,
+All quantities are then expressed in units of $(r_0, m_0, \epsilon_0)$,
 so that
 \[
 \hat r = r/r_0, \qquad
@@ -76,8 +74,11 @@ Runge--Kutta solver.
 
 In summary, the numerical setup consists of:
 \begin{enumerate}
-  \item The TOV equations with boundary conditions at the center and
-  surface.
+  \item The TOV equations, integrated outward from the center with 
+  initial conditions $m(0)=0$ and $P(0)=P_c$, and terminated when 
+  the surface condition $P(R)=0$ is reached. The corresponding 
+  radius $R$ and gravitational mass $M=m(R)$ then characterize 
+  the stellar model.
   \item The ideal neutron gas EOS $\epsilon(P)$, obtained from the
   parametric Fermi gas expressions of Chapter~\ref{chap:fermi}.
   \item Dimensionless variables to reduce numerical instabilities.
@@ -89,7 +90,7 @@ numerical solution.
 
 The numerical integration of the TOV equations with the ideal neutron
 gas EOS is carried out using a Python program originally developed by
-Herman Sletmoen as part of his Master's thesis~\cite{sletmoen2022}.
+Sletmoen as part of his Master's thesis~\cite{sletmoen2022}.
 In this work the code is used without modification to generate stellar
 models for the case of ideal neutron matter.
 
@@ -105,13 +106,16 @@ The implementation proceeds as follows:
 \end{itemize}
 Repeating the calculation for a range of central pressures $P_c$
 generates a sequence of stellar configurations. From these solutions
-one can extract the global properties of the star, namely its mass $M$
-and radius $R$, and thereby construct the mass--radius relation.
-In addition, the program provides access to internal structure such as
-the radial pressure profile $P(r)$ and energy density $\epsilon(r)$,
-which offer further insight into how equilibrium is maintained inside
-the star. In the following section we present both global and internal
-results for ideal neutron stars.
+one can extract the global properties of the star --- quantities defined
+at the surface that characterize the star as a whole --- namely its mass
+$M=m(R)$ and radius $R$ where $P(R)=0$. These global results can then be
+combined into the mass--radius relation. In addition, the solver also
+provides access to the internal structure, meaning the radial profiles
+of pressure $P(r)$ and energy density $\epsilon(r)$ throughout the
+stellar interior. Such internal results reveal how matter is distributed
+and how pressure balances gravity at each radius, complementing the
+global description. In the following section we present both global and
+internal results for ideal neutron stars.
 
 
 \section{Results}
@@ -122,7 +126,7 @@ stars and to examine the internal pressure profiles.
 
 \subsection*{Mass--radius relation}
 
-Figure~\ref{fig:mr_neutron} shows the mass--radius curves obtained under
+Figure~\ref{fig:mr_neutron} shows the mass--radius curves obtained in
 different levels of approximation. For comparison, both Newtonian
 hydrostatic equilibrium and the fully relativistic TOV equations are
 solved, each with two variants of the EOS: the non--relativistic limit
