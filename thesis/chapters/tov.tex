@@ -336,10 +336,10 @@ so that $e^{2\alpha}\to 1$ as $r\to\infty$.
 The factor $(1-2M/R)$ is the Schwarzschild redshift factor, and the condition $R>2M$ 
 ensures that the star is not a black hole.
 
-\section*{Example: Uniform--density (``incompressible'') star}
-\addcontentsline{toc}{section}{Example: Uniform--density (``incompressible'') star}
+\section*{Example: Uniform--density incompressible star}
+\addcontentsline{toc}{section}{Example: Uniform--density incompressible star}
 
-As an analytically solvable illustration of the TOV system, consider a star with
+As a simple analytically solvable example of the TOV equations, consider a star with
 \begin{equation}
 \epsilon(r)\equiv \epsilon_{0}=\text{const}.
 \label{eq:const_density_assumption}
@@ -370,13 +370,23 @@ It is convenient to define
 \Phi_{R}\equiv \Phi(R)=\sqrt{1-\frac{2M}{R}}.
 \label{eq:Phi_defs}
 \end{equation}
+The quantity $\Phi(r)$ is real only for $2m(r)/r<1$, corresponding to radii outside the Schwarzschild horizon.
+If the compactness $2M/R>1$, the interior lies within an event horizon and the configuration represents a black hole rather than a hydrostatic fluid sphere.
+In that regime the TOV equations are no longer valid, as they assume a static equilibrium supported by pressure.
 
 \subsection*{Pressure profile}
-Combining hydrostatic balance \eqref{eq:preTOV} with \eqref{eq:alpha_prime} and the uniform density \eqref{eq:const_density_mass}, one separates variables and integrates from $r$ to $R$ using $P(R)=0$. The result is
+From the TOV pressure equation \eqref{eq:TOV_pressure}, the pressure
+gradient for a uniform--density fluid takes the form
+\[
+\frac{dP}{dr}
+=-\,\frac{4\pi r\,(\epsilon_{0}+P)\,(\epsilon_{0}/3+P)}{\Phi(r)^{2}},
+\]
+which shows that $P$ decreases outward due to gravity.  Integrating this
+relation from $r$ to $R$ using $P(R)=0$ gives
 \begin{equation}
 P(r)
 =\epsilon_{0}\,
-\frac{\Phi_{r}-\Phi(R)}{3\,\Phi(R)-\Phi_{r}},
+\frac{\Phi(r)-\Phi(R)}{3\,\Phi(R)-\Phi(r)},
 \label{eq:const_density_pressure}
 \end{equation}
 and, at the center ($\Phi(0)=1$),
@@ -401,21 +411,32 @@ From \eqref{eq:Pc_const_density}, $P_c$ is finite for $\Phi_R\neq \frac{1}{3}$ a
 R>\frac{9}{4}\,M.
 \label{eq:Buchdahl_bound}
 \end{equation}
-This inequality is the \emph{Buchdahl bound}: for static, spherically symmetric, isotropic fluids with nonincreasing $\epsilon(r)$ one must have $R\ge \frac{9}{4}M$ \cite{buchdahl1959}. The uniform--density solution makes the divergence as the bound is approached explicit: $P_{c}\to\infty$ as $R$ approaches $\frac{9}{4}M$ from above.
+This inequality is the \emph{Buchdahl bound}: for static, spherically symmetric, isotropic fluids with nonincreasing $\epsilon(r)$ one must have $R\ge \frac{9}{4}M$ \cite{buchdahl1959}. The uniform--density solution makes the divergence as the bound is approached explicitly: $P_{c}\to\infty$ as $R$ approaches $\frac{9}{4}M$ from above.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/pressure_analytical_buchdal.pdf}
+\caption[Central pressure and Buchdahl limit for incompressible star]{
+Central pressure as a function of compactness for a uniform--density star. 
+As the compactness $\mathcal{C}=2M/R$ approaches the Buchdahl limit 
+$\mathcal{C}=8/9$, the required central pressure rises steeply and diverges at 
+the bound, signaling the onset of gravitational collapse.}
+\label{fig:buchdal_limit}
+\end{figure}
 
 \subsection*{Interior time component and surface matching}
 With $m(r)$ and $P(r)$ known, the remaining metric function is the redshift potential $e^{2\alpha(r)}$. 
 Equation~\eqref{eq:alpha_prime} relates $\alpha'(r)$ to the matter variables; substituting the uniform–density mass profile \eqref{eq:const_density_mass} and the pressure \eqref{eq:const_density_pressure} yields a first–order equation that integrates in closed form. 
 Up to an overall constant, the result is
 \begin{equation}
-e^{\alpha(r)}=C\,\bigl(3\,\Phi_{R}-\Phi(r)\bigr),
+e^{\alpha(r)}=C\,\bigl[3\,\Phi_{R}-\Phi(r)\bigr],
 \label{eq:alpha_shape}
 \end{equation}
 where $\Phi(r)$ and $\Phi_{R}$ are defined in \eqref{eq:Phi_defs}. 
 Continuity of the $tt$–component at the surface fixes $C$ via $e^{2\alpha(R)}=1-2M/R=\Phi_{R}^{2}$, hence $C=\tfrac{1}{2}$. 
 Therefore
 \begin{equation}
-e^{2\alpha(r)}=\frac{1}{4}\,\bigl(3\,\Phi_{R}-\Phi(r)\bigr)^{2},
+e^{2\alpha(r)}=\frac{1}{4}\,\bigl[3\,\Phi_{R}-\Phi(r)\bigr]^{2},
 \label{eq:e2alpha_uniform}
 \end{equation}
 and the interior line element is
@@ -430,5 +451,66 @@ At the center $r=0$ we have $\Phi(0)=1$, so $e^{\alpha(0)}=\tfrac{1}{2}(3\Phi_{R
 Thus the solution is regular at $r=0$. 
 For $R>\frac{9}{4}M$ the metric functions remain smooth and finite throughout the interior; only the central pressure $P_{c}$ diverges as the Buchdahl limit $R\to \frac{9}{4}M$ is approached.
 
-\subsection*{Summary and use}
-The uniform--density model is analytically solvable but acausal (infinite $c_{s}$). It is useful as a pedagogical foil and as a numerical check: a TOV integrator supplied with \eqref{eq:const_density_assumption} should reproduce \eqref{eq:const_density_pressure} and \eqref{eq:interior_schwarzschild}, and should approach the compactness limit \eqref{eq:Buchdahl_bound} from below in $\mathcal{C}$ as the central pressure is increased.
+\subsection*{Newtonian incompressible star}
+
+For comparison, consider the Newtonian hydrostatic equilibrium equation
+\begin{equation}
+\frac{dP}{dr}=-\,\frac{G\,m(r)\,\rho}{r^{2}},
+\qquad
+m(r)=4\pi\!\int_{0}^{r}\rho\,r'^{2}\,dr'=\frac{4\pi}{3}\rho\,r^{3},
+\end{equation}
+with constant mass density $\rho$ (so $\epsilon_{0}=\rho$ in units $c=1$).
+Integrating from $r$ to $R$ with $P(R)=0$ gives the pressure profile
+\begin{equation}
+P_{\mathrm{N}}(r)=\frac{2\pi G}{3}\,\rho^{2}\,\bigl(R^{2}-r^{2}\bigr),
+\qquad
+P_{\mathrm{N},c}\equiv P_{\mathrm{N}}(0)=\frac{2\pi G}{3}\,\rho^{2}\,R^{2}.
+\end{equation}
+Expressed in terms of the total mass $M=\tfrac{4\pi}{3}\rho R^{3}$,
+\begin{equation}
+P_{\mathrm{N}}(r)=\frac{3\,G}{8\pi}\,\frac{M^{2}}{R^{4}}
+\left(1-\frac{r^{2}}{R^{2}}\right),
+\qquad
+P_{\mathrm{N},c}=\frac{3\,G}{8\pi}\,\frac{M^{2}}{R^{4}}.
+\end{equation}
+
+\subsection*{Summary and remarks}
+The constant--density star provides an analytic solution of the TOV
+equations and a clear comparison with the Newtonian limit.  In the
+relativistic case, the pressure profile
+\eqref{eq:const_density_pressure} shows that $P(r)$ increases sharply
+with compactness and diverges at $2M/R=8/9$, beyond which no static
+solution exists. This divergence shows that the star can no longer 
+remain in hydrostatic equilibrium. Beyond this point, gravity overwhelms 
+pressure support, and the object collapses — 
+a limit known as the Buchdahl bound for fluid spheres. 
+
+In contrast, the Newtonian model yields a simple quadratic profile
+$P_{\mathrm{N}}(r)\propto(R^{2}-r^{2})$ with a finite central pressure
+for all $M$ and $R$.  Expanding the relativistic expression for small
+compactness reproduces the Newtonian result,
+\[
+P_{c}=\frac{3G}{8\pi}\frac{M^{2}}{R^{4}}
++\mathcal{O}\!\left((M/R)^{3}\right),
+\]
+illustrating how general relativity strengthens the required pressure
+support as gravity becomes stronger.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/pressure_analytical_incompressible.pdf}
+\caption[Pressure profiles for incompressible star]{
+Radial pressure profiles $P(r)/\epsilon_0$ for the uniform--density star. 
+Solid curves show the relativistic (TOV) solution, while dashed curves show 
+the Newtonian approximation. 
+For small compactness the two coincide, but at higher compactness the 
+relativistic pressure grows sharply toward the center, reflecting the stronger 
+self--gravity in general relativity.}
+\label{fig:pressure_incompressible}
+\end{figure}
+
+Despite its acausal equation of state ($c_{s}\!\to\!\infty$), the
+uniform--density star remains a useful analytic benchmark.  It provides
+a simple test for numerical TOV solvers and a reference point for
+understanding how relativistic corrections modify the structure of
+self-gravitating fluids.
