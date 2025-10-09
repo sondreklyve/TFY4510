@@ -120,51 +120,100 @@ internal results for ideal neutron stars.
 
 \section{Results}
 
-The numerical solutions of the TOV equations with the ideal neutron gas
-EOS allow us to construct the mass--radius relation of ideal neutron
-stars and to examine the internal pressure profiles.
+The numerical integration of the TOV equations using the ideal neutron
+gas EOS yields both global properties, such as the mass--radius relation,
+and internal structure, such as the pressure distribution.
+These results can be directly compared with the analytic behavior found
+for the uniform--density star in Chapter~\ref{chap:tov}.
 
 \subsection*{Mass--radius relation}
 
-Figure~\ref{fig:mr_neutron} shows the mass--radius curves obtained in
-different levels of approximation. For comparison, both Newtonian
-hydrostatic equilibrium and the fully relativistic TOV equations are
-solved, each with two variants of the EOS: the non--relativistic limit
-and the general relativistic dispersion relation. This yields four
-distinct curves. The Newtonian models predict unrealistically large
-masses and radii, while the relativistic treatment produces the expected
-turnover in the $M$--$R$ diagram, signaling the existence of a maximum
-stable mass. The difference between using the approximate
-non--relativistic EOS and the full relativistic form is modest at low
-central pressures but becomes significant as $P_c$ increases.
+Figure~\ref{fig:mr_neutron} shows the resulting mass--radius curves for
+ideal neutron stars.  The four models represent combinations of
+Newtonian and relativistic hydrostatic equilibrium with either the
+non--relativistic or the full relativistic form of the Fermi gas EOS.
+Each point corresponds to a distinct central pressure $P_c$.
+
+At low central pressures the models coincide, reflecting the Newtonian
+limit where gravitational fields are weak and the EOS is nearly
+non--relativistic.  As $P_c$ increases, however, the relativistic models
+deviate markedly: the curves flatten and eventually exhibit a turnover,
+indicating that beyond a certain maximum mass, no further stable
+solutions exist.  This behavior is the relativistic analogue of the
+instability already anticipated from the incompressible model, where the
+pressure diverges at the Buchdahl bound $2M/R=8/9$.  In the realistic
+neutron gas, the same effect manifests as the \emph{Oppenheimer--Volkoff
+limit}~\cite{oppenheimer1939}: a maximum gravitational mass of order
+$M_{\mathrm{max}}\!\approx\!0.7\,M_{\odot}$ for an ideal, non--interacting
+neutron fluid.  Beyond this point, increasing the central pressure only
+reduces the radius without adding mass, and the configuration becomes
+unstable to collapse.
+
+The Newtonian solutions, in contrast, show no turnover.  They predict
+monotonically increasing mass with increasing central pressure, an
+artifact of neglecting relativistic corrections to both gravity and the
+EOS.  The fully relativistic treatment thus captures a key qualitative
+feature: the existence of a maximum stable mass set by the balance
+between degeneracy pressure and spacetime curvature.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/mass_radius_ideal_neutron_star.pdf}
+  \includegraphics[width=0.8\textwidth]{figures/mass_radius_ideal_neutron_star.pdf}
   \caption[Mass--radius relation for ideal neutron stars]{
-  Mass--radius relation for ideal neutron stars. Four models are
-  compared: Newtonian hydrostatic equilibrium with non--relativistic and
-  general EOS, and relativistic TOV equations with the same two EOS
-  inputs. Color indicates the central pressure $P_c$.}
+  Mass--radius relation for ideal neutron stars. Four models are compared:
+  Newtonian and relativistic hydrostatic equilibrium, each with a
+  non--relativistic or fully relativistic Fermi gas EOS.  The color scale
+  indicates the central pressure $P_c$.  The relativistic models exhibit a
+  maximum mass, the Oppenheimer--Volkoff limit, beyond which no static
+  equilibrium is possible.}
   \label{fig:mr_neutron}
 \end{figure}
 
 \subsection*{Pressure profiles}
 
-Figure~\ref{fig:profiles_neutron} displays radial profiles of the
-normalized pressure $P(r)/P_c$ for a sequence of central pressures
-spanning several orders of magnitude. The overall behavior is smooth,
-with $P(r)$ decreasing monotonically from the center to the surface.
-For higher $P_c$ the profiles become more centrally peaked, reflecting
-the stronger gravitational compression. These results are consistent
-with the qualitative expectation that more massive stars are also more
-compact.
+Figure~\ref{fig:profiles_neutron} displays the normalized pressure
+profiles $P(r)/P_c$ for a range of central pressures.
+For small $P_c$, the pressure decreases almost linearly with radius,
+resembling the Newtonian incompressible case.
+As $P_c$ increases, the curves become increasingly concentrated toward
+the center, revealing stronger gravitational compression and greater
+compactness.  The outer layers contribute less to the total mass, while
+the interior supports an ever larger fraction of the gravitational
+weight.  This mirrors the analytic results for the constant--density
+star, where high compactness led to steep gradients and eventual
+divergence at the Buchdahl bound.
+
+At the highest central pressures, the pressure gradient near the center
+becomes extremely steep, signaling the proximity of the
+Oppenheimer--Volkoff limit.  Beyond this limit, no equilibrium solution
+exists: the star must collapse into a black hole.  Thus, the numerical
+pressure profiles confirm the same qualitative physics inferred from the
+analytic model—namely, that gravity strengthens faster than the pressure
+support as compactness increases.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/pressure_profile_ideal_neutron_star.pdf}
+  \includegraphics[width=0.8\textwidth]{figures/pressure_profile_ideal_neutron_star.pdf}
   \caption[Pressure profiles of ideal neutron stars]{
   Radial pressure profiles $P(r)/P_c$ for ideal neutron stars with
-  different central pressures $P_c$, shown on a logarithmic color scale.}
+  different central pressures $P_c$.  The color scale represents
+  $\log_{10}(P_c)$.  Increasing compactness leads to steeper gradients and
+  a stronger concentration of pressure toward the center, consistent with
+  the approach to the Oppenheimer--Volkoff limit.}
   \label{fig:profiles_neutron}
 \end{figure}
+
+\subsection*{Discussion}
+
+These results illustrate how the inclusion of relativistic gravity and a
+realistic Fermi gas EOS naturally produces a maximum stable mass for
+neutron stars.  The simple ideal neutron model predicts
+$M_{\mathrm{max}}\!\sim\!0.7\,M_{\odot}$, smaller than observed neutron
+star masses ($\sim\!1.4\,M_{\odot}$).  The discrepancy arises because
+the ideal model neglects nuclear interactions, composition gradients,
+and phase transitions that stiffen the EOS at high densities.  Still,
+the ideal neutron star captures the essential qualitative behavior:
+relativity imposes an upper bound on stable mass, just as the analytic
+incompressible solution hinted through the Buchdahl bound.  The
+Oppenheimer--Volkoff limit is therefore the realistic manifestation of
+that same gravitational instability in a physical neutron matter EOS.

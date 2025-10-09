@@ -60,12 +60,12 @@ def plot_all(compactness_list=(0.1, 0.3, 0.6), R=1.0):
         prof = profiles_uniform_density(C, R=R)
         x = prof["x"]
         plt.plot(x, prof["P_over_eps0"], lw=2, color=color, label=fr"$\mathcal{{C}}={C:.2f}$")
-        plt.plot(x, prof["Pn_over_eps0"], ls="--", lw=1.6, color=color, alpha=0.9)
+        # plt.plot(x, prof["Pn_over_eps0"], ls="--", lw=1.6, color=color, alpha=0.9)
 
     plt.xlabel(r"$r/R$")
     plt.ylabel(r"$P/\epsilon_0$")
-    plt.title("Uniform-density star: pressure profiles")
-    # plt.title("Uniform-density star: Buchdal limit")
+    # plt.title("Uniform-density star: pressure profiles")
+    plt.title("Uniform-density star: Buchdahl limit")
     plt.grid(True, alpha=0.3)
     plt.legend(frameon=False, ncol=1)
     plt.tight_layout()
@@ -101,4 +101,4 @@ def plot_all(compactness_list=(0.1, 0.3, 0.6), R=1.0):
 
 if __name__ == "__main__":
     # Choose any set of compactness values strictly below 8/9 ≈ 0.888...
-    plot_all(compactness_list=(0.05, 0.10, 0.25))
+    plot_all(compactness_list=(0.7, 0.8, 0.86, 0.88))
