@@ -334,68 +334,115 @@ scheme with adaptive step size.
 A bisection search is used to locate the eigenvalue $\omega^2$ to the
 desired accuracy.
 The full algorithm is based on the code developed by
-Sletmoen~\cite{sletmoen2022}, which follows Tooper’s formulation and has
-been adapted here to analyze the stability of the ideal neutron star
+Sletmoen~\cite{sletmoen2022}, used to analyze the stability of the ideal neutron star
 sequence.
 
 \subsection{Results and stability criterion}
 
-The numerical integration of Eq.~\eqref{eq:SL_ideal_NS} provides the
-eigenvalues $\omega^2$ and eigenfunctions $U(r)$ for each stellar model
-in the sequence.
-The sign of the lowest eigenvalue $\omega_0^2$ determines whether the
-configuration is stable or unstable:
+The numerical integration of Eq.~\eqref{eq:SL_ideal_NS} yields the
+discrete eigenvalues $\omega_n^2$ and eigenfunctions $U_n(r)$ for each
+stellar model in the sequence.
+The sign of the lowest eigenvalue determines the dynamical stability:
 \[
 \omega_0^2 > 0 \;\Rightarrow\; \text{stable}, \qquad
 \omega_0^2 = 0 \;\Rightarrow\; \text{marginally stable}, \qquad
 \omega_0^2 < 0 \;\Rightarrow\; \text{unstable}.
 \]
-In practice, we find that $\omega_0^2$ decreases with increasing central
-pressure $P_c$ and becomes zero exactly at the maximum of the
-mass--radius curve in Fig.~\ref{fig:mr_neutron}.
-This confirms the general stability criterion for relativistic stars:
-configurations on the rising branch of the mass curve
-($dM/dP_c>0$) are dynamically stable, while those beyond the turning
-point ($dM/dP_c<0$) are unstable to radial collapse.
-The maximum therefore marks the \emph{Oppenheimer--Volkoff limit},
-beyond which no static equilibrium exists.
 
-The corresponding eigenfunctions show the expected behaviour:
-the fundamental mode $U_0(r)$ has no interior nodes, and higher modes
-($U_1$, $U_2$, \ldots) have one, two, and more zero crossings,
-respectively.
-Each eigenfunction remains finite at the center and satisfies the
-surface condition $\Delta P(R)=0$, confirming that the numerical
-integration is well behaved.
-
-To check the robustness of the results, we verified the following:
-\begin{itemize}
-  \item The node theorem holds: the number of interior zeros of $U(r)$
-  matches the mode index $n$.
-  \item The eigenvalues $\omega_n^2$ converge under grid refinement and
-  are insensitive to small changes in the inner and outer integration
-  limits.
-  \item The zero crossing of $\omega_0^2$ coincides with the maximum
-  mass obtained directly from the TOV sequence, within numerical
-  precision.
-\end{itemize}
+Figure~\ref{fig:shooting_convergence} shows typical normalized mode
+functions $U_n(r)$ obtained with the shooting method.
+Each function satisfies the regularity condition $U_n(r)\propto r^3$
+near the center and the vanishing Lagrangian pressure perturbation at
+the surface.
+The number of interior nodes increases with mode index $n$, as expected
+from Sturm--Liouville theory: the fundamental mode $U_0(r)$ has no
+nodes, $U_1(r)$ one node, and so on.
+This confirms that the numerical integration behaves as required and
+that the node theorem is fulfilled.
+The smooth convergence of the solutions toward the correct boundary
+condition at $r=R$ demonstrates the reliability of the shooting
+algorithm.
 
 \begin{figure}[ht]
   \centering
-  %\includegraphics[width=0.8\textwidth]{figures/omega2_vs_Pc.pdf}
-  \caption[Fundamental mode and stability]
-  {Fundamental squared frequency $\omega_0^2$ versus central pressure
-   $P_c$ for the ideal neutron star sequence. The zero crossing marks the
-   onset of instability and coincides with the maximum mass in
-   Fig.~\ref{fig:mr_neutron}.}
-  \label{fig:omega2_vs_Pc}
+  \includegraphics[width=0.8\textwidth]{figures/shoot_shoot_relative.pdf}
+  \caption[Shooting method convergence]{
+  Shooting method convergence for the first few radial modes. Each line
+  corresponds to a trial eigenfunction $U_n(r)$ normalized by
+  $\max|U_0|$. The smooth approach to the boundary condition
+  $\Delta P(R)=0$ illustrates successful eigenvalue convergence.}
+  \label{fig:shooting_convergence}
 \end{figure}
 
-Overall, the stability analysis demonstrates that the relativistic
-ideal neutron star behaves as expected: small perturbations lead to
-stable oscillations below the Oppenheimer--Volkoff limit, while models
-beyond the maximum mass are unstable and collapse under their own
-gravity.
+The corresponding normalized eigenfunctions are displayed in
+Fig.~\ref{fig:nmodes_norm}.
+They form a complete set of orthogonal modes describing the radial
+oscillations of the star.
+The fundamental mode is positive everywhere and represents a coherent
+breathing motion of the entire star, while higher overtones exhibit
+additional internal nodes associated with local compressions and
+rarefactions.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/nmodes_norm.pdf}
+  \caption[Normalized eigenfunctions]{
+  Normalized eigenfunctions $U_n(r)$ for the lowest radial modes. The
+  number of interior nodes increases with $n$, as expected for a
+  Sturm--Liouville spectrum.}
+  \label{fig:nmodes_norm}
+\end{figure}
+
+The eigenfrequencies $\omega_n^2$ vary systematically along the TOV
+sequence.
+As the central pressure $P_c$ increases, the stellar mass grows until it
+reaches a maximum at the turning point of the mass--radius curve.
+At this point, the fundamental frequency satisfies $\omega_0^2 = 0$,
+indicating marginal stability.
+Configurations on the ascending branch ($dM/dP_c > 0$) have
+$\omega_0^2 > 0$ and are dynamically stable; beyond the maximum
+($dM/dP_c < 0$), $\omega_0^2$ becomes negative, signalling instability
+against radial collapse.
+This behaviour constitutes the general relativistic stability criterion
+for spherical stars.
+The equivalence between the turning point condition $dM/dP_c = 0$
+and the vanishing of the fundamental frequency $\omega_0^2 = 0$
+was first demonstrated by Chandrasekhar~\cite{chandrasekhar1964}
+using a variational principle for radial oscillations.
+In this formalism, the total energy of the configuration is stationary
+at equilibrium, and the sign of the second variation determines
+stability. The change of sign in $\omega_0^2$ at the mass maximum
+therefore coincides with the point where the equilibrium sequence
+passes from stable to unstable configurations.
+
+
+Physically, the transition arises because general relativity
+strengthens the effective gravitational attraction compared to
+Newtonian theory.
+At low compactness, the pressure response of the Fermi gas remains
+sufficient to counteract gravity, and perturbations lead to stable
+oscillations.
+As the central density increases, relativistic corrections make gravity
+grow more rapidly than pressure, reducing the effective restoring force.
+Once the mass maximum is reached, any further compression increases the
+gravitational binding faster than the pressure can respond, causing
+small perturbations to amplify.
+The star thus becomes dynamically unstable and collapses toward a more
+compact configuration—typically a black hole in realistic equations of
+state.
+
+In summary, the numerical results verify the expected behaviour:
+\begin{itemize}
+  \item The fundamental mode frequency $\omega_0^2$ changes sign exactly
+  at the maximum of the mass--radius curve.
+  \item The node structure of $U_n(r)$ confirms the correct mode
+  ordering.
+  \item The shooting solutions converge smoothly and respect all boundary
+  conditions.
+\end{itemize}
+This establishes that, for the ideal neutron star, the
+Oppenheimer--Volkoff limit corresponds precisely to the onset of
+dynamical instability against radial perturbations.
 
 \subsection*{Discussion}
 
