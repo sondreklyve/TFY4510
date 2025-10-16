@@ -26,7 +26,7 @@ def ϵGR(P): # general equation of state
     x = sol.root
     ϵx = 3*prefactor * ((2*x**3+x) * np.sqrt(x**2 + 1) - np.arcsinh(x))
     return ϵx
-
+"""
 P = np.linspace(0, 20, 500)
 ϵs = [[ϵ(P) for P in P] for ϵ in (ϵUR, ϵNR, ϵGR)]
 writecols([P, *ϵs], ["P", "epsUR", "epsNR", "epsGR"], "numerics/data/eos.dat")
@@ -55,7 +55,7 @@ P0head = ["P0"]
 xheads = [f"x{i}" for i in range(0, len(P0s))]
 pheads = [f"p{i}" for i in range(0, len(P0s))]
 writecols([P0s] + xs + ps, P0head + xheads + pheads, "numerics/data/pressures.dat")
-
+"""
 r, m, P, α, ϵ = soltov(ϵGR, 1e3)
 ω2s, us = eigenmode(r, m, P, α, ϵ, [0], plot=True, outfileshoot="numerics/data/shoot.dat")
 

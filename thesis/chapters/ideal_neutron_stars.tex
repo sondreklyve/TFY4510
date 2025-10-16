@@ -5,12 +5,13 @@
 
 The concept of an \emph{ideal neutron star} provides a minimal
 theoretical model for a relativistic compact star.
-In this picture the stellar interior is assumed to consist solely
-of neutrons, treated as a cold, non--interacting Fermi gas.
-This construction parallels the classic white dwarf model,
-where support against gravity is provided by the electron degeneracy
-pressure. The key distinction is that neutron stars reach densities
-so high that the gravitational field itself is extremely strong,
+Here the term ``ideal'' refers to the use of a simple, non--interacting
+Fermi gas equation of state, representing matter at zero temperature.
+The composition is taken to be pure neutrons for simplicity,
+in analogy with the classic white dwarf model where support against
+gravity arises from electron degeneracy pressure.
+The key distinction is that neutron stars reach densities so high
+that the gravitational field itself becomes extremely strong,
 requiring a treatment within general relativity.
 The appropriate framework is therefore given by the TOV equations
 introduced in Chapter~\ref{chap:tov}.
@@ -140,9 +141,9 @@ non--relativistic.  As $P_c$ increases, however, the relativistic models
 deviate markedly: the curves flatten and eventually exhibit a turnover,
 indicating that beyond a certain maximum mass, no further stable
 solutions exist.  This behavior is the relativistic analogue of the
-instability already anticipated from the incompressible model, where the
-pressure diverges at the Buchdahl bound $2M/R=8/9$.  In the realistic
-neutron gas, the same effect manifests as the \emph{Oppenheimer--Volkoff
+instability already encountered in the incompressible model, where the
+pressure diverges at the Buchdahl bound $2M/R=8/9$.  In a realistic
+neutron gas, the same effect manifests itself as the \emph{Oppenheimer--Volkoff
 limit}~\cite{oppenheimer1939}: a maximum gravitational mass of order
 $M_{\mathrm{max}}\!\approx\!0.7\,M_{\odot}$ for an ideal, non--interacting
 neutron fluid.  Beyond this point, increasing the central pressure only
@@ -202,6 +203,199 @@ support as compactness increases.
   the approach to the Oppenheimer--Volkoff limit.}
   \label{fig:profiles_neutron}
 \end{figure}
+
+\section{Radial stability analysis}
+\label{sec:ideal_ns_stability}
+
+\subsection{Physical motivation}
+
+The mass--radius curves in Fig.~\ref{fig:mr_neutron} show that the
+relativistic models reach a maximum mass and then turn over.
+This turning point marks a change in stability. 
+To understand why this happens, we study how small radial
+perturbations behave in a star that is initially in hydrostatic
+equilibrium.
+
+If the star is slightly compressed, gravity and pressure respond in
+opposite directions: gravity pulls matter inward while pressure pushes
+it outward. 
+If the pressure increase is strong enough to balance the added gravity,
+the star will oscillate around its equilibrium shape and remain stable.
+If gravity grows faster than the pressure response, the perturbation
+will instead amplify with time and lead to collapse.
+
+\subsection{Linearized equations}
+
+A convenient way to study the stability of a relativistic star is to
+examine how it responds to small, time--dependent, radial perturbations.
+The stability problem was first solved in detail by
+Chandrasekhar~\cite{chandrasekhar1964}, who derived the full set of
+relativistic perturbation equations for a fluid sphere.
+In this work we follow the later formulation of
+Tooper~\cite{tooper1965}, which rewrites the equations in a form that is
+more convenient for numerical integration and directly leads to the
+Sturm--Liouville equation for the radial modes.
+
+In this approach, one introduces a small radial displacement
+$\xi(r,t)$ of the fluid layers and linearizes the Einstein and fluid
+equations to first order in the perturbation amplitude.
+The resulting system can be combined into a single
+second--order differential equation for a variable $U(r,t)$ that is
+proportional to $\xi(r,t)$.
+Assuming harmonic time dependence $U(r,t)=U(r)\,e^{i\omega t}$ gives
+\begin{equation}
+\frac{d}{dr}\!\left[\Pi(r)\frac{dU}{dr}\right]
++ Q(r)\,U(r) + \omega^2 W(r)\,U(r) = 0,
+\label{eq:SL_ideal_NS}
+\end{equation}
+which has the standard form of a \emph{Sturm--Liouville eigenvalue
+problem}. The quantity $\omega^2$ is the squared oscillation frequency.
+
+A Sturm--Liouville problem is a general class of second--order linear
+differential equations with specific boundary conditions that admit a
+discrete set of eigenvalues and eigenfunctions.
+Each allowed solution $U_n(r)$ corresponds to an \emph{eigenmode}, and
+the associated constant $\omega_n^2$ is its \emph{eigenvalue}.
+In the context of stellar oscillations, $\omega_n^2$ represents the
+squared frequency of the $n$th radial mode.
+If all eigenvalues are positive, the star performs stable oscillations.
+When the lowest eigenvalue $\omega_0^2$ becomes zero or negative, the
+oscillation changes into a growing mode, and the equilibrium becomes
+dynamically unstable~\cite{arfken2013}.
+
+The coefficients $\Pi(r)$, $Q(r)$, and $W(r)$ depend only on the
+background stellar structure, that is, on $P(r)$, $\epsilon(r)$,
+$m(r)$, and the metric potential $\alpha(r)$ obtained from the TOV
+equations.
+They also include the adiabatic index
+\[
+\Gamma_1(r) = \frac{\epsilon(r)+P(r)}{P(r)}
+\frac{dP}{d\epsilon}\bigg|_{r},
+\]
+which describes the local stiffness of the equation of state.
+
+Regularity at the center requires $U(r)\propto r^{3}$ as $r\to0$.
+At the surface $r=R$, the pressure must vanish smoothly, giving the
+boundary condition $\Delta P(R)=0$ for the Lagrangian pressure
+perturbation.
+With these two boundary conditions, the problem is well defined and can
+be solved for the eigenvalues $\omega^2$.
+
+\subsection{Numerical method}
+
+Equation~\eqref{eq:SL_ideal_NS} forms an eigenvalue problem for the
+frequency $\omega^2$. For each stellar model obtained from the TOV
+equations, we can calculate the background functions
+$P(r)$, $\epsilon(r)$, $m(r)$, and $\alpha(r)$, and from them construct
+the coefficients $\Pi(r)$, $Q(r)$, and $W(r)$.
+These three functions contain all the information about the background
+structure and determine how the star responds to small radial motions.
+They are given by~\cite{tooper1965}
+\[
+\Pi = e^{\beta+3\alpha}\frac{\Gamma_1 P}{r^2}, \qquad
+Q = e^{\beta+3\alpha}\!\left(
+  \frac{dP}{dr}\frac{d\alpha}{dr}
+  - \frac{4}{r}\frac{dP}{dr}
+  - 8\pi G e^{2\beta} P(\epsilon + P)
+\right), \qquad
+W = e^{3\beta+\alpha}\frac{\epsilon+P}{r^2}.
+\]
+where $\alpha(r)$ and $\beta(r)$ are the metric functions,
+$\Gamma_1$ is the adiabatic index defined in the previous section, and
+$P(r)$ and $\epsilon(r)$ are determined by the equation of state.
+The equation is then fully specified and can be solved for the allowed
+values of $\omega^2$.
+
+In practice, this is done using a \emph{shooting method}.
+We start by choosing a trial value of $\omega^2$ and integrate the
+differential equation outward from the center using the regularity
+condition $U(r)\propto r^3$ near $r=0$.
+The integration proceeds until the surface $r=R$ is reached, where the
+Lagrangian pressure perturbation must vanish, $\Delta P(R)=0$.
+For most trial values, this condition will not be met exactly:
+the solution either diverges or crosses zero an incorrect number of
+times.
+
+To find the correct eigenvalue, $\omega^2$ is adjusted and the
+integration is repeated.
+The number of nodes (zero crossings) of $U(r)$ provides a useful guide:
+the fundamental mode has no internal nodes, the first overtone has one
+node, and so on.
+By searching for the value of $\omega^2$ that produces the correct
+number of nodes and satisfies the surface condition, we obtain the
+eigenvalue of that mode.
+This process is repeated for several stellar models with different
+central pressures $P_c$.
+
+In the implementation used here, the coefficients
+$\Pi(r)$, $Q(r)$, and $W(r)$ are evaluated numerically from the TOV
+profiles, and the equation is integrated using a finite--difference
+scheme with adaptive step size.
+A bisection search is used to locate the eigenvalue $\omega^2$ to the
+desired accuracy.
+The full algorithm is based on the code developed by
+Sletmoen~\cite{sletmoen2022}, which follows Tooper’s formulation and has
+been adapted here to analyze the stability of the ideal neutron star
+sequence.
+
+\subsection{Results and stability criterion}
+
+The numerical integration of Eq.~\eqref{eq:SL_ideal_NS} provides the
+eigenvalues $\omega^2$ and eigenfunctions $U(r)$ for each stellar model
+in the sequence.
+The sign of the lowest eigenvalue $\omega_0^2$ determines whether the
+configuration is stable or unstable:
+\[
+\omega_0^2 > 0 \;\Rightarrow\; \text{stable}, \qquad
+\omega_0^2 = 0 \;\Rightarrow\; \text{marginally stable}, \qquad
+\omega_0^2 < 0 \;\Rightarrow\; \text{unstable}.
+\]
+In practice, we find that $\omega_0^2$ decreases with increasing central
+pressure $P_c$ and becomes zero exactly at the maximum of the
+mass--radius curve in Fig.~\ref{fig:mr_neutron}.
+This confirms the general stability criterion for relativistic stars:
+configurations on the rising branch of the mass curve
+($dM/dP_c>0$) are dynamically stable, while those beyond the turning
+point ($dM/dP_c<0$) are unstable to radial collapse.
+The maximum therefore marks the \emph{Oppenheimer--Volkoff limit},
+beyond which no static equilibrium exists.
+
+The corresponding eigenfunctions show the expected behaviour:
+the fundamental mode $U_0(r)$ has no interior nodes, and higher modes
+($U_1$, $U_2$, \ldots) have one, two, and more zero crossings,
+respectively.
+Each eigenfunction remains finite at the center and satisfies the
+surface condition $\Delta P(R)=0$, confirming that the numerical
+integration is well behaved.
+
+To check the robustness of the results, we verified the following:
+\begin{itemize}
+  \item The node theorem holds: the number of interior zeros of $U(r)$
+  matches the mode index $n$.
+  \item The eigenvalues $\omega_n^2$ converge under grid refinement and
+  are insensitive to small changes in the inner and outer integration
+  limits.
+  \item The zero crossing of $\omega_0^2$ coincides with the maximum
+  mass obtained directly from the TOV sequence, within numerical
+  precision.
+\end{itemize}
+
+\begin{figure}[ht]
+  \centering
+  %\includegraphics[width=0.8\textwidth]{figures/omega2_vs_Pc.pdf}
+  \caption[Fundamental mode and stability]
+  {Fundamental squared frequency $\omega_0^2$ versus central pressure
+   $P_c$ for the ideal neutron star sequence. The zero crossing marks the
+   onset of instability and coincides with the maximum mass in
+   Fig.~\ref{fig:mr_neutron}.}
+  \label{fig:omega2_vs_Pc}
+\end{figure}
+
+Overall, the stability analysis demonstrates that the relativistic
+ideal neutron star behaves as expected: small perturbations lead to
+stable oscillations below the Oppenheimer--Volkoff limit, while models
+beyond the maximum mass are unstable and collapse under their own
+gravity.
 
 \subsection*{Discussion}
 
