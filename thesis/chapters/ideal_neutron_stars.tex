@@ -5,25 +5,18 @@
 
 The concept of an \emph{ideal neutron star} provides a minimal
 theoretical model for a relativistic compact star.
-Here the term ``ideal'' refers to the use of a simple, non--interacting
+Here the term ``ideal'' refers to the use of the simplest, non--interacting
 Fermi gas equation of state, representing matter at zero temperature.
 The composition is taken to be pure neutrons for simplicity,
 in analogy with the classic white dwarf model where support against
-gravity arises from electron degeneracy pressure.
+gravity arises from the electron degeneracy pressure.
 The key distinction is that neutron stars reach densities so high
 that the gravitational field itself becomes extremely strong,
 requiring a treatment within general relativity.
 The appropriate framework is therefore given by the TOV equations
 introduced in Chapter~\ref{chap:tov}.
 
-To close the TOV system, an EOS relating pressure $P$ and energy density
-$\epsilon$ must be specified.
-Here we adopt the ideal Fermi gas EOS developed in
-Chapter~\ref{chap:fermi}, specialized to neutrons of mass $m_{n}$.
-Substituting this EOS into the TOV equations yields a complete system
-that can be solved numerically.
-
-The aim of this chapter is therefore to construct and analyze such ideal neutron
+The aim of this chapter is to construct and analyze such ideal neutron
 star models, with the focus on the numerical implementation and results.
 
 \section{Numerical Setup}
@@ -39,7 +32,7 @@ where $P_c$ is the central pressure and $R$ is the stellar radius at
 which the pressure vanishes. The corresponding gravitational mass is
 then $M=m(R)$.
 
-In Chapter~\ref{chap:fermi} we obtained this relation for a degenerate,
+In Chapter~\ref{chap:fermi} we obtained the EOS for a degenerate,
 zero--temperature Fermi gas. Specializing to neutrons of mass $m_N$,
 the EOS can be expressed in parametric form
 \[
@@ -53,7 +46,7 @@ $\epsilon(x_F)$ accordingly. This guarantees a consistent mapping
 between $P$ and $\epsilon$ across all density regimes.
 
 For numerical stability it is advantageous to work with dimensionless
-variables. We introduce reference scales for radius, mass, and energy
+variables. We introduce reference scales for length, mass, and energy
 density,
 \[
 r_0 = \frac{1}{\sqrt{G \epsilon_0}}, \qquad
@@ -79,7 +72,7 @@ In summary, the numerical setup consists of:
   initial conditions $m(0)=0$ and $P(0)=P_c$, and terminated when 
   the surface condition $P(R)=0$ is reached. The corresponding 
   radius $R$ and gravitational mass $M=m(R)$ then characterize 
-  the stellar model.
+  the macroscopic quantities of the star.
   \item The ideal neutron gas EOS $\epsilon(P)$, obtained from the
   parametric Fermi gas expressions of Chapter~\ref{chap:fermi}.
   \item Dimensionless variables to reduce numerical instabilities.
@@ -89,7 +82,7 @@ numerical solution.
 
 \section{Numerical Method}
 
-The numerical integration of the TOV equations with the ideal neutron
+The numerical integration of the TOV equations with an ideal neutron
 gas EOS is carried out using a Python program originally developed by
 Sletmoen as part of his Master's thesis~\cite{sletmoen2022}.
 In this work the code is used without modification to generate stellar
@@ -99,7 +92,7 @@ The implementation proceeds as follows:
 \begin{itemize}
   \item The coupled ODEs for $P(r)$ and $m(r)$ are integrated outward
   from $r=0$ with initial values $P(0)=P_c$ and $m(0)=0$.
-  \item A Runge--Kutta algorithm with adaptive step size is used to
+  \item A fifth--order Runge--Kutta method with adaptive step size is used to
   advance the solution.
   \item The integration terminates once $P(r)$ vanishes, which defines
   the stellar radius $R$. The corresponding $m(R)$ gives the
@@ -107,26 +100,19 @@ The implementation proceeds as follows:
 \end{itemize}
 Repeating the calculation for a range of central pressures $P_c$
 generates a sequence of stellar configurations. From these solutions
-one can extract the global properties of the star --- quantities defined
-at the surface that characterize the star as a whole --- namely its mass
-$M=m(R)$ and radius $R$ where $P(R)=0$. These global results can then be
+one can extract the macroscopic properties of the star, namely its mass
+$M=m(R)$ and radius $R$ where $P(R)=0$. These results can then be
 combined into the mass--radius relation. In addition, the solver also
-provides access to the internal structure, meaning the radial profiles
+provides access to the radial structure, meaning the profiles
 of pressure $P(r)$ and energy density $\epsilon(r)$ throughout the
-stellar interior. Such internal results reveal how matter is distributed
+stellar interior. Such results reveal how matter is distributed
 and how pressure balances gravity at each radius, complementing the
-global description. In the following section we present both global and
-internal results for ideal neutron stars.
-
-
-\section{Results}
-
-The numerical integration of the TOV equations using the ideal neutron
-gas EOS yields both global properties, such as the mass--radius relation,
-and internal structure, such as the pressure distribution.
+macroscopic description. In the following section we present both
+macroscopic and structural results for ideal neutron stars.
 These results can be directly compared with the analytic behavior found
 for the uniform--density star in Chapter~\ref{chap:tov}.
 
+\section{Results}
 \subsection*{Mass--radius relation}
 
 Figure~\ref{fig:mr_neutron} shows the resulting mass--radius curves for
@@ -135,14 +121,14 @@ Newtonian and relativistic hydrostatic equilibrium with either the
 non--relativistic or the full relativistic form of the Fermi gas EOS.
 Each point corresponds to a distinct central pressure $P_c$.
 
-At low central pressures the models coincide, reflecting the Newtonian
+At low central pressures the curves coincide, reflecting the Newtonian
 limit where gravitational fields are weak and the EOS is nearly
-non--relativistic.  As $P_c$ increases, however, the relativistic models
+non--relativistic. As $P_c$ increases, however, the relativistic models
 deviate markedly: the curves flatten and eventually exhibit a turnover,
 indicating that beyond a certain maximum mass, no further stable
-solutions exist.  This behavior is the relativistic analogue of the
-instability already encountered in the incompressible model, where the
-pressure diverges at the Buchdahl bound $2M/R=8/9$.  In a realistic
+solutions exist. This behavior is analogous to the instability already 
+encountered in the incompressible model, where the
+pressure diverges at the Buchdahl bound $2M/R=8/9$.  In an ideal, non--interacting
 neutron gas, the same effect manifests itself as the \emph{Oppenheimer--Volkoff
 limit}~\cite{oppenheimer1939}: a maximum gravitational mass of order
 $M_{\mathrm{max}}\!\approx\!0.7\,M_{\odot}$ for an ideal, non--interacting
@@ -232,7 +218,7 @@ The stability problem was first solved in detail by
 Chandrasekhar~\cite{chandrasekhar1964}, who derived the full set of
 relativistic perturbation equations for a fluid sphere.
 In this work we follow the later formulation of
-Tooper~\cite{tooper1965}, which rewrites the equations in a form that is
+Tooper~\cite{tooper1965}, in which the equations are rewritten in a form that is
 more convenient for numerical integration and directly leads to the
 Sturm--Liouville equation for the radial modes.
 
@@ -245,24 +231,10 @@ proportional to $\xi(r,t)$.
 Assuming harmonic time dependence $U(r,t)=U(r)\,e^{i\omega t}$ gives
 \begin{equation}
 \frac{d}{dr}\!\left[\Pi(r)\frac{dU}{dr}\right]
-+ Q(r)\,U(r) + \omega^2 W(r)\,U(r) = 0,
++ Q(r)\,U(r) + \omega^2 W(r)\,U(r) = 0.
 \label{eq:SL_ideal_NS}
 \end{equation}
-which has the standard form of a \emph{Sturm--Liouville eigenvalue
-problem}. The quantity $\omega^2$ is the squared oscillation frequency.
-
-A Sturm--Liouville problem is a general class of second--order linear
-differential equations with specific boundary conditions that admit a
-discrete set of eigenvalues and eigenfunctions.
-Each allowed solution $U_n(r)$ corresponds to an \emph{eigenmode}, and
-the associated constant $\omega_n^2$ is its \emph{eigenvalue}.
-In the context of stellar oscillations, $\omega_n^2$ represents the
-squared frequency of the $n$th radial mode.
-If all eigenvalues are positive, the star performs stable oscillations.
-When the lowest eigenvalue $\omega_0^2$ becomes zero or negative, the
-oscillation changes into a growing mode, and the equilibrium becomes
-dynamically unstable~\cite{arfken2013}.
-
+The quantity $\omega^2$ is the squared oscillation frequency.
 The coefficients $\Pi(r)$, $Q(r)$, and $W(r)$ depend only on the
 background stellar structure, that is, on $P(r)$, $\epsilon(r)$,
 $m(r)$, and the metric potential $\alpha(r)$ obtained from the TOV
@@ -274,12 +246,30 @@ They also include the adiabatic index
 \]
 which describes the local stiffness of the equation of state.
 
-Regularity at the center requires $U(r)\propto r^{3}$ as $r\to0$.
-At the surface $r=R$, the pressure must vanish smoothly, giving the
-boundary condition $\Delta P(R)=0$ for the Lagrangian pressure
-perturbation.
-With these two boundary conditions, the problem is well defined and can
-be solved for the eigenvalues $\omega^2$.
+Equation \eqref{eq:SL_ideal_NS} has the standard form of a \emph{Sturm--Liouville eigenvalue
+problem}. This is a general class of second--order linear
+differential equations with specific boundary conditions that admit a
+discrete set of eigenvalues and eigenfunctions.
+Each allowed solution $U_n(r)$ corresponds to an \emph{eigenmode}, and
+the associated constant $\omega_n^2$ is its \emph{eigenvalue}.
+In the context of stellar oscillations, $\omega_n^2$ represents the
+squared frequency of the $n$th radial mode.
+If all eigenvalues are positive, the star performs stable oscillations.
+When the lowest eigenvalue $\omega_0^2$ becomes zero or negative, the
+oscillation changes into a growing mode, and the equilibrium becomes
+dynamically unstable~\cite{arfken2013}.
+
+Regularity at the center requires that the eigenfunction vanish at least
+as $U(r)\!\sim\!r^{3}$ for $r\!\to\!0$, ensuring that the 
+displacement $\xi = U\,e^{-\alpha}/r^{2}$ remains finite.  The cubic
+form is the lowest--order regular behavior and is therefore used as the
+boundary condition at $r = 0$.  At the surface $r = R$, the pressure
+must vanish smoothly, giving the boundary condition $\Delta P(R) = 0$
+for the Lagrangian pressure perturbation, which represents the total
+change in pressure experienced by a moving fluid element,
+$\Delta P = \delta P + \xi\,dP/dr$.  With these two boundary conditions,
+the problem is well defined and can be solved for the eigenvalues
+$\omega^{2}$.
 
 \subsection{Numerical method}
 
@@ -289,7 +279,7 @@ equations, we can calculate the background functions
 $P(r)$, $\epsilon(r)$, $m(r)$, and $\alpha(r)$, and from them construct
 the coefficients $\Pi(r)$, $Q(r)$, and $W(r)$.
 These three functions contain all the information about the background
-structure and determine how the star responds to small radial motions.
+structure and determine how the star responds to small radial perturbations.
 They are given by~\cite{tooper1965}
 \[
 \Pi = e^{\beta+3\alpha}\frac{\Gamma_1 P}{r^2}, \qquad
@@ -312,9 +302,9 @@ differential equation outward from the center using the regularity
 condition $U(r)\propto r^3$ near $r=0$.
 The integration proceeds until the surface $r=R$ is reached, where the
 Lagrangian pressure perturbation must vanish, $\Delta P(R)=0$.
-For most trial values, this condition will not be met exactly:
-the solution either diverges or crosses zero an incorrect number of
-times.
+For most trial values, this boundary condition will not be satisfied:
+the solution may diverge or exhibit an incorrect number of nodes,
+indicating that the guessed eigenvalue $\omega^2$ is not an allowed one.
 
 To find the correct eigenvalue, $\omega^2$ is adjusted and the
 integration is repeated.
@@ -447,14 +437,17 @@ dynamical instability against radial perturbations.
 \subsection*{Discussion}
 
 These results illustrate how the inclusion of relativistic gravity and a
-realistic Fermi gas EOS naturally produces a maximum stable mass for
-neutron stars.  The simple ideal neutron model predicts
-$M_{\mathrm{max}}\!\sim\!0.7\,M_{\odot}$, smaller than observed neutron
-star masses ($\sim\!1.4\,M_{\odot}$).  The discrepancy arises because
-the ideal model neglects nuclear interactions, composition gradients,
-and phase transitions that stiffen the EOS at high densities.  Still,
+degenerate Fermi gas EOS naturally produces a maximum stable mass for
+neutron stars.  The simple ideal neutron model predicts a limiting mass
+of only $M_{\mathrm{max}}\!\sim\!0.7\,M_{\odot}$, known as the
+Oppenheimer--Volkoff limit~\cite{oppenheimer1939}.  In reality,
+observations show several neutron stars with masses above
+$2\,M_{\odot}$~\cite{linares2018,strader2019,linares2020,romani2022}.
+The difference arises because the ideal model assumes non--interacting
+neutrons, while real neutron matter is affected by strong nuclear forces
+that make the material stiffer and able to support more mass.  Still,
 the ideal neutron star captures the essential qualitative behavior:
-relativity imposes an upper bound on stable mass, just as the analytic
-incompressible solution hinted through the Buchdahl bound.  The
-Oppenheimer--Volkoff limit is therefore the realistic manifestation of
-that same gravitational instability in a physical neutron matter EOS.
+general relativity imposes an upper bound on the stable mass, just as
+the incompressible model indicated through the Buchdahl limit.  The
+Oppenheimer--Volkoff limit therefore remains the simplest physical
+expression of this relativistic instability.
