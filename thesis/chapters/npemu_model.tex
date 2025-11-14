@@ -8,7 +8,7 @@ neutron stars using simple models of matter. These models were useful for
 building intuition about how gravity and pressure balance to form stable
 configurations, and for exploring how different equations of state affect the
 stellar mass and radius. However, at densities near and above the nuclear
-saturation point, the assumptions of non–interacting particles become too
+saturation density, the assumptions of non–interacting particles become too
 simple. The internal structure of nucleons and their mutual interactions start
 to play a major role in determining the properties of matter.
 
@@ -22,7 +22,7 @@ keeping the formulation simple enough for use in stellar calculations.
 In this chapter we use the RMF approximation to describe matter composed of neutrons,
 protons, electrons, and muons ($npe\mu$). By imposing charge neutrality and
 $\beta$–equilibrium, this composition forms a minimal realistic model of a cold
-neutron–star core. By studying existing RMF equations of state for such matter,
+neutron–star. By studying existing RMF equations of state for such matter,
 we can examine how nuclear interactions influence the pressure and density
 profiles and how this, in turn, affects the mass–radius relation obtained from
 the structure equations.
@@ -42,7 +42,7 @@ The most important of these bulk properties are:
   \item the \textbf{binding energy per nucleon} $B/A$, which measures how tightly the
         nucleons are bound together at equilibrium;
   \item the \textbf{saturation density} $\rho_{0}$, i.e.\ the baryon number density at which
-        the energy per particle reaches its minimum;
+        the energy per nucleon reaches its minimum;
   \item the \textbf{effective nucleon mass} $m^{*}$, which reflects how the scalar field
         modifies the nucleon rest mass in the medium;
   \item the \textbf{compression modulus} $K$, which quantifies how stiff or soft the
@@ -201,7 +201,6 @@ U(\sigma)
 \bar{\psi}_{\lambda}\bigl(i\gamma^{\mu}\partial_{\mu}-m_{\lambda}\bigr)\psi_{\lambda}.
 \label{eq:L_leptons}
 \end{align}
-
 The constants $m$, $m_{\sigma}$, $m_{\omega}$, and $m_{\rho}$ are the masses of
 the nucleon and mesons, and $g_{\sigma}$, $g_{\omega}$, $g_{\rho}$ are the
 respective coupling constants.  The parameters $b$ and $c$ control the
@@ -272,7 +271,16 @@ P_{N}^{\mathrm{kin}}
 \label{eq:pressure_nucleon}
 \end{equation}
 These two integrals represent the free Fermi–gas contributions modified by the
-effective mass $m^{*}$. The vector fields enter
+effective mass $m^{*}$. In evaluating them, one usually adopts the
+\emph{no-sea approximation}, meaning that the negative–energy states of the
+Dirac sea are omitted. Physically, this corresponds to subtracting the divergent
+vacuum contribution from the filled negative–energy spectrum, effectively
+renormalizing the zero of energy such that only excitations above the vacuum
+contribute to the thermodynamics. This approximation is well justified in
+nuclear matter, where the vacuum polarization effects are small compared with
+the mean-field contributions from the occupied positive–energy states.
+
+The vector fields enter
 the single-particle energies in Eq.~\eqref{eq:single_particle_energy} as constant
 shifts. Their effect on the thermodynamics appears not through the integrals
 above, but through separate classical field–energy terms associated with
@@ -331,7 +339,7 @@ m_{\sigma}^{2}\,\langle\sigma\rangle
 where $\langle\bar{\psi}\psi\rangle$ is the scalar density of nucleons,
 \begin{equation}
 \langle\bar{\psi}\psi\rangle
-= \sum_{B=n,p}\frac{1}{\pi^{2}}\!
+= \frac{1}{\pi^{2}}\!\sum_{B=n,p}
   \int_{0}^{p_{F,B}}\!dp\,p^{2}\,
   \frac{m^{*}}{\sqrt{p^{2}+m^{*2}}}.
 \label{eq:scalar_density}
@@ -340,16 +348,29 @@ This self–consistency relation couples the scalar mean field $\langle\sigma\ra
 occupied Fermi seas and must be solved together with the vector–meson and
 equilibrium conditions at each baryon density.
 
-The scalar field contributes to the total energy density both directly, through
-its potential energy, and indirectly, through the modification of the nucleon
-masses in the baryon integral. The contribution to the energy density associated
-with the $\sigma$ field is 
-as
+The scalar field also contributes to the total energy density of the system.
+Starting from the Lagrangian \eqref{eq:L_sigma} the corresponding Hamiltonian 
+density follows from the Legendre transform
+\[
+\mathcal{H}_{\sigma}
+= \pi_{\sigma}\,\dot{\sigma} - \mathcal{L}_{\sigma},
+\qquad
+\pi_{\sigma} = \frac{\partial\mathcal{L}_{\sigma}}{\partial\dot{\sigma}}
+              = \dot{\sigma}.
+\]
+In static, uniform matter the time derivative $\dot{\sigma}$ and spatial
+gradients vanish, so that $\pi_{\sigma}=0$ and the Hamiltonian density reduces to
+\[
+\mathcal{H}_{\sigma}
+= \frac{1}{2}m_{\sigma}^{2}\sigma^{2} + U(\sigma).
+\]
+The energy density associated with the scalar field is then given by the
+expectation value of this Hamiltonian density,
 \begin{equation}
 \epsilon_{\sigma}
 = \frac{1}{2}m_{\sigma}^{2}\langle\sigma\rangle^{2}
   + \frac{1}{3}m_{n}b\,(g_{\sigma}\langle\sigma\rangle)^{3}
-  + \frac{1}{4}c\,(g_{\sigma}\langle\sigma\rangle)^{4}
+  + \frac{1}{4}c\,(g_{\sigma}\langle\sigma\rangle)^{4}.
 \label{eq:epsilon_sigma}
 \end{equation}
 The corresponding pressure follows from the
@@ -359,7 +380,7 @@ $P = \sum_i \mu_i n_i - \epsilon$, yielding
 P_{\sigma}
 = -\,\frac{1}{2}m_{\sigma}^{2}\langle\sigma\rangle^{2}
   - \frac{1}{3}m_{n}b\,(g_{\sigma}\langle\sigma\rangle)^{3}
-  - \frac{1}{4}c\,(g_{\sigma}\langle\sigma\rangle)^{4}
+  - \frac{1}{4}c\,(g_{\sigma}\langle\sigma\rangle)^{4}.
 \label{eq:pressure_sigma}
 \end{equation}
 These expressions represent the pure field contributions of the scalar meson to
@@ -384,32 +405,56 @@ density. The corresponding part of the Lagrangian is
 \omega_{\mu\nu} = \partial_{\mu}\omega_{\nu} - \partial_{\nu}\omega_{\mu}.
 \]
 Variation with respect to $\omega_{\mu}$ gives the field equation
-\[
+\begin{equation}
 \partial_{\nu}\omega^{\mu\nu} + m_{\omega}^{2}\omega^{\mu}
 = g_{\omega}\,\bar{\psi}\gamma^{\mu}\psi.
-\]
-For uniform, static matter, spatial derivatives vanish and only the time
-component survives. Denoting its expectation value by
-$\langle\omega^{0}\rangle$, one obtains the simple algebraic
-relation
+\end{equation}
+In uniform, static matter all derivatives vanish,
+$\partial_{\nu}\omega^{\mu\nu} = 0$, and the field equation reduces to
 \begin{equation}
-m_{\omega}^{2}\,\langle\omega_{0}\rangle = g_{\omega}\,n_{B},
+m_{\omega}^{2}\,\langle\omega^{\mu}\rangle
+= g_{\omega}\,\langle\bar{\psi}\gamma^{\mu}\psi\rangle.
+\end{equation}
+Because the system is at rest in the mean–field frame, the spatial components
+$\langle\omega^{i}\rangle$ vanish and only the temporal component
+$\langle\omega^{0}\rangle$ remains nonzero. This yields
+\begin{equation}
+m_{\omega}^{2}\,\langle\omega^{0}\rangle = g_{\omega}\,n_{B},
 \label{eq:omega_field_eq}
 \end{equation}
 where $n_{B} = \langle\psi^{\dagger}\psi\rangle = n_{p} + n_{n}$ is the total
 baryon density. The $\omega$ field therefore grows linearly with density and
 acts as a uniform repulsive potential felt equally by all nucleons.
 
-Substituting this mean field into the energy–momentum tensor gives the
-contribution of the $\omega$ field to the energy density and pressure,
+The corresponding energy density can be derived directly from the Hamiltonian
+density of the $\omega$ field. Starting from the Lagrangian \eqref{eq:L_omega}
+the canonical momentum is
+$\pi_{\omega}^{\mu} = \frac{\partial\mathcal{L}_{\omega}}{\partial(\partial_{0}\omega_{\mu})}
+= \omega^{0\mu}$.
+In uniform, static matter, all derivatives of $\omega_{\mu}$ vanish, implying
+$\pi_{\omega}^{\mu}=0$ and $\omega_{\mu\nu}=0$. The Hamiltonian density then
+reduces to
+\[
+\mathcal{H}_{\omega} = \pi_{\omega}^{\mu}\dot{\omega}_{\mu} - \mathcal{L}_{\omega}
+= \frac{1}{2}\,m_{\omega}^{2}\,\omega_{\mu}\omega^{\mu}.
+\]
+Taking the expectation value gives the energy density associated with the mean
+field,
 \begin{equation}
-\epsilon_{\omega} = \frac{1}{2}\,m_{\omega}^{2}\,\langle\omega_{0}\rangle^{2},
-\qquad
-P_{\omega} = \frac{1}{2}\,m_{\omega}^{2}\,\langle\omega_{0}\rangle^{2}.
-\label{eq:omega_eps_P}
+\epsilon_{\omega}
+= \frac{1}{2}\,m_{\omega}^{2}\,\langle\omega^{0}\rangle^{2}.
+\label{eq:epsilon_omega}
 \end{equation}
-Using Eq.~\eqref{eq:omega_field_eq}, these expressions can be written directly
-in terms of the baryon density as
+Since the $\omega$ field behaves as a uniform classical field with vanishing
+derivatives, its contribution to the pressure is obtained from the spatial
+components of the energy–momentum tensor,
+\begin{equation}
+P_{\omega}
+= \frac{1}{2}\,m_{\omega}^{2}\,\langle\omega^{0}\rangle^{2}.
+\label{eq:pressure_omega}
+\end{equation}
+Using Eq.~\eqref{eq:omega_field_eq}, both quantities can be expressed in terms
+of the baryon density as
 \[
 \epsilon_{\omega} = P_{\omega}
 = \frac{1}{2}\,\Bigl(\frac{g_{\omega}}{m_{\omega}}\Bigr)^{2} n_{B}^{2}.
@@ -448,10 +493,10 @@ operator, and in uniform matter only this component contributes. The Euler–Lag
 = g_{\rho}\,\bar{\psi}\gamma^{\mu}\,\boldsymbol{\tau}\psi.
 \]
 In the RMF approximation, only the time component of the third isospin direction
-remains nonzero, $\langle\rho_{03}\rangle$, while all others
+remains nonzero, $\langle\rho^0_3\rangle$, while all others
 vanish. The equation of motion then reduces to
 \begin{equation}
-m_{\rho}^{2}\,\langle\rho_{03}\rangle
+m_{\rho}^{2}\,\langle\rho^0_3\rangle
 = \frac{1}{2}\,g_{\rho}\,(n_{p}-n_{n}),
 \label{eq:rho_field_eq}
 \end{equation}
@@ -460,7 +505,7 @@ field is therefore directly proportional to the neutron–proton imbalance and
 vanishes in symmetric nuclear matter where $n_{p}=n_{n}$.
 
 The single–particle energies of nucleons include an additional term
-$\pm \tfrac{1}{2} g_{\rho}\,\langle\rho_{03}\rangle$, which increases the energy of
+$\pm \tfrac{1}{2} g_{\rho}\,\langle\rho^0_3\rangle$, which increases the energy of
 neutrons relative to protons when the matter becomes neutron-rich. This effect
 raises the energy of asymmetric configurations and defines the symmetry energy
 coefficient of nuclear matter.
@@ -468,9 +513,9 @@ coefficient of nuclear matter.
 The energy density and pressure associated with the uniform $\rho$ field follow
 from its classical potential energy,
 \begin{equation}
-\epsilon_{\rho} = \frac{1}{2}\,m_{\rho}^{2}\,\langle\rho_{03}\rangle^{2},
+\epsilon_{\rho} = \frac{1}{2}\,m_{\rho}^{2}\,\langle\rho^0_3\rangle^{2},
 \qquad
-P_{\rho} = \frac{1}{2}\,m_{\rho}^{2}\,\langle\rho_{03}\rangle^{2}.
+P_{\rho} = \frac{1}{2}\,m_{\rho}^{2}\,\langle\rho^0_3\rangle^{2}.
 \label{eq:rho_eps_P}
 \end{equation}
 Using Eq.~\eqref{eq:rho_field_eq}, these can be written in terms of the baryon
@@ -493,9 +538,9 @@ asymmetric matter in neutron-star cores.
 \subsection{Leptonic sector}
 \label{subsec:leptons}
 
-The leptons (electrons and muons) are included to ensure charge neutrality and
+The leptons are included to ensure charge neutrality and
 $\beta$–equilibrium in stellar matter. They do not participate in the strong
-interaction and are therefore treated as free relativistic Fermi gases. The
+interaction and are therefore treated as free relativistic fermions. The
 corresponding part of the Lagrangian is
 \[
 \mathcal{L}_{\ell}
@@ -509,43 +554,41 @@ momentum $p_{F,\lambda}$, defined by the number density
 n_{\lambda} = \frac{p_{F,\lambda}^{3}}{3\pi^{2}}.
 \]
 In cold, degenerate matter the leptons obey the dispersion relation
-$e_{\lambda}(p)=\sqrt{p^{2}+m_{\lambda}^{2}}$, with chemical potential
-$\mu_{\lambda}=\sqrt{p_{F,\lambda}^{2}+m_{\lambda}^{2}}$. The muon appears only
-when the electron chemical potential exceeds the muon rest mass,
-$\mu_{e}\ge m_{\mu}$; below that threshold, muons are absent and all negative
-charge is carried by electrons.
+$e_{\lambda}(p)=\sqrt{p^{2}+m_{\lambda}^{2}}$, with chemical potentials
+$\mu_{\lambda}=\sqrt{p_{F,\lambda}^{2}+m_{\lambda}^{2}}$. The leptons interact
+only through the electromagnetic field, which in bulk neutral matter averages
+to zero. Their role in the RMF approximation is therefore to balance the
+positive charge of the protons and to satisfy the conditions of chemical
+equilibrium.
 
-The energy density and pressure of the leptons are obtained by integrating the
-relativistic Fermi–gas expressions,
-\begin{align}
-\epsilon_{\ell}
-&= \sum_{\lambda=e,\mu}\frac{1}{\pi^{2}}
-   \int_{0}^{p_{F,\lambda}}\!dp\,p^{2}\sqrt{p^{2}+m_{\lambda}^{2}},
-\\[0.4em]
-P_{\ell}
-&= \sum_{\lambda=e,\mu}\frac{1}{3\pi^{2}}
-   \int_{0}^{p_{F,\lambda}}\!dp\,\frac{p^{4}}{\sqrt{p^{2}+m_{\lambda}^{2}}}.
-\end{align}
-These integrals have analytic forms that can be evaluated numerically or
-approximated in the ultrarelativistic limit ($p_{F,\lambda}\!\gg\!m_{\lambda}$)
-as $\epsilon_{\ell}\simeq3P_{\ell}\simeq p_{F,\lambda}^{4}/(4\pi^{2})$.
-
-The leptons interact only through the electromagnetic field, which in bulk
-neutral matter averages to zero, so their only role in the RMF approximation is to
-balance the positive charge of the protons and to enforce the conditions of
-chemical equilibrium. Charge neutrality requires
+Charge neutrality requires
 \[
 n_{p} = n_{e} + n_{\mu},
 \]
-while $\beta$–equilibrium, maintained by weak interactions, imposes the chemical
-relations
+while weak interactions enforce $\beta$–equilibrium through
 \[
 \mu_{n} = \mu_{p} + \mu_{e}, \qquad
-\mu_{e} = \mu_{\mu},
+\mu_{e} = \mu_{\mu}.
 \]
-the latter holding whenever muons are present. Together with the baryonic field
-equations, these constraints determine the composition of the system at each
-density.
+The second condition holds whenever muons are present. It implies that muons
+begin to appear only once the electron chemical potential reaches the muon rest
+mass, $\mu_{e} \ge m_{\mu}$; below this threshold
+only electrons carry the negative charge.
+
+The energy density and pressure of the leptons are obtained from the standard
+relativistic Fermi–gas integrals,
+\begin{align}
+\epsilon_{\ell}
+&= \frac{1}{\pi^{2}}\sum_{\lambda=e,\mu}
+   \int_{0}^{p_{F,\lambda}}\!dp\,p^{2}\sqrt{p^{2}+m_{\lambda}^{2}},
+\\[0.4em]
+P_{\ell}
+&= \frac{1}{3\pi^{2}}\sum_{\lambda=e,\mu}
+   \int_{0}^{p_{F,\lambda}}\!dp\,\frac{p^{4}}{\sqrt{p^{2}+m_{\lambda}^{2}}}.
+\end{align}
+These expressions can be evaluated numerically or approximated in the
+ultrarelativistic limit ($p_{F,\lambda}\!\gg\!m_{\lambda}$) as
+$\epsilon_{\ell}\simeq3P_{\ell}\simeq p_{F,\lambda}^{4}/(4\pi^{2})$.
 
 \subsection{Self–consistent mean–field system and equation of state}
 \label{subsec:rmf_selfconsistent}
@@ -564,7 +607,7 @@ m_{\sigma}^{2}\,\langle\sigma\rangle
 + m_{n}b\,(g_{\sigma}\langle\sigma\rangle)^{2}
 + c\,(g_{\sigma}\langle\sigma\rangle)^{3}
 &= g_{\sigma}\,
-   \sum_{B=n,p}\frac{1}{\pi^{2}}
+   \frac{1}{\pi^{2}}\sum_{B=n,p}
    \int_{0}^{p_{F,B}}\!dp\,p^{2}\,
    \frac{m^{*}}{\sqrt{p^{2}+m^{*2}}},
 \\[0.5em]
@@ -597,48 +640,172 @@ For a chosen total baryon density $n_{B}=n_{p}+n_{n}$, these equations form a
 nonlinear system that is solved iteratively.  One starts with a trial value of
 $\bar\sigma$, computes $m^{*}$, determines the Fermi momenta consistent with
 charge neutrality and $\beta$–equilibrium, and then updates the fields until
-convergence is achieved.  The procedure yields, for each density point, the
+convergence is achieved.  The procedure yields, for each density, the
 composition of the matter $(n_{p},n_{n},n_{e},n_{\mu})$, the mean fields
 $(\langle\sigma\rangle,\langle\omega_{0}\rangle,\langle\rho_{03}\rangle)$, and the corresponding thermodynamic
 quantities.
 
 The total energy density and pressure follow by adding the contributions from
 all sectors:
-\begin{align}
+\begin{equation}
+\begin{aligned}
 \epsilon &=
   \frac{1}{2}\,m_{\sigma}^{2}\,\langle\sigma\rangle^{2}
   + \frac{1}{3}\,m_{n}b\,(g_{\sigma}\langle\sigma\rangle)^{3}
   + \frac{1}{4}\,c\,(g_{\sigma}\langle\sigma\rangle)^{4}
-  + \frac{1}{2}\,m_{\omega}^{2}\,\langle\omega_{0}\rangle^{2}
-  + \frac{1}{2}\,m_{\rho}^{2}\,\langle\rho_{03}\rangle^{2}
-\\[0.3em]
+  + \frac{1}{2}\,m_{\omega}^{2}\,\langle\omega^{0}\rangle^{2}
+  + \frac{1}{2}\,m_{\rho}^{2}\,\langle\rho^{0}_{3}\rangle^{2} \\[0.3em]
 &\quad
-  + \sum_{B=n,p}\frac{1}{\pi^{2}}
-    \int_{0}^{p_{F,B}}\!dp\,p^{2}\sqrt{p^{2}+m^{*2}}
-\\[0.3em]
+  + \frac{1}{\pi^{2}}\sum_{B=n,p}
+    \int_{0}^{p_{F,B}}\!dp\,p^{2}\sqrt{p^{2}+m^{*2}} \\[0.3em]
 &\quad
-  + \sum_{\lambda=e,\mu}\frac{1}{\pi^{2}}
+  + \frac{1}{\pi^{2}}\sum_{\lambda=e,\mu}
     \int_{0}^{p_{F,\lambda}}\!dp\,p^{2}
-    \sqrt{p^{2}+m_{\lambda}^{2}},
-\\[1.0em]
+    \sqrt{p^{2}+m_{\lambda}^{2}}.
+\end{aligned}
+\label{eq:energy_density_total}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
 P &=
  -\,\frac{1}{2}\,m_{\sigma}^{2}\,\langle\sigma\rangle^{2}
  - \frac{1}{3}\,m_{n}b\,(g_{\sigma}\langle\sigma\rangle)^{3}
  - \frac{1}{4}\,c\,(g_{\sigma}\langle\sigma\rangle)^{4}
- + \frac{1}{2}\,m_{\omega}^{2}\,\langle\omega_{0}\rangle^{2}
- + \frac{1}{2}\,m_{\rho}^{2}\,\langle\rho_{03}\rangle^{2}
-\\[0.3em]
+ + \frac{1}{2}\,m_{\omega}^{2}\,\langle\omega^{0}\rangle^{2}
+ + \frac{1}{2}\,m_{\rho}^{2}\,\langle\rho^{0}_{3}\rangle^{2} \\[0.3em]
 &\quad
-  + \sum_{B=n,p}\frac{1}{3\pi^{2}}
-    \int_{0}^{p_{F,B}}\!dp\,\frac{p^{4}}{\sqrt{p^{2}+m^{*2}}}
-\\[0.3em]
+  + \frac{1}{3\pi^{2}}\sum_{B=n,p}
+    \int_{0}^{p_{F,B}}\!dp\,\frac{p^{4}}{\sqrt{p^{2}+m^{*2}}} \\[0.3em]
 &\quad
-  + \sum_{\lambda=e,\mu}\frac{1}{3\pi^{2}}
+  + \frac{1}{3\pi^{2}}\sum_{\lambda=e,\mu}
     \int_{0}^{p_{F,\lambda}}\!dp\,\frac{p^{4}}{\sqrt{p^{2}+m_{\lambda}^{2}}}.
-\end{align}
+\end{aligned}
+\label{eq:pressure_total}
+\end{equation}
 These relations define a barotropic equation of state $P(\epsilon)$ that can be used
-directly in the TOV equations to compute the global
-structure of neutron stars.  Once calibrated to reproduce the empirical bulk
+directly in the TOV equations to compute the macroscopic quantities
+of neutron stars.  Once calibrated to reproduce the empirical bulk
 properties of symmetric nuclear matter at saturation, the RMF approximation provides
 a consistent microscopic description of dense, asymmetric matter and forms the
 basis for many modern neutron-star equations of state.
+
+
+\section{Numerical results}
+\label{sec:npemu_results}
+
+This section presents the numerical results obtained from three variants of the
+$npe\mu$ model implemented for cold, charge-neutral, $\beta$-equilibrated matter.  
+All calculations are based on the RMF approximation with
+$\sigma$–$\omega$–$\rho$ meson exchange and nonlinear scalar self-interactions.
+The stellar structure is determined from the TOV
+equations using the corresponding EOS for each case.
+The three implementations differ only in the treatment of the low-density region,
+allowing a comparison between a crust-joined model, a uniform $npe\mu$ model,
+and a version employing a polytropic continuation.
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/npemu/crust_comp.png}
+  \caption{Relative particle densities in $npe\mu$ matter.}
+  \label{fig:npemu_comp}
+\end{figure}
+
+\subsection{Crust Model}
+\label{subsec:npemu_crust}
+
+The first version follows the original implementation based on the master’s thesis by
+Pogliano, where the RMF core is joined smoothly to a crust EOS of the
+Friedman–Pandharipande–Skyrme (FPS) type.  
+The matching point between the two EOS segments is determined by the intersection of
+their respective pressure–density relations, ensuring a continuous transition at the
+crust–core interface.
+
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/npemu/crust_eos.png}
+  \caption{Equation of state for the crust-joined model, showing
+  $\log_{10} P$ as a function of $\log_{10} \epsilon$ in cgs units.}
+  \label{fig:npemu_crust_eos}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=1\textwidth]{figures/npemu/crust_mr.png}
+  \caption{Mass–radius and mass–central–density relations for the crust-joined model.
+  Solid lines denote stable configurations; dashed lines mark the onset of instability.}
+  \label{fig:npemu_crust_mr}
+\end{figure}
+
+The mass–radius sequence (Fig.~\ref{fig:npemu_crust_mr}) reaches a peak near
+$M \simeq 2\,M_\odot$ at a radius of about $11$–$12$ km; the dashed continuation marks
+the unstable branch beyond the turning point. For decreasing mass the curve develops a
+clear rightward tail: radii increase as $M$ drops, producing the extended low–mass,
+large–radius end typical of models with a soft outer layer.
+
+\subsection{Uniform \texorpdfstring{$npe\mu$}{npemu} Model}
+\label{subsec:npemu_uniform}
+
+The uniform model assumes $npe\mu$ matter at all densities, i.e.\ the RMF equation of state
+is applied without any crustal correction.  
+This allows an isolated examination of the core behavior and the effect of removing the
+crust discontinuity entirely.
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/npemu/uniform_eos.png}
+  \caption{Equation of state for the uniform $npe\mu$ model.}
+  \label{fig:npemu_uniform_eos}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/npemu/uniform_mr.png}
+  \caption{Mass–radius and mass–central–density relations for the uniform $npe\mu$ model.}
+  \label{fig:npemu_uniform_mr}
+\end{figure}
+
+The uniform model has essentially the same maximum mass and peak position as the crust
+case, but its low–mass behavior is qualitatively different (Fig.~\ref{fig:npemu_uniform_mr}):
+instead of extending to larger radii, the stable branch bends back toward \emph{smaller}
+radii as $M$ decreases. Removing the soft outer layer keeps configurations compact all the
+way down the sequence, yielding a narrow range of radii on the low–mass side.
+
+
+\subsection{Polytropic Tail Model}
+\label{subsec:npemu_tail}
+
+In the final version, the low-density regime is represented by a simple polytropic continuation
+of the form $P = K \epsilon^{\Gamma}$, with $\Gamma = 4/3$ chosen to mimic the soft behavior of
+a degenerate relativistic gas.  
+The polytrope is matched continuously to the RMF equation of state near $\rho \simeq 0.08\rho_0$.
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/npemu/tail_eos.png}
+  \caption{Equation of state for the RMF–polytrope joined model.}
+  \label{fig:npemu_tail_eos}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=1\textwidth]{figures/npemu/tail_mr.png}
+  \caption{Mass–radius and mass–central–density relations for the polytropic tail model.}
+  \label{fig:npemu_tail_mr}
+\end{figure}
+
+The polytropic continuation reproduces the same features as the crust model
+(Fig.~\ref{fig:npemu_tail_mr}). The peak mass and radius are practically unchanged, and
+the low–mass branch again tails off to the right with increasing radius. Compared to the
+crust case the tail appears slightly smoother, but the overall geometry of the sequence—
+peak location, stability change at the turning point, and rightward low–mass extension—
+is effectively the same.
+
+\subsection{Comparison and Summary}
+All three versions of the $npe\mu$ model share the same high-density description based on
+the RMF approximation, and consequently predict very similar maximum
+masses around $2.0\,M_\odot$ and radii near $11$–$12$~km at the stability limit.
+The differences between them arise entirely from the treatment of the low-density regime,
+which determines how the mass–radius sequence extends below about one solar mass.
+
