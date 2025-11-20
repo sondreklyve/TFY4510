@@ -692,120 +692,354 @@ basis for many modern neutron-star equations of state.
 
 
 \section{Numerical results}
-\label{sec:npemu_results}
+\label{sec:npe_mu_results}
 
-This section presents the numerical results obtained from three variants of the
-$npe\mu$ model implemented for cold, charge-neutral, $\beta$-equilibrated matter.  
-All calculations are based on the RMF approximation with
-$\sigma$–$\omega$–$\rho$ meson exchange and nonlinear scalar self-interactions.
-The stellar structure is determined from the TOV
-equations using the corresponding EOS for each case.
-The three implementations differ only in the treatment of the low-density region,
-allowing a comparison between a crust-joined model, a uniform $npe\mu$ model,
-and a version employing a polytropic continuation.
+The numerical implementation of the $npe\mu$ model follows the mean–field
+framework developed in the previous sections and is based closely on the code
+structure described in the master’s thesis of Pogliano~\cite{pogliano2017}.
+For each chosen mass density $\rho$ on a fixed grid, the coupled
+nonlinear equations for the meson mean fields, Fermi momenta, and chemical
+potentials are solved iteratively. At convergence, this procedure yields the
+self–consistent composition $(n_{n},n_{p},n_{e},n_{\mu})$ and the corresponding
+energy density and pressure. In this section we first present the resulting
+composition of $npe\mu$ matter, and then use it to construct and analyse the
+equation of state for the neutron–star core.
 
-\begin{figure}[ht!]
+\subsection{Composition of \texorpdfstring{$npe\mu$}{npemu} matter}
+\label{subsec:npemu_composition_results}
+
+Figure~\ref{fig:npemu_composition} shows the equilibrium composition obtained
+from the numerical solution of the mean–field system. The particle densities
+are plotted on a logarithmic scale as functions of the mass density $\rho$.
+All quantities entering the plot are determined self–consistently from the
+RMF field equations and the equilibrium conditions derived in
+Sec.~\ref{subsec:rmf_selfconsistent}; no additional phenomenological input is
+introduced at this stage.
+
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/npemu/crust_comp.png}
-  \caption{Relative particle densities in $npe\mu$ matter.}
-  \label{fig:npemu_comp}
+  \includegraphics[width=0.7\textwidth]{figures/npemu/comp}
+  \caption[Composition of \texorpdfstring{$npe\mu$}{npemu} matter]{
+    Equilibrium particle densities in the $npe\mu$ model as functions of the
+    mass density $\rho$, obtained from the self–consistent RMF calculation.
+    The curves show neutrons, protons, electrons, and muons on a logarithmic
+    scale. At low densities only neutrons, a small proton component, and
+    electrons are present. Once the electron chemical potential reaches the
+    muon rest mass, muons appear and increasingly share the negative charge
+    with electrons at higher densities.
+  }
+  \label{fig:npemu_composition}
 \end{figure}
 
-\subsection{Crust Model}
-\label{subsec:npemu_crust}
+At the lowest densities shown, the system is overwhelmingly neutron–rich.
+The proton density is suppressed by the symmetry–energy cost of creating
+protons, which is controlled by the isovector $\rho$–meson coupling in
+Eqs.~\eqref{eq:L_rho} and \eqref{eq:rho_field_eq}. A small but finite proton
+density is nevertheless required by the equilibrium relations between nucleon
+chemical potentials, and the electron density closely tracks it through the
+charge–neutrality condition. In this regime the lepton sector is effectively
+purely electronic; the electron chemical potential remains below the muon
+rest mass and the muon density is numerically zero in the solution.
 
-The first version follows the original implementation based on the master’s thesis by
-Pogliano, where the RMF core is joined smoothly to a crust EOS of the
-Friedman–Pandharipande–Skyrme (FPS) type.  
-The matching point between the two EOS segments is determined by the intersection of
-their respective pressure–density relations, ensuring a continuous transition at the
-crust–core interface.
+As $\rho$ increases, the balance between the scalar attraction and vector
+repulsion in the baryonic sector modifies the single–particle energies in
+Eq.~\eqref{eq:single_particle_energy} and gradually drives up the proton
+fraction. Through the equilibrium relations for the chemical potentials,
+this growth feeds directly into the electron Fermi momentum. The electron
+chemical potential $\mu_{e}$ eventually reaches the muon rest mass, at a
+density that can be read off from the point where the muon curve in
+Fig.~\ref{fig:npemu_composition} first lifts off the numerical zero level.
+Beyond this threshold it becomes favourable to populate muon states, and the
+code finds a rapidly increasing muon density $n_{\mu}$.
+
+Once muons are present, the negative charge is shared between electrons and
+muons. Further increases in $\rho$ are then accommodated partly by raising
+$n_{\mu}$ rather than pushing $\mu_{e}$ to ever larger values. This behaviour
+is visible in the plot as a transfer of weight from the electron to the muon
+curve at higher densities, while the total lepton density continues to follow
+the proton density as required by charge neutrality. The precise way in which
+the proton fraction grows with $\rho$, and hence how the lepton densities
+split between electrons and muons, is governed by the density dependence of
+the symmetry energy encoded in the $\rho$–meson sector,
+Eqs.~\eqref{eq:rho_field_eq} and \eqref{eq:rho_eps_P}.
+
+At the highest densities in Fig.~\ref{fig:npemu_composition}, the solution
+approaches the characteristic composition of a neutron–star core in this
+model: neutrons carry the bulk of the baryon number, the proton fraction is
+non–negligible but remains subdominant, and the leptonic charge is shared
+between electrons and muons in a ratio set by the equilibrium conditions and
+the underlying RMF couplings. In this sense the plot provides a direct
+numerical realization of the qualitative picture developed earlier: the
+$\sigma$ and $\omega$ fields fix the overall binding and stiffness, the
+$\rho$ field penalizes isospin asymmetry and controls the proton fraction,
+and the lepton sector adjusts to enforce the equilibrium conditions.
 
 
-\begin{figure}[ht!]
+\subsection{Core equation of state}
+\label{subsec:core_eos_results}
+
+With the composition determined at each density, the next step is to
+construct the corresponding equation of state $P(\epsilon)$ for
+uniform $npe\mu$ matter. The numerical implementation solves the
+mean–field equations and equilibrium conditions together with the
+thermodynamic expressions of Sec.~\ref{subsec:rmf_selfconsistent}.
+For each mass density $\rho$ on the numerical grid, the code returns the
+converged fields, particle densities, energy density, and pressure, thereby
+producing the full core EoS.
+
+A direct way to assess the plausibility of the obtained EoS is to compare
+it with observationally constrained pressure–density bands.
+Figure~\ref{fig:npemu_eos_vs_ng} shows the resulting $npe\mu$ core EoS
+together with the 95\% credible pressure band from the recent
+semiparametric analysis of Ng \textit{et al.}~\cite{Ng_2025}.
+The observational band synthesizes information from massive pulsars,
+binary-merger tidal deformabilities, and NICER X-ray pulse-profile
+measurements, and therefore represents one of the most up-to-date and
+model-independent constraints currently available.
+
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/npemu/crust_eos.png}
-  \caption{Equation of state for the crust-joined model, showing
-  $\log_{10} P$ as a function of $\log_{10} \epsilon$ in cgs units.}
-  \label{fig:npemu_crust_eos}
+  \includegraphics[width=0.70\textwidth]{figures/npemu/eos_bands}
+  \caption[Core EoS compared with observational band]{
+    Pressure--density relation of the RMF $npe\mu$ core EoS compared
+    with the 95\% credible region from Ng \textit{et al.}
+    (PSR + GW + NICER).
+    The $npe\mu$ model lies comfortably within the observationally
+    allowed region across the entire density range shown. A slight
+    offset appears in the intermediate region but the curve otherwise
+    remains fully inside the 95\% credible band.
+  }
+  \label{fig:npemu_eos_vs_ng}
 \end{figure}
 
-\begin{figure}[ht!]
+The comparison shows that the RMF-based $npe\mu$ core EoS is broadly
+consistent with the observational band across the entire density interval
+displayed. At the lower and higher ends of the range the model follows the
+posterior band closely, and the overall slope agrees well with the
+observational trend. In the intermediate region around
+$\log_{10}\rho \sim 14.2$--$14.5$ the EoS lies slightly above the central
+part of the band, producing a modest systematic offset. This indicates that the
+interaction parameters calibrated to nuclear bulk properties produce an
+EoS that is largely compatible with astrophysical constraints without any further
+adjustment.
+
+A modest offset of this kind is not unexpected given the minimal nature of
+the $npe\mu$ framework. Although the RMF description is entirely applicable
+in this uniform-matter regime, it represents only the leading contribution
+to the microphysics: the model includes nucleons and leptons but omits
+additional mechanisms that are known to soften the EoS near and moderately
+above saturation density. Examples include many-body correlations beyond the
+mean field or possible additional degrees of freedom. Such effects tend to
+lower the pressure in precisely the density range where the slight
+displacement appears. Within this context it is natural that the $npe\mu$
+EoS sits toward the upper part of the allowed region, while still remaining
+fully consistent with the observational band.
+
+It is also important to emphasise that all densities shown in
+Fig.~\ref{fig:npemu_eos_vs_ng} lie well within the uniform-matter domain
+where the RMF $npe\mu$ model is physically valid. The comparison therefore
+tests the core EoS only, not the low-density crustal regime. To obtain a
+complete neutron-star EoS suitable for TOV integration down to vanishing
+pressure, the core description must still be supplemented by an appropriate
+model for the outer layers. This motivates the introduction of a dedicated
+crust EoS in the next subsection.
+
+
+\subsection{Naive polytropic extension}
+\label{subsec:polytrope_results}
+
+As a first step towards extending the core $npe\mu$ EoS to
+lower densities, we adopt a deliberately simple phenomenological
+model for the crust. The idea is to replace the detailed
+low-density microphysics by a single polytropic relation between pressure
+and energy density,
+\begin{equation}
+  P_{\text{crust}}(\epsilon)
+  = K\,\epsilon^{\Gamma},
+\end{equation}
+where $\Gamma$ controls the stiffness of the crust and $K$ is fixed by the
+requirement that the polytrope matches smoothly onto the RMF $npe\mu$ core
+EoS at a chosen joining point. 
+In practice, the matching point is taken from the low-density end of the
+numerical table used internally by the code to define where the uniform
+$npe\mu$ core calculation stops. The corresponding energy density
+$\epsilon_{\mathrm{match}}$ and pressure $P_{\mathrm{match}}$ are then used to
+fix the constant $K$ so that the polytrope connects smoothly to the
+$npe\mu$ core EoS.
+\begin{equation}
+  K = \frac{P_{\mathrm{match}}}{\epsilon_{\mathrm{match}}^{\Gamma}}.
+\end{equation}
+Below $\epsilon_{\mathrm{match}}$ the pressure is given by the polytrope,
+and above $\epsilon_{\mathrm{match}}$ the EoS coincides with the uniform
+$npe\mu$ core.
+
+The numerical implementation uses a polytropic relation in the low density 
+region while keeping the original $npe\mu$
+core unchanged. In this way the red curve in
+Fig.~\ref{fig:poly_eos} represents the full EoS with a polytropic crust
+and an unchanged $npe\mu$ core; the other curves show, for comparison, the
+pure core EoS and the version extended to lower densities with the original
+tabulated crust.
+
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=1\textwidth]{figures/npemu/crust_mr.png}
-  \caption{Mass–radius and mass–central–density relations for the crust-joined model.
-  Solid lines denote stable configurations; dashed lines mark the onset of instability.}
-  \label{fig:npemu_crust_mr}
+  \includegraphics[width=0.7\textwidth]{figures/npemu/poly_eos}
+  \caption[Polytropic crust joined to \texorpdfstring{$npe\mu$}{npemu} core]{
+    Equation of state with a single polytropic crust ($\Gamma = 1.2$)
+    matched to the RMF $npe\mu$ core. The red curve shows the combined
+    model: at low densities the pressure follows the polytropic relation,
+    while at higher densities it coincides with the uniform $npe\mu$ core
+    EoS. For comparison, the pure core EoS and the reference model with a
+    tabulated crust are also indicated.
+  }
+  \label{fig:poly_eos}
 \end{figure}
 
-The mass–radius sequence (Fig.~\ref{fig:npemu_crust_mr}) reaches a peak near
-$M \simeq 2\,M_\odot$ at a radius of about $11$–$12$ km; the dashed continuation marks
-the unstable branch beyond the turning point. For decreasing mass the curve develops a
-clear rightward tail: radii increase as $M$ drops, producing the extended low–mass,
-large–radius end typical of models with a soft outer layer.
+For the results shown here, the polytropic index was simply chosen by
+inspection as $\Gamma = 1.2$. This value gives a low-density behaviour
+that looks reasonable when plotted together with the core EoS and does not
+produce any obvious pathologies in the resulting stellar models. Since the
+polytropic crust is only intended as an agnostic representation of the
+outer layers, and the detailed microphysics is not yet included, the exact
+choice of $\Gamma$ is not critical at this stage.
 
-\subsection{Uniform \texorpdfstring{$npe\mu$}{npemu} Model}
-\label{subsec:npemu_uniform}
+The effect of this naive crust prescription on the stellar structure is
+illustrated in Fig.~\ref{fig:poly_mr}, which shows the mass–radius
+relation and the gravitational mass as a function of central energy
+density for the combined polytrope + $npe\mu$ model.
+The high-mass part of the sequence is essentially governed by
+the pure core EoS, as expected: for massive stars the structure is
+dominated by the inner core, and the detailed crust EoS contributes only a
+small correction. The maximum mass and the radius
+are therefore controlled almost entirely by the RMF $npe\mu$ core.
 
-The uniform model assumes $npe\mu$ matter at all densities, i.e.\ the RMF equation of state
-is applied without any crustal correction.  
-This allows an isolated examination of the core behavior and the effect of removing the
-crust discontinuity entirely.
-
-\begin{figure}[ht!]
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/npemu/uniform_eos.png}
-  \caption{Equation of state for the uniform $npe\mu$ model.}
-  \label{fig:npemu_uniform_eos}
+  \includegraphics[width=0.85\textwidth]{figures/npemu/poly_mr}
+  \caption[Mass–radius relation for polytropic crust model]{
+    Left: mass–radius relation for the model with a polytropic crust
+    ($\Gamma = 1.2$) matched to the RMF $npe\mu$ core. The solid part of
+    the curve indicates stable configurations and the dashed part the
+    unstable branch. Right: gravitational mass as a function of central
+    energy density for the same model. The polytropic crust mainly affects
+    the low-mass, large-radius end of the sequence, while the maximum mass
+    and the high-mass branch remain controlled by the core EoS.
+  }
+  \label{fig:poly_mr}
 \end{figure}
 
-\begin{figure}[ht!]
+At lower masses the crust becomes comparatively more important, and the
+polytropic choice leaves a clearer imprint on the mass–radius curve. As
+the central density is reduced, the radius increases and the
+mass decreases. This behaviour
+is visible in the left panel of Fig.~\ref{fig:poly_mr}: below about
+$1\,M_{\odot}$ the curve bends towards radii of order $20$–$25\,$km,
+reflecting the increasing fractional thickness of the low-density
+envelope. In terms of the right panel, the polytropic crust shapes the
+low-density end of the $M(\epsilon_{c})$ relation but leaves the location
+of the maximum mass, and the onset of instability, determined by the $npe\mu$ core description.
+
+Overall, the naive polytropic extension provides a convenient way to close
+the EoS at low densities and to explore how a generic crust-like envelope
+affects the global stellar properties. However, the construction is
+deliberately agnostic: the choice of $\Gamma$ is not tied to nuclear
+microphysics, and the polytrope does not resolve the sequence of phases in
+the outer and inner crust.
+
+
+\subsection{Crust equation of state and final model}
+\label{subsec:crust_results}
+
+To obtain a physically motivated description of the outer layers of a neutron
+star, the microphysics of the crust must be taken into account. The essential
+features are well established and follow the classic work of Baym, Pethick
+and Sutherland (BPS)~\cite{bps1971}, and later refinements such as the
+Friedman–Pandharipande–Skyrme (FPS)~\cite{fps1981} and
+Skyrme–Lyon (SLy)~\cite{sly2001} models. A clear summary is given in
+Pogliano’s thesis (see Chapter~5, pp.~69–72), where the structure of crustal
+matter and the corresponding EoS is presented in detail. The results used
+here follow the FPS analytical approximation~\cite{pogliano2017}, which
+provides a smooth and accurate parametrization suitable for TOV integration.
+
+At very low densities the matter consists of a Coulomb lattice of iron-like
+nuclei embedded in a degenerate electron gas. As the density increases,
+heavier and more neutron-rich nuclei become energetically favoured. This
+sequence of composition changes appears as a series of phase transitions,
+each occurring at fixed pressure and slightly different nuclear species. When
+the density reaches the neutron-drip threshold—visible as the break near
+$4 \times 10^{11}\,\mathrm{g/cm^{3}}$ in the tabulated models—the most weakly bound
+neutrons escape the nuclei and populate a free neutron gas between the
+lattice sites. Above this point, in the inner crust, the nuclei continue to
+grow in size and neutron excess while the free neutron component increases.
+Near the crust–core interface the lattice becomes unstable against
+non-spherical nuclear shapes (“pasta phases”), but the overall effect on the
+pressure is modest and well captured by parametrized EoS models such as FPS.
+
+The key point for the present work is that the crust is intrinsically
+non-uniform and cannot be described by the RMF $npe\mu$ model. The field
+equations developed earlier assume a uniform medium of interacting baryons,
+which is appropriate only above the crust–core transition density
+($\rho \gtrsim 10^{14}\,\mathrm{g/cm^{3}}$). Below this threshold, the physics is
+dominated by nuclear structure and lattice geometry. Consequently, 
+the core EoS must be complemented by a crust model
+that captures these physical regimes and connects smoothly down to the
+surface.
+
+Figures~\ref{fig:crust_eos} and \ref{fig:crust_mr} show the full EoS and the
+resulting stellar models when the FPS crust is used instead of the naive
+polytrope. The crust part of the EoS (red curve in
+Fig.~\ref{fig:crust_eos}) reproduces the characteristic sequence of low-density
+phases and matches continuously onto the $npe\mu$ core. 
+Notice also the expected phase-transition break around
+$\rho \sim 4 \times 10^{11}\,\mathrm{g/cm^{3}}$,
+where neutrons begin to drip out of nuclei.
+
+
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/npemu/uniform_mr.png}
-  \caption{Mass–radius and mass–central–density relations for the uniform $npe\mu$ model.}
-  \label{fig:npemu_uniform_mr}
+  \includegraphics[width=0.75\textwidth]{figures/npemu/crust_eos}
+  \caption[Crust + core equation of state]{
+    Full equation of state combining the FPS crust with the RMF $npe\mu$
+    core. The crust (red curve) reproduces the sequence of low-density
+    phases and joins smoothly onto the uniform core matter. For comparison,
+    the pure core EoS beyond the branching point is also shown.}
+  \label{fig:crust_eos}
 \end{figure}
 
-The uniform model has essentially the same maximum mass and peak position as the crust
-case, but its low–mass behavior is qualitatively different (Fig.~\ref{fig:npemu_uniform_mr}):
-instead of extending to larger radii, the stable branch bends back toward \emph{smaller}
-radii as $M$ decreases. Removing the soft outer layer keeps configurations compact all the
-way down the sequence, yielding a narrow range of radii on the low–mass side.
+The corresponding mass–radius relation is shown in
+Fig.~\ref{fig:crust_mr}. As expected, the high-mass region of the sequence
+is unchanged, since the structure of massive neutron stars is determined
+almost entirely by the dense core and is insensitive to crust physics. The
+differences appear only in the low-mass, large-radius part of the curve.
+The polytropic crust produces comparatively larger radii at a given
+mass, or equivalently lower masses at the same radius. 
+This behaviour reflects the fact that the $\Gamma=1.2$ polytrope has
+a somewhat higher pressure at low energy densities, making the outer layers
+less compact. The FPS crust, with its lower pressure in the same regime,
+yields more compact configurations and therefore lies above the polytropic
+curve in the $M(R)$ plot.
 
+The central-density relation shows essentially no difference between the two
+models: both reach the same maximum mass at nearly identical central
+densities. This confirms that the crust affects only the low-density
+envelope and leaves the core-dominated part of the sequence unchanged.
 
-\subsection{Polytropic Tail Model}
-\label{subsec:npemu_tail}
-
-In the final version, the low-density regime is represented by a simple polytropic continuation
-of the form $P = K \epsilon^{\Gamma}$, with $\Gamma = 4/3$ chosen to mimic the soft behavior of
-a degenerate relativistic gas.  
-The polytrope is matched continuously to the RMF equation of state near $\rho \simeq 0.08\rho_0$.
-
-\begin{figure}[ht!]
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/npemu/tail_eos.png}
-  \caption{Equation of state for the RMF–polytrope joined model.}
-  \label{fig:npemu_tail_eos}
+  \includegraphics[width=0.85\textwidth]{figures/npemu/crust_mr}
+  \caption[Mass–radius relation with FPS crust]{
+    Left: mass–radius relation for the combined FPS crust + RMF $npe\mu$
+    core model. Right: gravitational mass as a function of central energy
+    density. The crust affects the low-mass, large-radius part of the
+    sequence while leaving the high-mass branch, and in particular the
+    maximum mass, essentially unchanged.}
+  \label{fig:crust_mr}
 \end{figure}
 
-\begin{figure}[ht!]
-  \centering
-  \includegraphics[width=1\textwidth]{figures/npemu/tail_mr.png}
-  \caption{Mass–radius and mass–central–density relations for the polytropic tail model.}
-  \label{fig:npemu_tail_mr}
-\end{figure}
-
-The polytropic continuation reproduces the same features as the crust model
-(Fig.~\ref{fig:npemu_tail_mr}). The peak mass and radius are practically unchanged, and
-the low–mass branch again tails off to the right with increasing radius. Compared to the
-crust case the tail appears slightly smoother, but the overall geometry of the sequence—
-peak location, stability change at the turning point, and rightward low–mass extension—
-is effectively the same.
-
-\subsection{Comparison and Summary}
-All three versions of the $npe\mu$ model share the same high-density description based on
-the RMF approximation, and consequently predict very similar maximum
-masses around $2.0\,M_\odot$ and radii near $11$–$12$~km at the stability limit.
-The differences between them arise entirely from the treatment of the low-density regime,
-which determines how the mass–radius sequence extends below about one solar mass.
-
+Taken together, these results provide a complete equation of state that spans
+the full range from the stellar surface to the centre. The RMF $npe\mu$ model
+governs the core, where uniform nuclear matter is an excellent approximation,
+while the FPS crust supplies the correct microphysical behaviour at
+sub-nuclear densities. This combined EoS is consistent with current
+astrophysical constraints, produces realistic radii across the mass range,
+and removes the arbitrariness present in the naive polytropic extension.
