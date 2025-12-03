@@ -710,7 +710,7 @@ equation of state for the neutron–star core.
 
 Figure~\ref{fig:npemu_composition} shows the equilibrium composition obtained
 from the numerical solution of the mean–field system. The particle densities
-are plotted on a logarithmic scale as functions of the mass density $\rho$.
+are plotted on a logarithmic scale as functions of the total mass density $\rho$.
 All quantities entering the plot are determined self–consistently from the
 RMF field equations and the equilibrium conditions derived in
 Sec.~\ref{subsec:rmf_selfconsistent}; no additional phenomenological input is
@@ -739,16 +739,16 @@ density is nevertheless required by the equilibrium relations between nucleon
 chemical potentials, and the electron density closely tracks it through the
 charge–neutrality condition. In this regime the lepton sector is effectively
 purely electronic; the electron chemical potential remains below the muon
-rest mass and the muon density is numerically zero in the solution.
+rest mass and the muon density is zero in the solution.
 
 As $\rho$ increases, the balance between the scalar attraction and vector
 repulsion in the baryonic sector modifies the single–particle energies in
 Eq.~\eqref{eq:single_particle_energy} and gradually drives up the proton
 fraction. Through the equilibrium relations for the chemical potentials,
 this growth feeds directly into the electron Fermi momentum. The electron
-chemical potential $\mu_{e}$ eventually reaches the muon rest mass, at a
-density that can be read off from the point where the muon curve in
-Fig.~\ref{fig:npemu_composition} first lifts off the numerical zero level.
+chemical potential $\mu_{e}$ eventually reaches the muon rest mass, 
+at the density where the muon number density becomes nonzero, as seen 
+in Fig.~\ref{fig:npemu_composition}.
 Beyond this threshold it becomes favourable to populate muon states, and the
 code finds a rapidly increasing muon density $n_{\mu}$.
 
@@ -774,79 +774,29 @@ $\sigma$ and $\omega$ fields fix the overall binding and stiffness, the
 $\rho$ field penalizes isospin asymmetry and controls the proton fraction,
 and the lepton sector adjusts to enforce the equilibrium conditions.
 
-
-\subsection{Core equation of state}
-\label{subsec:core_eos_results}
-
-With the composition determined at each density, the next step is to
-construct the corresponding equation of state $P(\epsilon)$ for
-uniform $npe\mu$ matter. The numerical implementation solves the
-mean–field equations and equilibrium conditions together with the
-thermodynamic expressions of Sec.~\ref{subsec:rmf_selfconsistent}.
-For each mass density $\rho$ on the numerical grid, the code returns the
-converged fields, particle densities, energy density, and pressure, thereby
-producing the full core EoS.
-
-A direct way to assess the plausibility of the obtained EoS is to compare
-it with observationally constrained pressure–density bands.
-Figure~\ref{fig:npemu_eos_vs_ng} shows the resulting $npe\mu$ core EoS
-together with the 95\% credible pressure band from the recent
-semiparametric analysis of Ng \textit{et al.}~\cite{Ng_2025}.
-The observational band synthesizes information from massive pulsars,
-binary-merger tidal deformabilities, and NICER X-ray pulse-profile
-measurements, and therefore represents one of the most up-to-date and
-model-independent constraints currently available.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.70\textwidth]{figures/npemu/eos_bands}
-  \caption[Core EoS compared with observational band]{
-    Pressure--density relation of the RMF $npe\mu$ core EoS compared
-    with the 95\% credible region from Ng \textit{et al.}
-    (PSR + GW + NICER).
-    The $npe\mu$ model lies comfortably within the observationally
-    allowed region across the entire density range shown. A slight
-    offset appears in the intermediate region but the curve otherwise
-    remains fully inside the 95\% credible band.
-  }
-  \label{fig:npemu_eos_vs_ng}
-\end{figure}
-
-The comparison shows that the RMF-based $npe\mu$ core EoS is broadly
-consistent with the observational band across the entire density interval
-displayed. At the lower and higher ends of the range the model follows the
-posterior band closely, and the overall slope agrees well with the
-observational trend. In the intermediate region around
-$\log_{10}\rho \sim 14.2$--$14.5$ the EoS lies slightly above the central
-part of the band, producing a modest systematic offset. This indicates that the
-interaction parameters calibrated to nuclear bulk properties produce an
-EoS that is largely compatible with astrophysical constraints without any further
-adjustment.
-
-A modest offset of this kind is not unexpected given the minimal nature of
-the $npe\mu$ framework. Although the RMF description is entirely applicable
-in this uniform-matter regime, it represents only the leading contribution
-to the microphysics: the model includes nucleons and leptons but omits
-additional mechanisms that are known to soften the EoS near and moderately
-above saturation density. Examples include many-body correlations beyond the
-mean field or possible additional degrees of freedom. Such effects tend to
-lower the pressure in precisely the density range where the slight
-displacement appears. Within this context it is natural that the $npe\mu$
-EoS sits toward the upper part of the allowed region, while still remaining
-fully consistent with the observational band.
-
-It is also important to emphasise that all densities shown in
-Fig.~\ref{fig:npemu_eos_vs_ng} lie well within the uniform-matter domain
-where the RMF $npe\mu$ model is physically valid. The comparison therefore
-tests the core EoS only, not the low-density crustal regime. To obtain a
-complete neutron-star EoS suitable for TOV integration down to vanishing
-pressure, the core description must still be supplemented by an appropriate
-model for the outer layers. This motivates the introduction of a dedicated
-crust EoS in the next subsection.
-
-
 \subsection{Naive polytropic extension}
 \label{subsec:polytrope_results}
+With the composition determined at each density, the next step is to
+construct the corresponding equation of state $P(\epsilon)$ for uniform
+$npe\mu$ matter. The numerical implementation solves the coupled mean–field
+equations and equilibrium conditions together with the thermodynamic
+relations of Sec.~\ref{subsec:rmf_selfconsistent}. For each mass density
+$\rho$ on the grid, the code returns the converged meson fields, particle
+densities, energy density, and pressure, thereby producing the EoS of the
+uniform core.
+
+However, the $npe\mu$ model is applicable only in the density range where
+matter is homogeneous. Below the crust–core transition the system becomes
+non–uniform: nuclei form a Coulomb lattice, neutron drip occurs, and the
+microphysics is dominated by nuclear structure rather than the uniform
+mean–field dynamics. The tabulated core EoS therefore terminates at its
+lowest density point and cannot be used to describe the outer layers.
+
+To obtain a complete EoS suitable for TOV integration, the core
+must be supplemented by a separate description of the crust. This extension
+provides the physically consistent low-density behaviour and ensures that the
+pressure decreases smoothly to zero at the stellar surface, thereby allowing
+the boundary conditions of the TOV problem to be satisfied.
 
 As a first step towards extending the core $npe\mu$ EoS to
 lower densities, we adopt a deliberately simple phenomenological
@@ -858,13 +808,13 @@ and energy density,
   = K\,\epsilon^{\Gamma},
 \end{equation}
 where $\Gamma$ controls the stiffness of the crust and $K$ is fixed by the
-requirement that the polytrope matches smoothly onto the RMF $npe\mu$ core
+requirement that the polytrope matches continuously onto the RMF $npe\mu$ core
 EoS at a chosen joining point. 
 In practice, the matching point is taken from the low-density end of the
 numerical table used internally by the code to define where the uniform
 $npe\mu$ core calculation stops. The corresponding energy density
 $\epsilon_{\mathrm{match}}$ and pressure $P_{\mathrm{match}}$ are then used to
-fix the constant $K$ so that the polytrope connects smoothly to the
+fix the constant $K$ so that the polytrope connects continuously to the
 $npe\mu$ core EoS.
 \begin{equation}
   K = \frac{P_{\mathrm{match}}}{\epsilon_{\mathrm{match}}^{\Gamma}}.
@@ -937,7 +887,8 @@ $1\,M_{\odot}$ the curve bends towards radii of order $20$–$25\,$km,
 reflecting the increasing fractional thickness of the low-density
 envelope. In terms of the right panel, the polytropic crust shapes the
 low-density end of the $M(\epsilon_{c})$ relation but leaves the location
-of the maximum mass, and the onset of instability, determined by the $npe\mu$ core description.
+of the maximum mass, and the onset of instability, 
+determined by the $npe\mu$ core description.
 
 Overall, the naive polytropic extension provides a convenient way to close
 the EoS at low densities and to explore how a generic crust-like envelope
@@ -950,40 +901,97 @@ the outer and inner crust.
 \subsection{Crust equation of state and final model}
 \label{subsec:crust_results}
 
-To obtain a physically motivated description of the outer layers of a neutron
-star, the microphysics of the crust must be taken into account. The essential
-features are well established and follow the classic work of Baym, Pethick
-and Sutherland (BPS)~\cite{bps1971}, and later refinements such as the
-Friedman–Pandharipande–Skyrme (FPS)~\cite{fps1981} and
-Skyrme–Lyon (SLy)~\cite{sly2001} models. A clear summary is given in
-Pogliano’s thesis (see Chapter~5, pp.~69–72), where the structure of crustal
-matter and the corresponding EoS is presented in detail. The results used
-here follow the FPS analytical approximation~\cite{pogliano2017}, which
-provides a smooth and accurate parametrization suitable for TOV integration.
+Below the crust--core transition density, neutron-star matter is no longer
+uniform and cannot be described by the $npe\mu$ mean–field model. Instead,
+the microphysics is governed by nuclear structure, Coulomb interactions, and
+the equilibrium between nuclei, electrons, and (above neutron drip) free
+neutrons. A realistic description of the outer layers must therefore follow
+the established crust Equation of State (EoS) models originally developed by
+Baym, Pethick, and Sutherland (BPS)~\cite{bps1971} and later refined in works
+such as Haensel and Pichon~\cite{haensel_pichon1994}, Friedman and
+Pandharipande~\cite{fps1981}, and the Skyrme–Lyon (SLy) model~\cite{sly2001}.
 
-At very low densities the matter consists of a Coulomb lattice of iron-like
-nuclei embedded in a degenerate electron gas. As the density increases,
-heavier and more neutron-rich nuclei become energetically favoured. This
-sequence of composition changes appears as a series of phase transitions,
-each occurring at fixed pressure and slightly different nuclear species. When
-the density reaches the neutron-drip threshold—visible as the break near
-$4 \times 10^{11}\,\mathrm{g/cm^{3}}$ in the tabulated models—the most weakly bound
-neutrons escape the nuclei and populate a free neutron gas between the
-lattice sites. Above this point, in the inner crust, the nuclei continue to
-grow in size and neutron excess while the free neutron component increases.
-Near the crust–core interface the lattice becomes unstable against
-non-spherical nuclear shapes (“pasta phases”), but the overall effect on the
-pressure is modest and well captured by parametrized EoS models such as FPS.
+At the lowest densities, cold catalyzed matter minimizes the Gibbs free
+energy by forming a Coulomb lattice of ${}^{56}\mathrm{Fe}$ nuclei immersed in a
+degenerate electron gas. As the pressure increases, heavier and increasingly
+neutron-rich nuclei become energetically favored. Each change of the
+ground-state nucleus corresponds to a first-order phase transition at fixed
+pressure, with a discrete jump in the energy density. Detailed calculations
+identify roughly a dozen such transitions before reaching the next major
+threshold~\cite{haensel_pichon1994}, as nuclei gradually approach the limits
+of stability.
 
-The key point for the present work is that the crust is intrinsically
-non-uniform and cannot be described by the RMF $npe\mu$ model. The field
-equations developed earlier assume a uniform medium of interacting baryons,
-which is appropriate only above the crust–core transition density
-($\rho \gtrsim 10^{14}\,\mathrm{g/cm^{3}}$). Below this threshold, the physics is
-dominated by nuclear structure and lattice geometry. Consequently, 
-the core EoS must be complemented by a crust model
-that captures these physical regimes and connects smoothly down to the
-surface.
+At a density of
+\[
+  \rho_{\mathrm{drip}} \simeq 4\times 10^{11}\,\mathrm{g\,cm^{-3}},
+\]
+the neutron chemical potential reaches the continuum threshold and neutrons
+begin to drip out of nuclei. This marks the onset of the inner crust,
+where the system consists of a lattice of extremely neutron-rich nuclei,
+degenerate electrons, and a free neutron gas. With increasing density the
+nuclear clusters grow in size and neutron excess, while the surrounding
+neutron gas becomes more significant.
+
+Close to the crust--core interface, typically around
+$\rho_{\mathrm{cc}}\sim 10^{14}\,\mathrm{g\,cm^{-3}}$, the competition between
+nuclear surface tension and Coulomb energy destabilizes spherical nuclei.
+This produces a sequence of non-spherical nuclear shapes—rods, slabs, tubes,
+and bubbles—collectively known as ``nuclear pasta''. Although these phases
+have important implications for transport and elasticity, their effect on the
+pressure is modest, and smooth parametrized EoSs such as FPS or SLy capture
+the thermodynamics to sufficient accuracy for global stellar structure
+calculations.
+
+In this work we adopt the Friedman–Pandharipande–Skyrme (FPS) crust EoS
+in the analytic form provided by the fit of Haensel and Pichon and compiled
+in later works (see e.g.\ the parametrization reproduced in
+Pogliano~\cite{pogliano2017}).
+The fit expresses $\log_{10}P$ as a smooth function of $\log_{10}\rho$ using
+sigmoid transitions between different density regimes:
+\begin{equation}
+\begin{aligned}
+\tilde{P} =
+\frac{a_{1} + a_{2}\tilde{\rho} + a_{3}\tilde{\rho}^{3}}{
+1 + a_{4}\tilde{\rho}}\, f_{0}\!\left(a_{5}(\tilde{\rho}-a_{6})\right)
++ (a_{7} + a_{8}\tilde{\rho}) \, f_{0}\!\left(a_{9}(a_{10}-\tilde{\rho})\right)\\
++ (a_{11} + a_{12}\tilde{\rho}) \, f_{0}\!\left(a_{13}(a_{14}-\tilde{\rho})\right)
++ (a_{15} + a_{16}\tilde{\rho}) \, f_{0}\!\left(a_{17}(a_{18}-\tilde{\rho})\right),
+\label{eq:fps_fit}
+\end{aligned}
+\end{equation}
+where $\tilde{P}=\log_{10}(P/\mathrm{dyne\,cm^{-2}})$,
+$\tilde{\rho}=\log_{10}(\rho/\mathrm{g\,cm^{-3}})$, and
+\begin{equation}
+  f_{0}(x)=\frac{1}{e^{x}+1}.
+\end{equation}
+The fit parameters $a_{1}$–$a_{18}$ are listed in Table~\ref{tab:fps_params}.
+
+\begin{table}[ht]
+  \centering
+  \caption{Parameters of the FPS analytic crust EoS.}
+  \label{tab:fps_params}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{*{6}{c}}
+    \toprule
+    $a_{1}$ & $a_{2}$ & $a_{3}$ & $a_{4}$ & $a_{5}$ & $a_{6}$ \\
+    11.4950 & $-22.775$ & 1.5707 & 4.3 & 14.08 & 27.80 \\
+    \midrule
+    $a_{7}$ & $a_{8}$ & $a_{9}$ & $a_{10}$ & $a_{11}$ & $a_{12}$ \\
+    $-1.653$ & 1.50 & 14.67 & 6.22 & 6.121 & 0.005925 \\
+    \midrule
+    $a_{13}$ & $a_{14}$ & $a_{15}$ & $a_{16}$ & $a_{17}$ & $a_{18}$ \\
+    0.16326 & 6.48 & 11.4971 & 19.105 & 0.8938 & 6.54 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+This parametrization provides a smooth and accurate description of the entire
+crust, including neutron drip and the approach to the crust--core transition,
+and is easily matched to the uniform $npe\mu$ core at
+$\rho=\rho_{\mathrm{cc}}$.  
+The resulting combined EoS is thermodynamically consistent, numerically
+stable, and suitable for the stellar structure calculations presented in the
+following subsections.
 
 Figures~\ref{fig:crust_eos} and \ref{fig:crust_mr} show the full EoS and the
 resulting stellar models when the FPS crust is used instead of the naive
@@ -1001,7 +1009,7 @@ where neutrons begin to drip out of nuclei.
   \caption[Crust + core equation of state]{
     Full equation of state combining the FPS crust with the RMF $npe\mu$
     core. The crust (red curve) reproduces the sequence of low-density
-    phases and joins smoothly onto the uniform core matter. For comparison,
+    phases and joins continuously onto the uniform core matter. For comparison,
     the pure core EoS beyond the branching point is also shown.}
   \label{fig:crust_eos}
 \end{figure}
@@ -1043,3 +1051,101 @@ while the FPS crust supplies the correct microphysical behaviour at
 sub-nuclear densities. This combined EoS is consistent with current
 astrophysical constraints, produces realistic radii across the mass range,
 and removes the arbitrariness present in the naive polytropic extension.
+
+\subsection{Comparison with observationally inferred EoS and mass--radius bands}
+\label{subsec:bands_results}
+
+To assess the astrophysical plausibility of the combined FPS~+~$npe\mu$ equation of state,
+we compare our model with observationally inferred constraints obtained in the recent
+semiparametric analysis of Ng \textit{et al.}~\cite{Ng_2025}.
+Their work synthesizes information from three independent classes of neutron-star 
+observations: (i) precise radio timing of massive pulsars (PSRs), (ii) gravitational-wave
+tidal deformability measurements from binary neutron-star mergers (GWs), and
+(iii) simultaneous mass--radius measurements from NICER X-ray pulse-profile modelling.  
+These data are incorporated through a hierarchical Bayesian framework that produces
+posterior distributions for the pressure--density relation and for the mass--radius curve.  
+The resulting ``PSRs~+~GWs~+~X-ray'' credible bands represent one of the most up-to-date and
+model-independent constraints available.
+
+The observational bands used here are reconstructed from the public data
+release accompanying Ng~\textit{et al.}~\cite{Ng_2025}, using the
+\texttt{NLSLTR\_EOS\_PSR+GW+XRay\_posterior\_samples.h5} dataset. This file
+contains a posterior ensemble of equations of state conditioned on massive
+radio pulsars, gravitational-wave tidal deformabilities, and NICER X-ray
+mass--radius measurements (the ``PSR+GW+X-ray'' posterior of their analysis).
+For each posterior sample, the \texttt{eos} group provides a tabulated
+pressure--energy-density relation, which we use to construct the
+pressure--density band. The accompanying \texttt{ns} group contains the
+corresponding neutron-star sequences—mass, radius, and tidal deformability
+computed by Ng~\textit{et al.}—as well as the observationally inferred
+mass--radius posterior samples themselves. Both the modelled sequences and
+the observational samples are used to form the mass--radius band shown here.
+
+In all figures we restrict the axes to the same density, pressure, mass, and
+radius ranges displayed in Fig.~4 of Ng~\textit{et al.}. These limits are
+taken to define the domain over which the PSR+GW+X-ray posterior is intended
+to be interpreted. We also limit the datasets to the 90\% credible range like
+in the original publication.
+
+Figure~\ref{fig:eos_band} shows the pressure--density relation of the
+$npe\mu$ core EoS together with the PSR+GW+X-ray band from
+Ng~\textit{et al.}. Only the uniform-matter part of the model is used here.
+For context, the crust--core transition of the crust models we have used lie around
+$\log_{10}\rho \approx 14$, which is near the lower end of the density range
+covered by the Ng~\textit{et al.} band.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.70\textwidth]{figures/npemu/eos_band}
+  \caption[Core EoS compared with observational posterior band]{
+    Pressure--density relation of the RMF $npe\mu$ core EoS compared with the 
+    90\% PSR+GW+X-ray posterior band from Ng \textit{et al.}.}
+  \label{fig:eos_band}
+\end{figure}
+
+Across most of the range the $npe\mu$ core lies comfortably inside the
+posterior band. A mild deviation appears toward the lower-density side of the
+mid-range region, where the model is slightly above the posterior band. 
+This indicates that the RMF model we have used might
+omit softening mechanisms that would reduce the
+pressure near and somewhat above the crust--core transition density.
+There is also a very slight deviation around $\log_10\rho~15$, where the model
+is below the band.
+Nevertheless, the core EoS remains mostly within the 90\% credible region.
+
+\smallskip
+
+For the mass--radius comparison we use the full stellar model, which includes
+the FPS crust at low densities. The resulting comparison is displayed
+in Fig.~\ref{fig:mr_band}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/npemu/mr_band}
+  \caption[Mass--radius curve compared with observational posterior band]{
+    Mass--radius relation for the FPS+$npe\mu$ model compared with the
+    90\% PSR+GW+X-ray posterior band of Ng \textit{et al.}.
+    Stable configurations are shown with solid lines, unstable ones dashed.}
+  \label{fig:mr_band}
+\end{figure}
+
+The mass--radius curve shows a broadly consistent trend when compared with the
+observed band, though the agreement is not uniform across the entire mass
+range. At high masses, around $M\simeq 2\,M_{\odot}$, the predicted radius lies
+close to the upper edge of the credible region. As the mass decreases, the model
+curve moves to systematically larger radii and gradually departs from the
+posterior band. This behaviour reflects the slight over-stiffness already seen
+in the pressure comparison: a stiffer EoS yields larger radii at fixed mass.
+
+Toward lower masses the radius grows more rapidly. In this regime the stellar
+structure becomes increasingly dominated by the outer layers, and differences in
+the low-density part of the EoS---including the details of the crust---leave a
+clear imprint. This part of the sequence lies outside the range that is tightly
+constrained in the Ng \textit{et al.} analysis.
+
+Taken together, the comparisons in Figs.~\ref{fig:eos_band} and
+\ref{fig:mr_band} show that the FPS+$npe\mu$ model captures the overall
+behaviour supported by current constraints, though with a
+tendency toward slightly larger radii at intermediate masses. These deviations
+point to the limitations of the minimal nucleonic RMF model
+and motivate the exploration of more flexible or extended models.

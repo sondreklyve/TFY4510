@@ -2,7 +2,7 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
-from numerics.npemu.core import (
+from core import (
     solve_composition,
     make_eos,
     dMdr,
@@ -12,7 +12,7 @@ from numerics.npemu.core import (
     MeV4togcm3,
     dynetoMeV4,
 )
-from numerics.npemu.eos_models import (
+from eos_models import (
     build_eos_uniform,
     build_eos_rmf_plus_crust,
     build_eos_polytrope_crust
