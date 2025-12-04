@@ -908,14 +908,14 @@ the equilibrium between nuclei, electrons, and (above neutron drip) free
 neutrons. A realistic description of the outer layers must therefore follow
 the established crust Equation of State (EoS) models originally developed by
 Baym, Pethick, and Sutherland (BPS)~\cite{bps1971} and later refined in works
-such as Haensel and Pichon~\cite{haensel_pichon1994}, Friedman and
+by Haensel and Pichon~\cite{haensel_pichon1994}, Friedman and
 Pandharipande~\cite{fps1981}, and the Skyrme–Lyon (SLy) model~\cite{sly2001}.
 
 At the lowest densities, cold catalyzed matter minimizes the Gibbs free
 energy by forming a Coulomb lattice of ${}^{56}\mathrm{Fe}$ nuclei immersed in a
 degenerate electron gas. As the pressure increases, heavier and increasingly
 neutron-rich nuclei become energetically favored. Each change of the
-ground-state nucleus corresponds to a first-order phase transition at fixed
+ground-state nucleus corresponds to a first-order phase transition at a fixed
 pressure, with a discrete jump in the energy density. Detailed calculations
 identify roughly a dozen such transitions before reaching the next major
 threshold~\cite{haensel_pichon1994}, as nuclei gradually approach the limits
@@ -971,27 +971,32 @@ The fit parameters $a_{1}$–$a_{18}$ are listed in Table~\ref{tab:fps_params}.
   \caption{Parameters of the FPS analytic crust EoS.}
   \label{tab:fps_params}
   \renewcommand{\arraystretch}{1.2}
-  \begin{tabular}{*{6}{c}}
-    \toprule
+  \begin{tabular}{|cccccc|}
+    \hline
     $a_{1}$ & $a_{2}$ & $a_{3}$ & $a_{4}$ & $a_{5}$ & $a_{6}$ \\
     11.4950 & $-22.775$ & 1.5707 & 4.3 & 14.08 & 27.80 \\
-    \midrule
+    \hline
     $a_{7}$ & $a_{8}$ & $a_{9}$ & $a_{10}$ & $a_{11}$ & $a_{12}$ \\
     $-1.653$ & 1.50 & 14.67 & 6.22 & 6.121 & 0.005925 \\
-    \midrule
+    \hline
     $a_{13}$ & $a_{14}$ & $a_{15}$ & $a_{16}$ & $a_{17}$ & $a_{18}$ \\
     0.16326 & 6.48 & 11.4971 & 19.105 & 0.8938 & 6.54 \\
-    \bottomrule
+    \hline
   \end{tabular}
 \end{table}
+
 
 This parametrization provides a smooth and accurate description of the entire
 crust, including neutron drip and the approach to the crust--core transition,
 and is easily matched to the uniform $npe\mu$ core at
 $\rho=\rho_{\mathrm{cc}}$.  
-The resulting combined EoS is thermodynamically consistent, numerically
-stable, and suitable for the stellar structure calculations presented in the
-following subsections.
+The resulting combined EoS is thermodynamically consistent: pressure and
+chemical potentials are derived from a single underlying energy density and
+satisfy the standard zero-temperature thermodynamic relations across the full
+density range, including the matching region.  
+It is also numerically stable under interpolation on the grid used in our TOV
+solver, and can therefore be used directly in the stellar structure
+calculations presented in the following subsections.
 
 Figures~\ref{fig:crust_eos} and \ref{fig:crust_mr} show the full EoS and the
 resulting stellar models when the FPS crust is used instead of the naive
@@ -1025,7 +1030,7 @@ This behaviour reflects the fact that the $\Gamma=1.2$ polytrope has
 a somewhat higher pressure at low energy densities, making the outer layers
 less compact. The FPS crust, with its lower pressure in the same regime,
 yields more compact configurations and therefore lies above the polytropic
-curve in the $M(R)$ plot.
+curve in the $M-R$ plot.
 
 The central-density relation shows essentially no difference between the two
 models: both reach the same maximum mass at nearly identical central
@@ -1048,9 +1053,14 @@ Taken together, these results provide a complete equation of state that spans
 the full range from the stellar surface to the centre. The RMF $npe\mu$ model
 governs the core, where uniform nuclear matter is an excellent approximation,
 while the FPS crust supplies the correct microphysical behaviour at
-sub-nuclear densities. This combined EoS is consistent with current
-astrophysical constraints, produces realistic radii across the mass range,
-and removes the arbitrariness present in the naive polytropic extension.
+sub-nuclear densities. The resulting combined EoS is internally consistent and
+removes the arbitrariness introduced by a naive polytropic extension at low
+densities, and it yields radii in a realistic range for typical neutron-star
+masses. At the same time, it does not satisfy all current astrophysical
+constraints: in particular, the maximum mass predicted by this model falls
+below the heaviest precisely measured neutron stars. This mismatch shows that,
+although the model provides a useful and controlled baseline, it is not fully
+satisfactory as a quantitative description of neutron-star matter.
 
 \subsection{Comparison with observationally inferred EoS and mass--radius bands}
 \label{subsec:bands_results}
