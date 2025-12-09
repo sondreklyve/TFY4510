@@ -1,8 +1,6 @@
 \chapter{The \texorpdfstring{$npe\mu$}{npemu} model}
 \label{chap:npe_mu}
 
-\section{Introduction}
-
 In the previous chapters we developed and tested the structure equations for
 neutron stars using simple models of matter. These models were useful for
 building intuition about how gravity and pressure balance to form stable
@@ -718,7 +716,7 @@ introduced at this stage.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/npemu/comp}
+  \includegraphics[width=0.8\textwidth]{figures/npemu/comp}
   \caption[Composition of \texorpdfstring{$npe\mu$}{npemu} matter]{
     Equilibrium particle densities in the $npe\mu$ model as functions of the
     mass density $\rho$, obtained from the self–consistent RMF calculation.
@@ -833,7 +831,7 @@ tabulated crust.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/npemu/poly_eos}
+  \includegraphics[width=0.8\textwidth]{figures/npemu/poly_eos}
   \caption[Polytropic crust joined to \texorpdfstring{$npe\mu$}{npemu} core]{
     Equation of state with a single polytropic crust ($\Gamma = 1.2$)
     matched to the RMF $npe\mu$ core. The red curve shows the combined
@@ -865,7 +863,7 @@ are therefore controlled almost entirely by the RMF $npe\mu$ core.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/npemu/poly_mr}
+  \includegraphics[width=1.0\textwidth]{figures/npemu/poly_mr}
   \caption[Mass–radius relation for polytropic crust model]{
     Left: mass–radius relation for the model with a polytropic crust
     ($\Gamma = 1.2$) matched to the RMF $npe\mu$ core. The solid part of
@@ -1010,7 +1008,7 @@ where neutrons begin to drip out of nuclei.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.75\textwidth]{figures/npemu/crust_eos}
+  \includegraphics[width=0.8\textwidth]{figures/npemu/crust_eos}
   \caption[Crust + core equation of state]{
     Full equation of state combining the FPS crust with the RMF $npe\mu$
     core. The crust (red curve) reproduces the sequence of low-density
@@ -1030,7 +1028,7 @@ This behaviour reflects the fact that the $\Gamma=1.2$ polytrope has
 a somewhat higher pressure at low energy densities, making the outer layers
 less compact. The FPS crust, with its lower pressure in the same regime,
 yields more compact configurations and therefore lies above the polytropic
-curve in the $M-R$ plot.
+curve in the mass-radius plot.
 
 The central-density relation shows essentially no difference between the two
 models: both reach the same maximum mass at nearly identical central
@@ -1039,7 +1037,7 @@ envelope and leaves the core-dominated part of the sequence unchanged.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/npemu/crust_mr}
+  \includegraphics[width=1.0\textwidth]{figures/npemu/crust_mr}
   \caption[Mass–radius relation with FPS crust]{
     Left: mass–radius relation for the combined FPS crust + RMF $npe\mu$
     core model. Right: gravitational mass as a function of central energy
@@ -1062,7 +1060,7 @@ below the heaviest precisely measured neutron stars. This mismatch shows that,
 although the model provides a useful and controlled baseline, it is not fully
 satisfactory as a quantitative description of neutron-star matter.
 
-\subsection{Comparison with observationally inferred EoS and mass--radius bands}
+\subsection{Comparison with observationally inferred EoS and mass--radius constraints}
 \label{subsec:bands_results}
 
 To assess the astrophysical plausibility of the combined FPS~+~$npe\mu$ equation of state,
@@ -1085,28 +1083,21 @@ radio pulsars, gravitational-wave tidal deformabilities, and NICER X-ray
 mass--radius measurements (the ``PSR+GW+X-ray'' posterior of their analysis).
 For each posterior sample, the \texttt{eos} group provides a tabulated
 pressure--energy-density relation, which we use to construct the
-pressure--density band. The accompanying \texttt{ns} group contains the
-corresponding neutron-star sequences—mass, radius, and tidal deformability
-computed by Ng~\textit{et al.}—as well as the observationally inferred
-mass--radius posterior samples themselves. Both the modelled sequences and
-the observational samples are used to form the mass--radius band shown here.
-
+pressure--density band shown below.
 In all figures we restrict the axes to the same density, pressure, mass, and
-radius ranges displayed in Fig.~4 of Ng~\textit{et al.}. These limits are
-taken to define the domain over which the PSR+GW+X-ray posterior is intended
-to be interpreted. We also limit the datasets to the 90\% credible range like
-in the original publication.
+radius ranges displayed in Fig.~4 of Ng~\textit{et al.}, and we limit the
+datasets to the 90\% credible range as in the original publication.
 
 Figure~\ref{fig:eos_band} shows the pressure--density relation of the
-$npe\mu$ core EoS together with the PSR+GW+X-ray band from
+$npe\mu$ core EoS together with the observed PSR+GW+X-ray band from
 Ng~\textit{et al.}. Only the uniform-matter part of the model is used here.
-For context, the crust--core transition of the crust models we have used lie around
+For context, the crust--core transition of the crust models we have used lies around
 $\log_{10}\rho \approx 14$, which is near the lower end of the density range
 covered by the Ng~\textit{et al.} band.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.70\textwidth]{figures/npemu/eos_band}
+  \includegraphics[width=0.80\textwidth]{figures/npemu/eos_band}
   \caption[Core EoS compared with observational posterior band]{
     Pressure--density relation of the RMF $npe\mu$ core EoS compared with the 
     90\% PSR+GW+X-ray posterior band from Ng \textit{et al.}.}
@@ -1116,46 +1107,90 @@ covered by the Ng~\textit{et al.} band.
 Across most of the range the $npe\mu$ core lies comfortably inside the
 posterior band. A mild deviation appears toward the lower-density side of the
 mid-range region, where the model is slightly above the posterior band. 
-This indicates that the RMF model we have used might
-omit softening mechanisms that would reduce the
-pressure near and somewhat above the crust--core transition density.
-There is also a very slight deviation around $\log_10\rho~15$, where the model
+This indicates that the RMF model we have used may omit softening mechanisms 
+that would reduce the pressure near and somewhat above the crust--core 
+transition density.
+There is also a very slight deviation around $\log_{10}\rho \sim 15$, where the model
 is below the band.
 Nevertheless, the core EoS remains mostly within the 90\% credible region.
 
 \smallskip
 
-For the mass--radius comparison we use the full stellar model, which includes
-the FPS crust at low densities. The resulting comparison is displayed
-in Fig.~\ref{fig:mr_band}.
+For the mass--radius comparison we complement the $npe\mu$ model with a set of 
+individual neutron stars whose masses are known with high precision.  
+These systems—PSR~J0348+0432~\cite{Antoniadis_2013_J0348},
+PSR~J1614$-$2230~\cite{Demorest_2010_J1614},
+PSR~J2215+5135~\cite{Linares_2018_J2215}, and
+PSR~J0952$-$0607~\cite{Romani_2022_J0952}—are all in binary orbits where the 
+geometry and orbital motion can be measured accurately.  
+The mass determinations rely on purely gravitational and kinematic effects, such as 
+the relativistic time delay experienced by the pulsar signal as it passes near the 
+companion, or the orbital motion of the companion star measured in optical spectra.  
+Because these techniques depend only on well-understood gravity and orbital 
+mechanics, the resulting masses are essentially free from assumptions about the 
+equation of state.  All four objects are found to be very massive, close to or 
+exceeding \({2\,M_{\odot}}\).  
+This makes them especially important: any theoretical equation of state must be able 
+to support at least this mass, and these systems therefore provide a robust lower 
+bound on the maximum mass in any mass--radius relation.
+
+In addition, NICER X-ray pulse-profile modelling has yielded simultaneous
+mass and radius estimates for two rotation-powered millisecond pulsars:
+PSR J0030+0451~\cite{Miller_2019_J0030,Riley_2019_J0030} and
+PSR J0740+6620~\cite{Miller_2021_J0740,Salmi_2024_J0740}.
+The NICER analyses rely on detailed modelling of the surface hot-spot geometry,
+beaming, and atmosphere physics and are therefore more model dependent than
+radio timing, but they currently provide some of the most informative
+constraints on radii in the mass range $\sim 1.3$--$2.1\,M_{\odot}$.
+Independent analyses by different groups, using different waveform models,
+give mutually consistent results for both pulsars, which increases confidence
+in the overall radius scale.
+
+Figure~\ref{fig:mr_band} shows the mass--radius relation for the $npe\mu$
+model together with these observational constraints.  The solid and dashed curves
+represent the stable and unstable branches of the TOV solutions, respectively.
+Horizontal shaded bands indicate the $1\sigma$ mass ranges of the four massive
+pulsars, while the NICER measurements for PSR~J0030+0451 and PSR~J0740+6620 are
+plotted as crosses with $1\sigma$ error bars in both mass and radius.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/npemu/mr_band}
-  \caption[Mass--radius curve compared with observational posterior band]{
-    Mass--radius relation for the FPS+$npe\mu$ model compared with the
-    90\% PSR+GW+X-ray posterior band of Ng \textit{et al.}.
-    Stable configurations are shown with solid lines, unstable ones dashed.}
+  \includegraphics[width=0.85\textwidth]{figures/npemu/mr_band_obs}
+  \caption[Mass--radius curve compared with observational constraints]{
+    Mass--radius relation for the $npe\mu$ model compared with selected
+    observational constraints:
+    horizontal bands show the measured masses of the pulsars
+    J0348+0432, J1614$-$2230, J2215+5135, and J0952$-$0607
+    (central value $\pm 1\sigma$), while crosses with error bars
+    represent the NICER mass--radius measurements for
+    J0030+0451 and J0740+6620.  Stable configurations are shown with
+    solid lines, unstable ones with dashed lines.}
   \label{fig:mr_band}
 \end{figure}
 
-The mass--radius curve shows a broadly consistent trend when compared with the
-observed band, though the agreement is not uniform across the entire mass
-range. At high masses, around $M\simeq 2\,M_{\odot}$, the predicted radius lies
-close to the upper edge of the credible region. As the mass decreases, the model
-curve moves to systematically larger radii and gradually departs from the
-posterior band. This behaviour reflects the slight over-stiffness already seen
-in the pressure comparison: a stiffer EoS yields larger radii at fixed mass.
+The comparison in Fig.~\ref{fig:mr_band} shows a clear mismatch between the
+$npe\mu$ model and the observational constraints.  First, the maximum mass
+supported by the model sequence remains below the highest-mass pulsars in the
+sample, in particular the very massive systems J2215+5135 and J0952$-$0607,
+whose central values lie well above $2\,M_{\odot}$.
+Thus, in its present form the $npe\mu$ model does not reproduce the full range
+of neutron-star masses inferred from observations.
 
-Toward lower masses the radius grows more rapidly. In this regime the stellar
-structure becomes increasingly dominated by the outer layers, and differences in
-the low-density part of the EoS---including the details of the crust---leave a
-clear imprint. This part of the sequence lies outside the range that is tightly
-constrained in the Ng \textit{et al.} analysis.
+Second, the model mass--radius curve does not pass through the NICER mass--radius
+contours.  At the masses of J0030+0451 and J0740+6620, the theoretical sequence
+predicts radii that are systematically offset from the central values of the
+NICER measurements, and the observed crosses lie outside the narrow region
+covered by the stable branch of the $npe\mu$ model.  This indicates that,
+even if the maximum mass problem were remedied, the simple nucleonic RMF model
+with an FPS crust would still struggle to match the combined mass and radius
+information.
 
-Taken together, the comparisons in Figs.~\ref{fig:eos_band} and
-\ref{fig:mr_band} show that the FPS+$npe\mu$ model captures the overall
-behaviour supported by current constraints, though with a
-tendency toward slightly larger radii at intermediate masses. These deviations
-point to the limitations of the minimal nucleonic RMF model
-and motivate the exploration of more flexible or extended models.
+These discrepancies are not surprising in view of the simplicity of the
+underlying microphysics. The $npe\mu$ model includes only nucleons and leptons
+in uniform matter and neglects additional degrees of freedom and many-body
+correlations that may become important in the dense cores of massive neutron
+stars. The present comparison therefore serves mainly to show
+that, while the minimal $npe\mu$ framework provides a useful baseline and is
+compatible with the semiparametric EoS constraints of Ng~\textit{et al.},
+it is not sufficient to account quantitatively for the current mass--radius
+measurements.

@@ -100,19 +100,17 @@ def plot_npemu_vs_ng_band(
     return ax
 
 
-def plot_npemu_mr_vs_ng_band(
-    green_file="numerics/neutron_star_bands/NLSLTR_green.h5",
-    low=5.0,
-    high=95.0,
-):
+def plot_npemu_mr():
     """
     Build the npeμ+crust EoS, run the TOV solver, and plot the resulting
-    mass–radius relation against the Ng et al. MR band.
+    mass–radius relation together with selected observational constraints:
 
-    - Radius on x-axis (km)
-    - Mass on y-axis (M_sun)
-    - Green shaded band from Ng posterior
-    - Optional purple dashed envelope for 'full' dataset if provided
+      - NICER radius measurements for PSR J0030+0451 and PSR J0740+6620
+        shown as error bars in the M–R plane.
+      - Mass measurements for PSR J0348+0432, J1614−2230, J2215+5135,
+        and J0952−0607 shown as horizontal shaded bands (±1σ).
+
+    Radius on x-axis (km), mass on y-axis (M_sun).
     """
 
     # ------------------------------------------------------------------
@@ -148,60 +146,107 @@ def plot_npemu_mr_vs_ng_band(
     UnstableR  = tov["UnstableR"]
 
     # ------------------------------------------------------------------
-    # 3) Build Ng MR band on a mass grid overlapping our stable branch
+    # 3) Observational constraints (hard-coded numbers)
     # ------------------------------------------------------------------
-    M_grid = np.linspace(0.0, 3.0, 300)
+    # NICER radius measurements (asymmetric errors)
+    # PSR J0030+0451  (Riley/Miller 2019; choose one set consistently)
+    M_0030 = 1.34
+    M_0030_err_low  = 0.16
+    M_0030_err_high = 0.15
+    R_0030 = 12.71
+    R_0030_err_low  = 1.19
+    R_0030_err_high = 1.14
 
-    # Green band (PSR+GW+X-Ray, or whatever is in green_file)
-    R_lower_green, R_upper_green = load_mr_band(
-        green_file,
-        M_grid,
-        low=low,
-        high=high,
-    )
+    # PSR J0740+6620 (Salmi/Dittmann 2024)
+    M_0740 = 2.08
+    M_0740_err_low  = 0.07
+    M_0740_err_high = 0.07
+    R_0740 = 12.49
+    R_0740_err_low  = 0.88
+    R_0740_err_high = 1.28
+
+    # Massive pulsars: central mass ± 1σ, shown as horizontal bands
+    M_0348, dM_0348 = 2.01, 0.04   # PSR J0348+0432
+    M_1614, dM_1614 = 1.97, 0.04   # PSR J1614−2230
+    M_2215, dM_2215 = 2.27, 0.16   # PSR J2215+5135
+    M_0952, dM_0952 = 2.35, 0.17   # PSR J0952−0607
 
     # ------------------------------------------------------------------
     # 4) Plot: radius on x-axis, mass on y-axis
     # ------------------------------------------------------------------
     fig, ax = plt.subplots(figsize=(6, 4))
 
-    # Green band (shaded)
-    ax.fill_betweenx(
-        M_grid,
-        R_lower_green,
-        R_upper_green,
-        color="green",
-        alpha=0.3,
-        label=f"PSRs+GWs+X-Ray 90% band",
-    )
-
     # Your MR curve
     ax.plot(StableR,   StableM,   "k-", label="npemu+crust (stable)")
     ax.plot(UnstableR, UnstableM, "k--", label="npemu+crust (unstable)")
 
+    # Axis limits used also for horizontal bands
+    R_min, R_max = 8.1, 14.0
+    ax.set_xlim(R_min, R_max)
+    ax.set_ylim(1.0, 2.6)
+
+    # Horizontal mass bands (±1σ)
+    y = lambda M, dM: np.linspace(M - dM, M + dM, 2)
+
+    ax.fill_betweenx(
+        y(M_0348, dM_0348),
+        R_min,
+        R_max,
+        alpha=0.3,
+        label="PSR J0348+0432",
+    )
+    ax.fill_betweenx(
+        y(M_1614, dM_1614),
+        R_min,
+        R_max,
+        alpha=0.3,
+        label="PSR J1614−2230",
+    )
+    ax.fill_betweenx(
+        y(M_2215, dM_2215),
+        R_min,
+        R_max,
+        alpha=0.3,
+        label="PSR J2215+5135",
+    )
+    ax.fill_betweenx(
+        y(M_0952, dM_0952),
+        R_min,
+        R_max,
+        alpha=0.3,
+        label="PSR J0952−0607",
+    )
+
+    # NICER points with error bars
+    ax.errorbar(
+        R_0030,
+        M_0030,
+        xerr=[[R_0030_err_low], [R_0030_err_high]],
+        yerr=[[M_0030_err_low], [M_0030_err_high]],
+        fmt="o",
+        label="PSR J0030+0451",
+    )
+    ax.errorbar(
+        R_0740,
+        M_0740,
+        xerr=[[R_0740_err_low], [R_0740_err_high]],
+        yerr=[[M_0740_err_low], [M_0740_err_high]],
+        fmt="o",
+        label="PSR J0740+6620",
+    )
+
     ax.set_xlabel("Radius (km)")
     ax.set_ylabel(r"$M/M_\odot$")
-
-    # Rough but reasonable limits; adjust if you like
-    ax.set_xlim(5.5, 16.5)
-    ax.set_ylim(1.02, 2.5)
-
-    ax.set_title("Mass–Radius Relation vs Ng et al. posterior band")
+    ax.set_title("Mass–radius relation with observational constraints")
     ax.grid(True, which="both", alpha=0.2)
-    ax.legend()
+    ax.legend(loc="lower left", fontsize="small")
     fig.tight_layout()
 
     return fig, ax
 
-
-"""
 if __name__ == "__main__":
     # Example call
-    fig, ax = plot_npemu_mr_vs_ng_band(
-        green_file="numerics/neutron_star_bands/NLSLTR_green.h5",
-        low=5.0,
-        high=95.0,
-    )
+    fig, ax = plot_npemu_mr()
     plt.show()
 
 """
@@ -233,3 +278,4 @@ if __name__ == '__main__':
         P_upper=P_upper,
     )
     plt.show()
+"""

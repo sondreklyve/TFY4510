@@ -1,0 +1,108 @@
+\chapter{Conclusion and Outlook}
+\label{chap:conclusion}
+
+The aim of this thesis has been to develop a coherent and progressively more
+realistic description of neutron--star structure, beginning with the
+relativistic equations that govern hydrostatic equilibrium and culminating in a
+self–consistent calculation of dense matter within the relativistic mean–field
+$npe\mu$ model. Each step in this progression served to isolate how
+microphysical assumptions about matter translate into macroscopic predictions
+for the mass–radius relation of neutron stars.
+
+The starting point was the derivation of the
+Tolman--Oppenheimer--Volkoff equations, which form the backbone of any
+non–rotating neutron--star model. Their structure makes clear that gravity,
+pressure, and spacetime curvature are inseparably linked, and that no stellar
+model is complete without a physically motivated equation of state. Using this
+framework, ideal Fermi gases provided the first concrete examples. The
+non–interacting, zero–temperature Fermi gas captures the essential role of
+degeneracy pressure and illustrates how the stiffness of an equation of state
+depends on whether the fermions are non–relativistic or ultra–relativistic.
+Solving the TOV equations with this idealized microphysics yielded the
+classical Oppenheimer--Volkoff limit: a maximum mass far below what is observed
+in nature. Although quantitatively unrealistic, these models were valuable for
+building numerical intuition and for demonstrating how relativistic corrections
+enforce upper bounds on the mass of compact stars.
+
+The next step was the construction of ideal neutron--star models based on a
+pure neutron Fermi gas. These results largely confirmed the physical picture
+anticipated from the analytic limits: relativistic gravitational effects
+strengthen the tendency toward collapse, while degeneracy pressure becomes
+progressively less effective at stabilizing high–density matter. The resulting
+mass–radius curves exhibited the expected turnover at the maximum mass, and the
+accompanying radial–mode analysis verified the standard stability criterion.
+These calculations established the numerical infrastructure later used for more
+realistic equations of state.
+
+The principal part of this thesis was the implementation and study of the
+relativistic mean–field $npe\mu$ model. Here, interactions between nucleons are
+mediated by scalar, vector, and isovector meson fields, calibrated to reproduce
+empirical bulk properties of saturated nuclear matter. Charge neutrality and
+$\beta$–equilibrium were enforced through the inclusion of electrons and
+muons. Solving the coupled nonlinear field equations at each density produced a
+complete microscopic equation of state for uniform matter. This model captures
+several qualitative features expected of neutron–star interiors, including the
+growth of the proton fraction at higher densities, the appearance of muons once
+the electron chemical potential becomes large enough, and a realistic
+competition between attractive scalar and repulsive vector interactions.
+
+To obtain a stellar model that spans the full density range, the microscopic
+core description was matched to a crust equation of state based on the FPS
+parametrization. This produced a complete $P(\varepsilon)$ relation suitable
+for TOV integration. The resulting mass–radius curve showed reasonable radii
+for typical neutron–star masses and behaved smoothly across the crust–core
+interface.
+
+However, when confronted with current observational constraints—including radio
+timing of massive pulsars, NICER mass–radius measurements, and the
+semiparametric EoS posteriors of Ng~et~al.—the limitations of the $npe\mu$
+model became clear. Most notably, the maximum mass of the sequence lies below
+that of the heaviest firmly measured pulsars. The predicted radii at the NICER
+masses also deviate from the central values of the observational contours.
+These mismatches indicate that the minimal nucleonic mean–field model, even
+when calibrated to nuclear bulk properties, lacks enough stiffness at high
+densities to support the observed population of heavy neutron stars. This is
+consistent with the broader literature, where additional degrees of freedom,
+more sophisticated treatments of nuclear correlations, or density–dependent
+couplings are often required to achieve agreement with observations.
+
+In summary, the results of this thesis show that the $npe\mu$ model provides a
+clear and controlled improvement over idealized Fermi–gas descriptions. It
+reproduces many qualitative aspects of dense matter and yields mass–radius
+curves that fall within a plausible range for intermediate densities. At the
+same time, the quantitative discrepancies with astrophysical data demonstrate
+that this minimal approach is not sufficient as a complete description of
+neutron–star interiors. A more realistic equation of state must include
+additional physical mechanisms that soften or stiffen the matter in appropriate
+density regimes.
+
+\section*{Outlook}
+
+Several natural extensions follow from the present work.
+
+\textbf{Improved nuclear microphysics:}  
+Density–dependent RMF models, Skyrme–type functionals, or
+chiral–effective–field–theory–based constraints at low densities could be
+incorporated to refine the stiffness of the EoS.
+
+\textbf{Additional degrees of freedom:}  
+At supranuclear densities, hyperons, $\Delta$–resonances, meson condensates, or
+deconfined quark matter may appear. Their inclusion typically softens the EoS,
+requiring repulsive interactions or phase–transition effects to remain
+consistent with the observed $2\,M_{\odot}$ stars.
+
+\textbf{Phase transitions and hybrid stars:}  
+A natural next step is to explore hadron–quark transitions within the same TOV
+framework. Matching the RMF model to a quark–matter EoS, such as quark–meson
+or NJL–type models, would allow a systematic study of hybrid–star sequences.
+
+\textbf{Confronting new observational data:}  
+Future NICER measurements, improved gravitational–wave constraints on tidal
+deformabilities, and radio timing of even heavier pulsars will further restrict
+the allowed EoS space. Incorporating these results into the modelling pipeline
+developed here is a direct continuation of this work.
+
+The overall conclusion is that the methods and models developed in this thesis
+establish a solid baseline for neutron–star calculations, while the
+discrepancies with observations clearly motivate the exploration of more
+sophisticated descriptions of dense matter.
