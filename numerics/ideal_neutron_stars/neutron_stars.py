@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from constants import *
+from numerics.ideal_neutron_stars.constants import *
 from tov import *
 from stability import *
 from utils import *

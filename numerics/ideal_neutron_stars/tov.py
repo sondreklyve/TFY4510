@@ -6,7 +6,7 @@ import matplotlib.colors
 import utils
 from stability import eigenmode
 
-from constants import *
+from numerics.ideal_neutron_stars.constants import *
 
 matplotlib.use("TkAgg")
 

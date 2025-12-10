@@ -1,4 +1,4 @@
-from constants import *
+from numerics.ideal_neutron_stars.constants import *
 import matplotlib.pyplot as plt
 import numpy as np
 from utils import *
