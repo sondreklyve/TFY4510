@@ -2,9 +2,7 @@ import numpy as np
 import scipy.constants as sc
 import scipy.optimize as op
 
-# ----------------------------
 # Constants and unit helpers
-# ----------------------------
 G = sc.G
 hbar = sc.hbar
 Mo = 1.9891e30  # solar mass in kg
@@ -37,18 +35,13 @@ e0 = m ** 4.0
 # Scaled mass density prefactor (for TOV): solar masses per km^3
 beta = 4.0 * np.pi * e0 * MeV4tokgkm3 / Mo
 
-# ----------------------------
 # RMF parameters (σ-ω-ρ, with σ self-interactions b,c)
-# ----------------------------
 gmsigma2 = 9.927 * (1.0e-15 * mtoperMeV) ** 2.0
 gmomega2 = 4.820 * (1.0e-15 * mtoperMeV) ** 2.0
 gmrho2 = 4.791 * (1.0e-15 * mtoperMeV) ** 2.0
 b = 0.008621
 c = -0.002321
 
-# ----------------------------
-# Simple helpers
-# ----------------------------
 def cube(x):
     """Real cube root (handles negatives)."""
     if x >= 0:
@@ -68,10 +61,6 @@ def gsigmaintegral(fgsigma, k):
     ) / (2.0 * np.pi ** 2.0)
 
 
-# ----------------------------
-# Nonlinear system for composition before/after muon onset
-# Unknowns x = [rho_n, g_sigma, k_e]
-# ----------------------------
 _bnds = ((0, None), (0, None), (0, None))  # rho_n, g_sigma, k_e >= 0
 
 
@@ -209,10 +198,7 @@ def solve_composition(
         rhomuonsnorm=np.array(rhomuonsnorm),
     )
 
-
-# ----------------------------
 # EoS integrals (fermion gas)
-# ----------------------------
 def pressureintegral(x):
     return (
         (2.0 * x ** 3.0 - 3.0 * x) * np.sqrt(1.0 + x ** 2.0)
@@ -271,9 +257,7 @@ def make_eos(rholist, rhonlist, gsigmalist, kelist, kmulist):
     return np.array(energydensitylist), np.array(pressurelist)
 
 
-# ----------------------------
 # TOV right-hand sides
-# ----------------------------
 def dMdr(r, eps):
     # eps is dimensionless (in units of e0); beta carries units
     return beta * r ** 2.0 * eps  # solar masses per km

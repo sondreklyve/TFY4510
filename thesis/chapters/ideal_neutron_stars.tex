@@ -30,9 +30,9 @@ where $P_c$ is the central pressure and $R$ is the stellar radius at
 which the pressure vanishes. The corresponding gravitational mass is
 then $M=m(R)$.
 
-In Chapter~\ref{chap:fermi} we obtained the EOS for a degenerate,
+In Chapter~\ref{chap:fermi} we obtained the EoS for a degenerate,
 zero--temperature Fermi gas. Specializing to neutrons of mass $m_N$,
-the EOS can be expressed in parametric form
+the EoS can be expressed in parametric form
 \[
 P = P(x_F), \qquad \epsilon = \epsilon(x_F),
 \]
@@ -71,7 +71,7 @@ In summary, the numerical setup consists of:
   the surface condition $P(R)=0$ is reached. The corresponding 
   radius $R$ and gravitational mass $M=m(R)$ then characterize 
   the macroscopic quantities of the star.
-  \item The ideal neutron gas EOS $\epsilon(P)$, obtained from the
+  \item The ideal neutron gas EoS $\epsilon(P)$, obtained from the
   parametric Fermi gas expressions of Chapter~\ref{chap:fermi}.
   \item Dimensionless variables to reduce numerical instabilities.
 \end{enumerate}
@@ -81,7 +81,7 @@ numerical solution.
 \section{Numerical Method}
 
 The numerical integration of the TOV equations with an ideal neutron
-gas EOS is carried out using a Python program originally developed by
+gas EoS is carried out using a Python program originally developed by
 Sletmoen as part of his Master's thesis~\cite{sletmoen2022}.
 In this work the code is used without modification to generate stellar
 models for the case of ideal neutron matter.
@@ -116,11 +116,11 @@ for the uniform--density star in Chapter~\ref{chap:tov}.
 Figure~\ref{fig:mr_neutron} shows the resulting mass--radius curves for
 ideal neutron stars.  The four models represent combinations of
 Newtonian and relativistic hydrostatic equilibrium with either the
-non--relativistic or the full relativistic form of the Fermi gas EOS.
+non--relativistic or the full relativistic form of the Fermi gas EoS.
 Each point corresponds to a distinct central pressure $P_c$.
 
 At low central pressures the curves coincide, reflecting the Newtonian
-limit where gravitational fields are weak and the EOS is nearly
+limit where gravitational fields are weak and the EoS is nearly
 non--relativistic. As $P_c$ increases, however, the relativistic models
 deviate markedly: the curves flatten and eventually exhibit a turnover,
 indicating that beyond a certain maximum mass, no further stable
@@ -137,17 +137,17 @@ unstable to collapse.
 The Newtonian solutions, in contrast, show no turnover.  They predict
 monotonically increasing mass with increasing central pressure, an
 artifact of neglecting relativistic corrections to both gravity and the
-EOS.  The fully relativistic treatment thus captures a key qualitative
+EoS.  The fully relativistic treatment thus captures a key qualitative
 feature: the existence of a maximum stable mass set by the balance
 between degeneracy pressure and spacetime curvature.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/mass_radius_ideal_neutron_star.pdf}
+  \includegraphics[width=0.9\textwidth]{figures/ideal_neutron_stars/mass_radius_ideal_neutron_star.pdf}
   \caption[Mass--radius relation for ideal neutron stars]{
   Mass--radius relation for ideal neutron stars. Four models are compared:
   Newtonian and relativistic hydrostatic equilibrium, each with a
-  non--relativistic or fully relativistic Fermi gas EOS.  The color scale
+  non--relativistic or fully relativistic Fermi gas EoS.  The color scale
   indicates the central pressure $P_c$.  The relativistic models exhibit a
   maximum mass, the Oppenheimer--Volkoff limit, beyond which no static
   equilibrium is possible.}
@@ -178,7 +178,7 @@ support as compactness increases.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/pressure_profile_ideal_neutron_star.pdf}
+  \includegraphics[width=0.8\textwidth]{figures/ideal_neutron_stars/pressure_profile_ideal_neutron_star.pdf}
   \caption[Pressure profiles of ideal neutron stars]{
   Radial pressure profiles $P(r)/P_c$ for ideal neutron stars with
   different central pressures $P_c$.  The color scale represents
@@ -353,7 +353,7 @@ algorithm.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/shoot_shoot_relative.pdf}
+  \includegraphics[width=0.95\textwidth]{figures/ideal_neutron_stars/shoot_shoot_relative.pdf}
   \caption[Shooting method convergence]{
   Shooting method convergence for the first few radial modes. Each line
   corresponds to a trial eigenfunction $U_n(r)$ normalized by
@@ -373,7 +373,7 @@ rarefactions.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/nmodes_norm.pdf}
+  \includegraphics[width=0.8\textwidth]{figures/ideal_neutron_stars/nmodes_norm.pdf}
   \caption[Normalized eigenfunctions]{
   Normalized eigenfunctions $U_n(r)$ for the lowest radial modes. The
   number of interior nodes increases with $n$, as expected for a
@@ -435,7 +435,7 @@ dynamical instability against radial perturbations.
 \subsection*{Discussion}
 
 These results illustrate how the inclusion of relativistic gravity and a
-degenerate Fermi gas EOS naturally produces a maximum stable mass for
+degenerate Fermi gas EoS naturally produces a maximum stable mass for
 neutron stars.  The simple ideal neutron model predicts a limiting mass
 of only $M_{\mathrm{max}}\!\sim\!0.7\,M_{\odot}$, known as the
 Oppenheimer--Volkoff limit~\cite{oppenheimer1939}.  In reality,

@@ -3,9 +3,7 @@ from scipy import interpolate, optimize
 
 from core import e0, dynetoMeV4, MeV4togcm3, gcm3toMeV4
 
-# ----------------------------
 # Uniform npeμ model (no crust)
-# ----------------------------
 def build_eos_uniform(energy, pressure):
     """
     EoS epsilon(P) using ONLY the npeμ core EoS.
@@ -41,9 +39,7 @@ def build_eos_uniform(energy, pressure):
     )
 
 
-# ----------------------------
 # Crust EoS fit (Lattimer–Swesty-like logistic joins)
-# ----------------------------
 def f0(x):
     return 1.0 / (np.exp(x) + 1.0)
 

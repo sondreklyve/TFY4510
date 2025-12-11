@@ -1,12 +1,10 @@
 import numpy as np
-import scipy.integrate
 import matplotlib
 import matplotlib.pyplot as plt
-import matplotlib.colors
 import utils
 from stability import eigenmode
 
-from numerics.ideal_neutron_stars.constants import *
+from constants import *
 
 matplotlib.use("TkAgg")
 

@@ -2,24 +2,14 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_shoot_relative(filename, save_as="pdf"):
+plt.rcParams["text.usetex"] = True
+plt.rcParams["font.family"] = "serif"
+plt.rcParams["font.size"] = 14
+
+
+def plot_shoot_relative(filename, save_file=False):
     """
     Plot shooting-method results from numerics/data/<filename>.
-
-    Behavior:
-    - Reads columns: omega2 nn r U0 U1 U2 ...
-    - Ignores omega2 and nn
-    - Normalizes x = r / r[-1]  (so x in [0,1])
-    - Normalizes all U* by max|U0|
-    - y-axis fixed to [-2, 2]
-    - Saves figure (no GUI)
-
-    Parameters
-    ----------
-    filename : str
-        Name of the data file (e.g. 'shoot.dat')
-    save_as : str
-        Output format for saved figure (e.g. 'pdf', 'png')
     """
     path = os.path.join("numerics", "data", filename)
     data = np.genfromtxt(path, names=True, comments="#")
@@ -36,25 +26,36 @@ def plot_shoot_relative(filename, save_as="pdf"):
         raise ValueError("No U* columns found.")
     Ucols.sort(key=lambda s: int(s[1:]) if s[1:].isdigit() else 0)
 
+    # --- colors from viridis ---
+    cmap = plt.cm.viridis
+    colors = cmap(np.linspace(0.2, 0.9, len(Ucols)))
+
     # --- plot ---
-    fig, ax = plt.subplots(figsize=(7, 4))
-    for col in Ucols:
+    fig, ax = plt.subplots(figsize=(10, 5.5))
+    for col, color in zip(Ucols, colors):
         y = np.asarray(data[col], dtype=float) / 0.0003
-        ax.plot(x, y, lw=1, label=col)
+        ax.plot(x, y, lw=1.5, color=color)
 
     ax.set_xlim(0.0, 1.0)
     ax.set_ylim(-2, 2)
-    ax.set_xlabel(r"$r / R$")
-    ax.set_ylabel(r"$U_n(r) / \max|U_0|$")
-    ax.set_title("Shooting method convergence: $U_n(r)$ vs $r/R$")
-    ax.grid(True, alpha=0.3)
+
+    ax.set_xlabel(r"$r/R$", fontsize=18)
+    ax.set_ylabel(r"$U_n(r) / \max|U_0|$", fontsize=18)
+    ax.set_title(r"Shooting Method Convergence: $U_n(r)$ vs $r/R$", fontsize=20)
+
+    ax.grid(True, alpha=0.3, linestyle=":")
+
     fig.tight_layout()
 
-    outname = os.path.splitext(filename)[0] + "_shoot_relative." + save_as
-    outpath = os.path.join("numerics", "data", outname)
-    fig.savefig(outpath)
-    plt.close(fig)
-    print(f"Saved: {outpath}")
+    if save_file:
+        outname = os.path.splitext(filename)[0] + "_shoot_relative.pdf"
+        outpath = os.path.join("numerics", "data", outname)
+        fig.savefig(outpath, dpi=300)
+        print(f"Saved: {outpath}")
 
-# ---- self-contained call ----
-plot_shoot_relative("shoot.dat", save_as="pdf")
+    plt.show()
+    plt.close(fig)
+
+
+if __name__ == "__main__":
+    plot_shoot_relative("shoot.dat", save_file=False)
