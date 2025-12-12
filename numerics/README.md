@@ -50,12 +50,12 @@ numerics/
 Parts of the numerical code are adapted from existing academic work:
 
 - The $npe\mu$ relativistic mean-field implementation is based on code
-  developed by **L. Pogliano** (Master’s thesis), available via the
+  developed by **Pogliano** (Master’s thesis), available via the
   Norwegian National Research Archive:  
   [Pogliano, *Master’s thesis*](https://nva.sikt.no/registration/0198e9e2b085-6c0d9f80-868e-4ee7-81ed-33151eb22ebd)
 
 - The radial stability solver and parts of the ideal neutron-star code
-  are adapted from work by **H. Sletmoen** (Master’s thesis), available at:  
+  are adapted from work by **Sletmoen** (Master’s thesis), available at:  
   [Sletmoen, *Master’s thesis*](https://nva.sikt.no/registration/0198e9e37e05-8cfbb1be-ecc5-4287-893b-68f433b1bb2c),  
   with an accompanying public repository:  
   [hersle/master-thesis (GitHub)](https://github.com/hersle/master-thesis/)
