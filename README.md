@@ -1,4 +1,4 @@
-# Neutron Stars — Specializatoin Project (TFY4510)
+# Neutron Stars — Specialization Project (TFY4510)
 
 This repository contains the LaTeX source and numerical material for my 
 project in the course **TFY4510 – Physics Specialization Project**
