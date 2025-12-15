@@ -1,8 +1,8 @@
 # Numerical Code
 
 This directory contains the Python code used to generate all numerical
-results and figures appearing in the project thesis. The code is written
-to support the analysis in the thesis and is not intended as a general
+results and figures appearing in the project. The code is written
+to support the analysis in the main text and is not intended as a general
 library.
 
 The numerical work focuses on neutron-star structure in general
@@ -50,13 +50,12 @@ numerics/
 Parts of the numerical code are adapted from existing academic work:
 
 - The $npe\mu$ relativistic mean-field implementation is based on code
-  developed by **Pogliano** (Master’s thesis), available via the
-  Norwegian National Research Archive:  
-  [Pogliano, *Master’s thesis*](https://nva.sikt.no/registration/0198e9e2b085-6c0d9f80-868e-4ee7-81ed-33151eb22ebd)
+  developed by **Pogliano** (Master’s thesis), available at:  
+  [Pogliano, *Master’s thesis*](https://hdl.handle.net/11250/2445966)
 
 - The radial stability solver and parts of the ideal neutron-star code
   are adapted from work by **Sletmoen** (Master’s thesis), available at:  
-  [Sletmoen, *Master’s thesis*](https://nva.sikt.no/registration/0198e9e37e05-8cfbb1be-ecc5-4287-893b-68f433b1bb2c),  
+  [Sletmoen, *Master’s thesis*](https://hdl.handle.net/11250/3031031),  
   with an accompanying public repository:  
   [hersle/master-thesis (GitHub)](https://github.com/hersle/master-thesis/)
 

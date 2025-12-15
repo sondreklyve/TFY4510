@@ -126,7 +126,7 @@ minimal, physically consistent description of cold matter in the
 stellar core. Within this framework, the baryonic sector is governed by the
 RMF approximation tuned to reproduce nuclear bulk properties,
 while the leptonic sector enforces charge neutrality and $\beta$–stability.
-Together, these ingredients yield a barotropic equation of state $P(\varepsilon)$
+Together, these ingredients yield a barotropic equation of state $P(\epsilon)$
 that can be directly used in the Tolman–Oppenheimer–Volkoff equations to compute
 the mass–radius relation of neutron stars \cite{glendenning2000,pogliano2017}.
 
@@ -694,7 +694,7 @@ basis for many modern neutron-star equations of state.
 
 The numerical implementation of the $npe\mu$ model follows the mean–field
 framework developed in the previous sections and is based closely on the code
-structure described in the master’s thesis of Pogliano~\cite{pogliano2017}.
+structure described in the Master’s thesis of Pogliano~\cite{pogliano2017}.
 For each chosen mass density $\rho$ on a fixed grid, the coupled
 nonlinear equations for the meson mean fields, Fermi momenta, and chemical
 potentials are solved iteratively. At convergence, this procedure yields the
@@ -823,7 +823,7 @@ $npe\mu$ core.
 
 The numerical implementation uses a polytropic relation in the low density 
 region while keeping the original $npe\mu$
-core unchanged. In this way the red curve in
+core unchanged. In this way the blue curve in
 Fig.~\ref{fig:poly_eos} represents the full EoS with a polytropic crust
 and an unchanged $npe\mu$ core; the other curves show, for comparison, the
 pure core EoS and the version extended to lower densities with the original
@@ -834,7 +834,7 @@ tabulated crust.
   \includegraphics[width=0.8\textwidth]{figures/npemu/poly_eos}
   \caption[Polytropic crust joined to \texorpdfstring{$npe\mu$}{npemu} core]{
     Equation of state with a single polytropic crust ($\Gamma = 1.2$)
-    matched to the RMF $npe\mu$ core. The red curve shows the combined
+    matched to the RMF $npe\mu$ core. The blue curve shows the combined
     model: at low densities the pressure follows the polytropic relation,
     while at higher densities it coincides with the uniform $npe\mu$ core
     EoS. For comparison, the pure core EoS and the reference model with a
@@ -906,8 +906,8 @@ the equilibrium between nuclei, electrons, and (above neutron drip) free
 neutrons. A realistic description of the outer layers must therefore follow
 the established crust Equation of State (EoS) models originally developed by
 Baym, Pethick, and Sutherland (BPS)~\cite{bps1971} and later refined in works
-by Haensel and Pichon~\cite{haensel_pichon1994}, Friedman and
-Pandharipande~\cite{fps1981}, and the Skyrme–Lyon (SLy) model~\cite{sly2001}.
+by Haensel and Pichon~\cite{haensel_pichon1993}, Friedman and
+Pandharipande~\cite{pr1989}, and the Skyrme–Lyon (SLy) model~\cite{sly2001}.
 
 At the lowest densities, cold catalyzed matter minimizes the Gibbs free
 energy by forming a Coulomb lattice of ${}^{56}\mathrm{Fe}$ nuclei immersed in a
@@ -916,7 +916,7 @@ neutron-rich nuclei become energetically favored. Each change of the
 ground-state nucleus corresponds to a first-order phase transition at a fixed
 pressure, with a discrete jump in the energy density. Detailed calculations
 identify roughly a dozen such transitions before reaching the next major
-threshold~\cite{haensel_pichon1994}, as nuclei gradually approach the limits
+threshold~\cite{haensel_pichon1993}, as nuclei gradually approach the limits
 of stability.
 
 At a density of
@@ -1100,7 +1100,7 @@ covered by the Ng~\textit{et al.} band.
   \includegraphics[width=0.80\textwidth]{figures/npemu/eos_band}
   \caption[Core EoS compared with observational posterior band]{
     Pressure--density relation of the RMF $npe\mu$ core EoS compared with the 
-    90\% PSR+GW+X-ray posterior band from Ng \textit{et al.}.}
+    90\% PSR+GW+X-ray posterior band from Ng \textit{et al.}~\cite{Ng_2025}.}
   \label{fig:eos_band}
 \end{figure}
 
@@ -1120,8 +1120,8 @@ For the mass--radius comparison we complement the $npe\mu$ model with a set of
 individual neutron stars whose masses are known with high precision.  
 These systems—PSR~J0348+0432~\cite{Antoniadis_2013_J0348},
 PSR~J1614$-$2230~\cite{Demorest_2010_J1614},
-PSR~J2215+5135~\cite{Linares_2018_J2215}, and
-PSR~J0952$-$0607~\cite{Romani_2022_J0952}—are all in binary orbits where the 
+PSR~J2215+5135~\cite{linares2018}, and
+PSR~J0952$-$0607~\cite{romani2022}—are all in binary orbits where the 
 geometry and orbital motion can be measured accurately.  
 The mass determinations rely on purely gravitational and kinematic effects, such as 
 the relativistic time delay experienced by the pulsar signal as it passes near the 
@@ -1130,7 +1130,7 @@ Because these techniques depend only on well-understood gravity and orbital
 mechanics, the resulting masses are essentially free from assumptions about the 
 equation of state.  All four objects are found to be very massive, close to or 
 exceeding \({2\,M_{\odot}}\).  
-This makes them especially important: any theoretical equation of state must be able 
+This makes them especially important: any equation of state must be able 
 to support at least this mass, and these systems therefore provide a robust lower 
 bound on the maximum mass in any mass--radius relation.
 
@@ -1191,6 +1191,6 @@ in uniform matter and neglects additional degrees of freedom and many-body
 correlations that may become important in the dense cores of massive neutron
 stars. The present comparison therefore serves mainly to show
 that, while the minimal $npe\mu$ framework provides a useful baseline and is
-compatible with the semiparametric EoS constraints of Ng~\textit{et al.},
+compatible with the semiparametric EoS constraints of Ng~\textit{et al.}~\cite{Ng_2025},
 it is not sufficient to account quantitatively for the current mass--radius
 measurements.

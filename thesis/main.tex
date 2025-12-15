@@ -10,26 +10,25 @@
 
 \begin{abstract}
 Neutron stars contain matter at extremely high densities, where both general relativity and
-quantum many-body physics are required to describe their structure. In this thesis, we study
+quantum many-body physics are required to describe their structure. In this project, we study
 how different models of dense matter affect the relation between the mass and radius of a
-neutron star. The starting point is the Tolman--Oppenheimer--Volkoff equation, which we
-solve numerically for a sequence of equations of state.
+neutron star. The analysis is based on the Tolman–Oppenheimer–Volkoff equations, which are solved
+numerically for various equations of state.
 
-We first consider simple models based on degenerate fermions. These illustrate how the
-pressure of a Fermi gas supports a star against gravitational collapse, and why such idealised
-descriptions are not sufficient to describe the full range of observed neutron-star properties.
-Building on this, the main part of the thesis develops an interacting model for nucleons and
-leptons in equilibrium. The interactions are described through self-consistent meson fields
-and give rise to a more realistic equation of state, which is combined with a standard crust
+We first consider a simple model, namely an ideal, non-interacting Fermi gas. This illustrates how
+degeneracy pressure can counteract gravitational collapse, while also demonstrating the limitations
+of such idealised descriptions when confronted with observed neutron-star properties.
+Building on this, the main part of the project develops an interacting model for nucleons and
+leptons in equilibrium. The interactions are described through self-consistent meson fields,
+leading to a more realistic equation of state, which is combined with a standard crust
 model before being used in the numerical stellar calculations.
 
-The resulting mass–radius relation radii in a plausible range for typical neutron-star masses,
-but it does not support the heaviest observed stars and shows clear differences from current
-astronomical constraints. This demonstrates that while the interacting model represents a
-meaningful improvement over simple free-gas descriptions, it remains incomplete at the
-highest densities.
+The resulting mass–radius relations yield radii typical of neutron stars,
+but they do not support the heaviest observed stars and show clear differences from current
+astronomical constraints. This demonstrates that while the interacting model improves upon the
+ideal, non-interacting Fermi gas description, it remains incomplete at the highest densities.
 
-Overall, the thesis presents a coherent path from ideal models to an interacting description of
+Overall, the project presents a coherent path from ideal models to a description of interacting
 dense matter and shows the need for more advanced equations of state in order to reproduce
 the full range of observed neutron-star properties.
 \end{abstract}
@@ -47,11 +46,7 @@ the full range of observed neutron-star properties.
 
 \appendix
 \input{appendix/gr_basics.tex}
-\chapter{Declaration of AI tools}
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.7\textwidth]{appendix/AI_declaration.pdf}
-\end{figure}
+\input{appendix/numerics.tex}
 
 \printbibliography
 
